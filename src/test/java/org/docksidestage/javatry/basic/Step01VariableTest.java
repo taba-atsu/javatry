@@ -24,7 +24,7 @@ import org.docksidestage.unit.PlainTestCase;
  * Operate exercise as javadoc. If it's question style, write your answer before test execution. <br>
  * (javadocの通りにエクササイズを実施。質問形式の場合はテストを実行する前に考えて答えを書いてみましょう)
  * @author jflute
- * @author your_name_here
+ * @author taba-atsu
  */
 public class Step01VariableTest extends PlainTestCase {
 
@@ -47,7 +47,8 @@ public class Step01VariableTest extends PlainTestCase {
         String piari = null;
         String dstore = "mai";
         sea = sea + land + piari + ":" + dstore;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => mystic8:mai
+        // String型とInteger型の変数を連結する場合、IntegerはStringに変換されて連結される！nullは文字列として連結される！
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -56,7 +57,9 @@ public class Step01VariableTest extends PlainTestCase {
         String land = "oneman";
         sea = land;
         land = land + "'s dreams";
-        log(sea); // your answer? => 
+        log(sea); // your answer? => oneman's dream
+        // seaにlandを代入した際、landの参照がseaに代入される。その下でlandの値を変更しているが、変更の際にlandには別の参照が代入されている。したがって、seaの値は変わらない。
+        // という認識であっているのか？
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -65,7 +68,9 @@ public class Step01VariableTest extends PlainTestCase {
         int land = 415;
         sea = land;
         land++;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 415
+        // int型の変数はスタック領域にメモリが確保されており、そこに値が直接格納される。seaにlandを代入した際、landの値のコピーがそこに入る。
+        // したがって、landの値を変更してもseaの値は変わらない。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
