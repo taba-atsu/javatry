@@ -49,7 +49,7 @@ public class Step01VariableTest extends PlainTestCase {
         sea = sea + land + piari + ":" + dstore;
         log(sea); // your answer? => mystic8:mai
         // String型とInteger型の変数を連結する場合、IntegerはStringに変換されて連結される！nullは文字列として連結される！
-        // TODO tabata [いいね] 思考コメントありがとうございます！ by jflute (2025/07/15)
+        // TODO done tabata [いいね] 思考コメントありがとうございます！ by jflute (2025/07/15)
         // そう、String以外のクラスを、文字列に対して+連結したときは、それぞれのtoString()メソッドが暗黙的に呼び出されて、
         // すべて文字列に変換されます。また、インスタンスが入ってない変数の場合は "null" という文字列になります。
         // 昔のインターネット画面だと、よく「こんにちは nullさん」とか表示されるのあったりしました(^^。
@@ -67,7 +67,7 @@ public class Step01VariableTest extends PlainTestCase {
         log(sea); // your answer? => oneman's dream
         // seaにlandを代入した際、landの参照がseaに代入される。その下でlandの値を変更しているが、変更の際にlandには別の参照が代入されている。したがって、seaの値は変わらない。
         // という認識であっているのか？
-        // TODO tabata [ふぉろー] Goodです。「参照がseaに代入される」という言葉がとても適切ですね by jflute (2025/07/15)
+        // TODO done tabata [ふぉろー] Goodです。「参照がseaに代入される」という言葉がとても適切ですね by jflute (2025/07/15)
         // 変数はあくまでインスタンスの(メモリ上のどこかに)置かれた場所のアドレスを保持するだけで、
         // sea = land; もそのアドレスをコピーして互いに共有しただけとも言えます。
         // land = land + "'s dreams"; は、land自身が、そのアドレスを破棄して別のアドレスを受け取ったという感じで。
@@ -83,7 +83,7 @@ public class Step01VariableTest extends PlainTestCase {
         log(sea); // your answer? => 415
         // int型の変数はスタック領域にメモリが確保されており、そこに値が直接格納される。seaにlandを代入した際、landの値のコピーがそこに入る。
         // したがって、landの値を変更してもseaの値は変わらない。
-        // TODO tabata [いいね] プリミティブ型は、参照ではなく値そのものが変数に入っているイメージですね。Goodです by jflute (2025/07/15)
+        // TODO done tabata [いいね] プリミティブ型は、参照ではなく値そのものが変数に入っているイメージですね。Goodです by jflute (2025/07/15)
         // 一方で、land++; は、実際には land = land + 1; とやっているだけなので、
         // 中の値自体が変化(インクリメント)したというより、結局新しい値に差し替わっただけという感じですね。
     }
@@ -95,7 +95,9 @@ public class Step01VariableTest extends PlainTestCase {
         sea = land;
         sea = land.add(new BigDecimal(1));
         sea.add(new BigDecimal(1));
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 417
+        // BigDecminalは不変オブジェクトなので、.add()メソッドを呼び出した場合新しいインスタンスが生成される。
+        // そのためsea.add(new BigDecimal(1));を実行しても、どの変数にも代入していないので結果は416になる。
     }
 
     // ===================================================================================
@@ -109,19 +111,22 @@ public class Step01VariableTest extends PlainTestCase {
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_variable_instance_variable_default_String() {
         String sea = instanceBroadway;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => ""
+        // 明示的に初期化しない場合、デフォルト値が自動的に設定されるの。オブジェクト型のデフォルト値はnullになる。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_variable_instance_variable_default_int() {
         int sea = instanceDockside;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 0
+        // int型の変数は、上記同様デフォルト値が設定され0になる。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_variable_instance_variable_default_Integer() {
         Integer sea = instanceHangar;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => null
+        // Integer型はオブジェクト型なので、デフォルト値はnullになる。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
