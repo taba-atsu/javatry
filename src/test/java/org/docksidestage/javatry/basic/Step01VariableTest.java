@@ -49,13 +49,15 @@ public class Step01VariableTest extends PlainTestCase {
         sea = sea + land + piari + ":" + dstore;
         log(sea); // your answer? => mystic8:mai
         // String型とInteger型の変数を連結する場合、IntegerはStringに変換されて連結される！nullは文字列として連結される！
-        // TODO done tabata [いいね] 思考コメントありがとうございます！ by jflute (2025/07/15)
+        // done tabata [いいね] 思考コメントありがとうございます！ by jflute (2025/07/15)
         // そう、String以外のクラスを、文字列に対して+連結したときは、それぞれのtoString()メソッドが暗黙的に呼び出されて、
         // すべて文字列に変換されます。また、インスタンスが入ってない変数の場合は "null" という文字列になります。
         // 昔のインターネット画面だと、よく「こんにちは nullさん」とか表示されるのあったりしました(^^。
         // 最近でも、メールで null って文言が入っちゃってるのを見たことがあります。
         // 一方で、ログとかで値を確認するときは、何も出てこないよりは null って出てくるほうがわかりやすいと思うこともあります。
         // 些細な違いではありますが、この辺は言語によって変わります。
+        // #1on1 メールのプログラミングって、業務の優先度は低く思われがちだけど、丁寧に実装しないといけないもの。
+        // #1on1 IntelliJで shift + shift の todo で、todo一覧が見られる。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -67,11 +69,12 @@ public class Step01VariableTest extends PlainTestCase {
         log(sea); // your answer? => oneman's dream
         // seaにlandを代入した際、landの参照がseaに代入される。その下でlandの値を変更しているが、変更の際にlandには別の参照が代入されている。したがって、seaの値は変わらない。
         // という認識であっているのか？
-        // TODO done tabata [ふぉろー] Goodです。「参照がseaに代入される」という言葉がとても適切ですね by jflute (2025/07/15)
+        // done tabata [ふぉろー] Goodです。「参照がseaに代入される」という言葉がとても適切ですね by jflute (2025/07/15)
         // 変数はあくまでインスタンスの(メモリ上のどこかに)置かれた場所のアドレスを保持するだけで、
         // sea = land; もそのアドレスをコピーして互いに共有しただけとも言えます。
         // land = land + "'s dreams"; は、land自身が、そのアドレスを破棄して別のアドレスを受け取ったという感じで。
         // seaが参照するアドレスは以降変わらないですし、その参照されているインスタンス自身にも何も変化は起きていないと。
+        // #1on1: 外部研修のお話
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -83,9 +86,10 @@ public class Step01VariableTest extends PlainTestCase {
         log(sea); // your answer? => 415
         // int型の変数はスタック領域にメモリが確保されており、そこに値が直接格納される。seaにlandを代入した際、landの値のコピーがそこに入る。
         // したがって、landの値を変更してもseaの値は変わらない。
-        // TODO done tabata [いいね] プリミティブ型は、参照ではなく値そのものが変数に入っているイメージですね。Goodです by jflute (2025/07/15)
+        // done tabata [いいね] プリミティブ型は、参照ではなく値そのものが変数に入っているイメージですね。Goodです by jflute (2025/07/15)
         // 一方で、land++; は、実際には land = land + 1; とやっているだけなので、
         // 中の値自体が変化(インクリメント)したというより、結局新しい値に差し替わっただけという感じですね。
+        // #1on1: 制御系プログラミングのお話
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -98,7 +102,13 @@ public class Step01VariableTest extends PlainTestCase {
         log(sea); // your answer? => 417
         // BigDecminalは不変オブジェクトなので、.add()メソッドを呼び出した場合新しいインスタンスが生成される。
         // そのためsea.add(new BigDecimal(1));を実行しても、どの変数にも代入していないので結果は416になる。
+        // #1on1: IntelliJ上で、BigDecimal(型宣言)にカーソルを当てるとクラスのJavaDocが表示されて、immutableがわかる。
+        // add()メソッドも同じくJavaDoc見るといいです。
+        // IntelliJで、メソッド補完時にcontrol+Jを押すとJavaDoc表示されるので、見たいときはぱっとcontrol+J！
+        // add()のソースコードを読んで構造を知ってimmutableを推測する。
+        // #1on1: immutable/mutableのバランス話
     }
+    // TODO jflute 1on1ふぉろー、ここまで、次回はここから (2025/07/16)
 
     // ===================================================================================
     //                                                                   Instance Variable
