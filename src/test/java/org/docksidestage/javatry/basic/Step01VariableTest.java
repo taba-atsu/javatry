@@ -145,7 +145,9 @@ public class Step01VariableTest extends PlainTestCase {
         instanceMagiclamp = "magician";
         helpInstanceVariableViaMethod(instanceMagiclamp);
         String sea = instanceBroadway + "|" + instanceDockside + "|" + instanceHangar + "|" + instanceMagiclamp;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => bbb|1|null|magician
+        // 初期化されていないインスタンス変数は、デフォルト値が設定される。
+        // さらに文字列に対して連結が行われており、デフォルト値が文字列化されている。
     }
 
     private void helpInstanceVariableViaMethod(String instanceMagiclamp) {
@@ -165,7 +167,8 @@ public class Step01VariableTest extends PlainTestCase {
         String sea = "harbor";
         int land = 415;
         helpMethodArgumentImmutableMethodcall(sea, land);
-        log(sea); // your answer? => 
+        log(sea); // your answer? => harbor
+        // Stringは普遍オブジェクトなのでsea.concat()を行なっても代入していないので値は変化しない。
     }
 
     private void helpMethodArgumentImmutableMethodcall(String sea, int land) {
@@ -182,7 +185,9 @@ public class Step01VariableTest extends PlainTestCase {
         StringBuilder sea = new StringBuilder("harbor");
         int land = 415;
         helpMethodArgumentMethodcall(sea, land);
-        log(sea); // your answer? => 
+        log(sea); // your answer? => harbor416
+        // StringBuilderを使うことで可変オブジェクトである文字列を作成できる。
+        // 可変であるのでsea.append(land)で値が変化する。
     }
 
     private void helpMethodArgumentMethodcall(StringBuilder sea, int land) {
@@ -198,7 +203,32 @@ public class Step01VariableTest extends PlainTestCase {
         StringBuilder sea = new StringBuilder("harbor");
         int land = 415;
         helpMethodArgumentVariable(sea, land);
-        log(sea); // your answer? => 
+        log(sea); // your answer? => harbor416
+        // helpMethodArgumentVariableメソッドの引数には参照のコピーが渡されるが、メソッド内で参照先のオブジェクトの内容の変更を行なっていないので値は変わらない。
+        // MethodArgumentVariable()メソッドで引数名と同じ名前の変数が定義されている部分で少し混乱してしまったので整理する。
+        // test_variable_method_argument_variable_assignment()メソッド内でhelpMethodArgumentVariable()を呼び出すと、スタック領域に
+        // そのメソッド専用の領域が確保される。そして、引数とローカル変数がそこに置かれる。
+        // sea = new StringBuilder(seaStr).append(land); の部分で、seaという引数に新しいStringBuilderの参照が代入される。
+        // test_variable_method_argument_variable_assignment()メソッド内のseaは元の"harbor"への参照を保持しているので、log(sea)ではharborが出力される。
+        // メソッドの引数は、そのメソッドの中だけで有効なローカル変数のイメージ、、？
+
+        // geminiにイメージを書いてもらいました。
+        // ┌───────────────────────────┐
+        //  │ 【help...メソッドのフレーム】 │
+        //  ├───────────────────────────┤
+        //  │ ローカル変数 seaStr        │  (値: "harbor"への参照)
+        //  ├───────────────────────────┤
+        //  │ 引数 land                  │  (値: 415)
+        //  ├───────────────────────────┤
+        //  │ 引数 sea                   │  (値: "harbor416"への新しい参照) <-- 上書きされた！
+        //  └───────────────────────────┘
+        //  ┌───────────────────────────┐
+        //  │ 【test_...メソッドのフレーム】│
+        //  ├───────────────────────────┤
+        //  │ 変数 land                  │  (値: 415)
+        //  ├───────────────────────────┤
+        //  │ 変数 sea                   │  (値: 元の"harbor"への参照)     <-- 全く影響を受けない
+        //  └───────────────────────────┘
     }
 
     private void helpMethodArgumentVariable(StringBuilder sea, int land) {
@@ -228,7 +258,13 @@ public class Step01VariableTest extends PlainTestCase {
      */
     public void test_variable_writing() {
         // define variables here
+        String sea = "mystic";
+        Integer land = null;
+        log(sea,land,piari);
+        // インスタンス変数とはメソッドの外でクラスの直下で定義される変数のこと。
+        // 今回は、インスタンス変数piariは初期値が設定されていないので、デフォルト値の0が入る。
     }
+    int piari;
 
     // ===================================================================================
     //                                                                           Good Luck
@@ -239,11 +275,20 @@ public class Step01VariableTest extends PlainTestCase {
      * <pre>
      * _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
      * your question here (ここにあなたの質問を):
-     * 
+     * o ローカル変数、名前はbizreach, 型はString, 初期値は "bizreach"
+     * o インスタンス変数、名前はhrmos, 型はint,初期値 2025 ただしimutable
+     * o インスタンス変数、名前はcampus, 型はString, 初期値なし
+     * o すべての変数をlog()でカンマ区切りの文字列で表示
      * _/_/_/_/_/_/_/_/_/_/
      * </pre>
      */
     public void test_variable_yourExercise() {
         // write your code here
+        String bizreach = "bizreach";
+        log(bizreach,hrmos,campus);
     }
+    final int hrmos = 2025;
+    String campus;
+
 }
+
