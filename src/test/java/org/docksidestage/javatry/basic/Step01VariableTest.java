@@ -148,6 +148,7 @@ public class Step01VariableTest extends PlainTestCase {
         log(sea); // your answer? => bbb|1|null|magician
         // 初期化されていないインスタンス変数は、デフォルト値が設定される。
         // さらに文字列に対して連結が行われており、デフォルト値が文字列化されている。
+        // TODO tabata [いいね] インスタンス変数と引数の変数の違いは全然問題なさそうですね(^^ by jflute (2025/07/22)
     }
 
     private void helpInstanceVariableViaMethod(String instanceMagiclamp) {
@@ -169,6 +170,8 @@ public class Step01VariableTest extends PlainTestCase {
         helpMethodArgumentImmutableMethodcall(sea, land);
         log(sea); // your answer? => harbor
         // Stringは普遍オブジェクトなのでsea.concat()を行なっても代入していないので値は変化しない。
+        // TODO tabata [ふぉろー] 厳密には、代入したとしても、seaという変数が別物なので、やはりログの結果は変わりません by jflute (2025/07/22)
+        // (test_側のsea変数と、help側のsea変数(引数)は別変数なので、そこに代入しても影響はないということで)
     }
 
     private void helpMethodArgumentImmutableMethodcall(String sea, int land) {
@@ -211,6 +214,8 @@ public class Step01VariableTest extends PlainTestCase {
         // sea = new StringBuilder(seaStr).append(land); の部分で、seaという引数に新しいStringBuilderの参照が代入される。
         // test_variable_method_argument_variable_assignment()メソッド内のseaは元の"harbor"への参照を保持しているので、log(sea)ではharborが出力される。
         // メソッドの引数は、そのメソッドの中だけで有効なローカル変数のイメージ、、？
+        // TODO tabata [ふぉろー] yes, メソッドの引数はある意味「単なるローカル変数」です by jflute (2025/07/22)
+        // デフォルト値として引数で指定された値で初期化されるってだけのローカル変数と考えてよいです。
 
         // geminiにイメージを書いてもらいました。
         // ┌───────────────────────────┐
@@ -229,6 +234,9 @@ public class Step01VariableTest extends PlainTestCase {
         //  ├───────────────────────────┤
         //  │ 変数 sea                   │  (値: 元の"harbor"への参照)     <-- 全く影響を受けない
         //  └───────────────────────────┘
+
+        // TODO tabata [いいね] ↑すごい！引数 seaはまさしく参照を上書きされた(差し替えられた)という感じで... by jflute (2025/07/22)
+        // test側の sea の持ってる参照(アドレス)はずっと変わらないということですね。
     }
 
     private void helpMethodArgumentVariable(StringBuilder sea, int land) {
@@ -260,11 +268,14 @@ public class Step01VariableTest extends PlainTestCase {
         // define variables here
         String sea = "mystic";
         Integer land = null;
-        log(sea,land,piari);
+        log(sea, land, piari);
         // インスタンス変数とはメソッドの外でクラスの直下で定義される変数のこと。
         // 今回は、インスタンス変数piariは初期値が設定されていないので、デフォルト値の0が入る。
     }
+
     int piari;
+
+    // TODO jflute 1on1にて、インスタンス変数の概念について補足予定 (2025/07/22)
 
     // ===================================================================================
     //                                                                           Good Luck
@@ -285,10 +296,12 @@ public class Step01VariableTest extends PlainTestCase {
     public void test_variable_yourExercise() {
         // write your code here
         String bizreach = "bizreach";
-        log(bizreach,hrmos,campus);
+        log(bizreach, hrmos, campus);
     }
+
     final int hrmos = 2025;
     String campus;
 
+    // TODO tabata [いいね] immutableな変数も登場しているのがGoodですね by jflute (2025/07/22)
+    // javatryのstep1では、immutableのインスタンスばかりフォーカス当たってますが、immutableの変数も大事です(^^
 }
-
