@@ -42,6 +42,7 @@ public class Step02IfForTest extends PlainTestCase {
             sea = 2001;
         }
         log(sea); // your answer? => 2001
+        // if文の条件に当てはまるのでseaは変更される
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -52,7 +53,8 @@ public class Step02IfForTest extends PlainTestCase {
         } else {
             sea = 7;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 7
+        // if文の条件式に当てはまらないので7になる
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -67,7 +69,8 @@ public class Step02IfForTest extends PlainTestCase {
         } else {
             sea = 9;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 7
+        // 二つ目の条件式に当てはまるので7になる
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -97,7 +100,9 @@ public class Step02IfForTest extends PlainTestCase {
         if (land) {
             sea = 10;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 10
+        // 一つ目のif文でseaが8,landがtrueになる.また、二つ目のif文の条件式にも当てはまるのでseaは7になるが、３つ目のif文の条件式にも当てはまるので最終的にsea
+        // は10になる.
     }
 
     // ===================================================================================
@@ -113,7 +118,8 @@ public class Step02IfForTest extends PlainTestCase {
                 sea = stage;
             }
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => dockside
+        // 出力されるのはiが1の時なので、配列の2番目の要素である "dockside" になる.
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -123,7 +129,8 @@ public class Step02IfForTest extends PlainTestCase {
         for (String stage : stageList) {
             sea = stage;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => magiclamp
+        // for文で配列の要素が前から順番にseaに代入されていくので、最後の要素である "magiclamp" が出力される.
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -139,7 +146,9 @@ public class Step02IfForTest extends PlainTestCase {
                 break;
             }
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => hangar
+        // continueは次のループに進むがbreakはループを抜ける。seaにhangarが代入されたとき、gaが含まれているのでbreakによりループを抜ける。
+        // そのため、出力されるのは "hangar" になる.
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
