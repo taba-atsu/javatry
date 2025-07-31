@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.docksidestage.unit.PlainTestCase;
 
+// TODO tabata javadocのauthorお願いしますm(_ _)m by jflute (2025/07/31)
 /**
  * The test of if-for. <br>
  * Operate exercise as javadoc. If it's question style, write your answer before test execution. <br>
@@ -103,6 +104,7 @@ public class Step02IfForTest extends PlainTestCase {
         log(sea); // your answer? => 10
         // 一つ目のif文でseaが8,landがtrueになる.また、二つ目のif文の条件式にも当てはまるのでseaは7になるが、３つ目のif文の条件式にも当てはまるので最終的にsea
         // は10になる.
+        // TODO jflute 1on1にてソースコードリーディングのお話予定 (2025/07/31)
     }
 
     // ===================================================================================
@@ -149,6 +151,9 @@ public class Step02IfForTest extends PlainTestCase {
         log(sea); // your answer? => hangar
         // continueは次のループに進むがbreakはループを抜ける。seaにhangarが代入されたとき、gaが含まれているのでbreakによりループを抜ける。
         // そのため、出力されるのは "hangar" になる.
+        // TODO tabata [いいね] こちらがJavaの文法的には「拡張for文」と呼ばれるもので、普通のfor文読んじゃったりします by jflute (2025/07/31)
+        // 次のforEach()と違って、Javaの文法として組み込まれているループ機能となります。
+        // TODO jflute 1on1にて、Javaのfor文いっぱい話 (2025/07/31)
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
