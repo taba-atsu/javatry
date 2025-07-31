@@ -15,18 +15,17 @@
  */
 package org.docksidestage.javatry.basic;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.docksidestage.unit.PlainTestCase;
 
-// TODO tabata javadocのauthorお願いしますm(_ _)m by jflute (2025/07/31)
+// TODO done tabata javadocのauthorお願いしますm(_ _)m by jflute (2025/07/31)
 /**
  * The test of if-for. <br>
  * Operate exercise as javadoc. If it's question style, write your answer before test execution. <br>
  * (javadocの通りにエクササイズを実施。質問形式の場合はテストを実行する前に考えて答えを書いてみましょう)
  * @author jflute
- * @author your_name_here
+ * @author taba-atsu
  */
 public class Step02IfForTest extends PlainTestCase {
 
@@ -151,7 +150,7 @@ public class Step02IfForTest extends PlainTestCase {
         log(sea); // your answer? => hangar
         // continueは次のループに進むがbreakはループを抜ける。seaにhangarが代入されたとき、gaが含まれているのでbreakによりループを抜ける。
         // そのため、出力されるのは "hangar" になる.
-        // TODO tabata [いいね] こちらがJavaの文法的には「拡張for文」と呼ばれるもので、普通のfor文読んじゃったりします by jflute (2025/07/31)
+        // TODO done tabata [いいね] こちらがJavaの文法的には「拡張for文」と呼ばれるもので、普通のfor文読んじゃったりします by jflute (2025/07/31)
         // 次のforEach()と違って、Javaの文法として組み込まれているループ機能となります。
         // TODO jflute 1on1にて、Javaのfor文いっぱい話 (2025/07/31)
     }
@@ -169,7 +168,11 @@ public class Step02IfForTest extends PlainTestCase {
             }
         });
         String sea = sb.toString();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => dockside
+        // stageListの中身をforEachメソッドを使用して一つずつ処理していっており、処理の中身はsbの長さが0より大きいとreturnし、
+        // stage(stageListから取り出されている一つ一つの要素)がiを含んでいるとsbにstageを追加する。
+        // prepareStageListを見てみると、"dockside" がiを含んでいるのでsbに追加される。そして、sbの長さが0ではなくなるので、それ以降のループでは全てreturn
+        //　される。したがって、seaの中身は "dockside" になる。
     }
 
     // ===================================================================================
@@ -181,6 +184,17 @@ public class Step02IfForTest extends PlainTestCase {
      */
     public void test_iffor_making() {
         // write if-for here
+        List<String> stageList = prepareStageList();
+        List<String> resultList = new ArrayList<>();
+        for (String stage : stageList) {
+            if (stage.contains("a")) {
+                resultList.add(stage);
+            }
+        }
+        resultList.forEach(stage -> log(stage));
+        //　通常のfor文はループの制御にインデックスを使用するが、拡張for文はインデックスを使用せずコレクションを直接取り出して処理する？
+        // 今回の場合、for文とforEachメソッドをどのように使い分けるのが適切なのかわかりませんでした、、
+        // break,continueやインデックスを使用する場合はfor文を使う必要がある？
     }
 
     // ===================================================================================
@@ -192,17 +206,30 @@ public class Step02IfForTest extends PlainTestCase {
      */
     public void test_iffor_refactor_foreach_to_forEach() {
         List<String> stageList = prepareStageList();
-        String sea = null;
-        for (String stage : stageList) {
-            if (stage.startsWith("br")) {
-                continue;
+        String[] res = new String[1];
+        res[0] = "";
+        stageList.forEach(stage->{
+            if(res[0].contains("ga")){
+                return;
             }
-            sea = stage;
-            if (stage.contains("ga")) {
-                break;
+            if(stage.startsWith("br")) {
+                return;
             }
-        }
-        log(sea); // should be same as before-fix
+            res[0] = stage;
+        });
+        String sea = (res[0] == "") ? null : res[0];
+        log(sea);
+
+        // forEach()の特徴をGeminiと整理
+        // 戻り値は常にvoid
+        // breakとcontinueを使用できない
+        // ラムダ式の中から、ラムダ式の定義されたスコープ外のローカル変数にアクセスする場合、その変数はfinalもしくは事実上finalでなければならない
+
+        // continueはreturnすることで再現できる。しかし、breakは再現できないので最終的なアプトプットを行うres[0]にgaが含まれたら残りのループをスキップ。
+        // この実装だと無駄なループが回ってしまう、、
+        // forEachの中で何が変更できるのかまだあまり理解できていない。参照型なら変更できる、、？？？
+        // res[0]の初期値をnullにしようと考えていたが、.containsメソッドでnullだとエラーが出てしまうので初期値を空文字で代用。
+        // seaに代入する際に三項演算子を使って空文字の場合nullへ変換を行う。
     }
 
     /**
@@ -211,12 +238,19 @@ public class Step02IfForTest extends PlainTestCase {
      * <pre>
      * _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
      * your question here (ここにあなたの質問を):
-     * 
+     * 拡張for文を使用せずに書き換えてください
      * _/_/_/_/_/_/_/_/_/_/
      * </pre>
      */
     public void test_iffor_yourExercise() {
-        // write your code here
+        Set<String> fruits = new HashSet<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Orange");
+
+        for (String fruit : fruits) {
+            log(fruit);
+        }
     }
 
     // ===================================================================================
