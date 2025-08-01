@@ -106,9 +106,10 @@ public class Step01VariableTest extends PlainTestCase {
         // add()メソッドも同じくJavaDoc見るといいです。
         // IntelliJで、メソッド補完時にcontrol+Jを押すとJavaDoc表示されるので、見たいときはぱっとcontrol+J！
         // add()のソースコードを読んで構造を知ってimmutableを推測する。
+        // #1on1: step2のところで一緒にadd()も読んで漠然読みフォーカス読みした
         // #1on1: immutable/mutableのバランス話
     }
-    // TODO jflute 1on1ふぉろー、ここまで、次回はここから (2025/07/16)
+    // done jflute 1on1ふぉろー、ここまで、次回はここから (2025/07/16)
 
     // ===================================================================================
     //                                                                   Instance Variable
@@ -130,6 +131,8 @@ public class Step01VariableTest extends PlainTestCase {
         int sea = instanceDockside;
         log(sea); // your answer? => 0
         // int型の変数は、上記同様デフォルト値が設定され0になる。
+        // #1on1: デフォルト0に注意。変数便宜上の0なのか？業務的な0なのか？
+        // 区別が付かないし、間違って処理しちゃうことも。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -148,7 +151,7 @@ public class Step01VariableTest extends PlainTestCase {
         log(sea); // your answer? => bbb|1|null|magician
         // 初期化されていないインスタンス変数は、デフォルト値が設定される。
         // さらに文字列に対して連結が行われており、デフォルト値が文字列化されている。
-        // TODO done tabata [いいね] インスタンス変数と引数の変数の違いは全然問題なさそうですね(^^ by jflute (2025/07/22)
+        // done tabata [いいね] インスタンス変数と引数の変数の違いは全然問題なさそうですね(^^ by jflute (2025/07/22)
     }
 
     private void helpInstanceVariableViaMethod(String instanceMagiclamp) {
@@ -169,8 +172,8 @@ public class Step01VariableTest extends PlainTestCase {
         int land = 415;
         helpMethodArgumentImmutableMethodcall(sea, land);
         log(sea); // your answer? => harbor
-        // Stringは普遍オブジェクトなのでsea.concat()を行なっても代入していないので値は変化しない。
-        // TODO done tabata [ふぉろー] 厳密には、代入したとしても、seaという変数が別物なので、やはりログの結果は変わりません by jflute (2025/07/22)
+        // Stringは不変オブジェクトなのでsea.concat()を行なっても代入していないので値は変化しない。
+        // done tabata [ふぉろー] 厳密には、代入したとしても、seaという変数が別物なので、やはりログの結果は変わりません by jflute (2025/07/22)
         // (test_側のsea変数と、help側のsea変数(引数)は別変数なので、そこに代入しても影響はないということで)
         // concat()メソッドは、新しいオブジェクトを生成して返すので、元のオブジェクトは変化しない。
     }
@@ -215,7 +218,7 @@ public class Step01VariableTest extends PlainTestCase {
         // sea = new StringBuilder(seaStr).append(land); の部分で、seaという引数に新しいStringBuilderの参照が代入される。
         // test_variable_method_argument_variable_assignment()メソッド内のseaは元の"harbor"への参照を保持しているので、log(sea)ではharborが出力される。
         // メソッドの引数は、そのメソッドの中だけで有効なローカル変数のイメージ、、？
-        // TODO　done tabata [ふぉろー] yes, メソッドの引数はある意味「単なるローカル変数」です by jflute (2025/07/22)
+        // done tabata [ふぉろー] yes, メソッドの引数はある意味「単なるローカル変数」です by jflute (2025/07/22)
         // デフォルト値として引数で指定された値で初期化されるってだけのローカル変数と考えてよいです。
 
         // geminiにイメージを書いてもらいました。
@@ -236,7 +239,7 @@ public class Step01VariableTest extends PlainTestCase {
         //  │ 変数 sea                   │  (値: 元の"harbor"への参照)     <-- 全く影響を受けない
         //  └───────────────────────────┘
 
-        // TODO　done tabata [いいね] ↑すごい！引数 seaはまさしく参照を上書きされた(差し替えられた)という感じで... by jflute (2025/07/22)
+        // done tabata [いいね] ↑すごい！引数 seaはまさしく参照を上書きされた(差し替えられた)という感じで... by jflute (2025/07/22)
         // test側の sea の持ってる参照(アドレス)はずっと変わらないということですね。
     }
 
@@ -276,7 +279,8 @@ public class Step01VariableTest extends PlainTestCase {
 
     int piari;
 
-    // TODO jflute 1on1にて、インスタンス変数の概念について補足予定 (2025/07/22)
+    // done jflute 1on1にて、インスタンス変数の概念について補足予定 (2025/07/22)
+    // #1on1: BigDecimalのintValを例に、実際のインスタンス変数の使われ方を振り返り
 
     // ===================================================================================
     //                                                                           Good Luck
@@ -303,6 +307,7 @@ public class Step01VariableTest extends PlainTestCase {
     final int hrmos = 2025;
     String campus;
 
-    // TODO　done tabata [いいね] immutableな変数も登場しているのがGoodですね by jflute (2025/07/22)
+    // done tabata [いいね] immutableな変数も登場しているのがGoodですね by jflute (2025/07/22)
     // javatryのstep1では、immutableのインスタンスばかりフォーカス当たってますが、immutableの変数も大事です(^^
+    // #1on1: よもやま話: ベンチャーサービスのお話
 }

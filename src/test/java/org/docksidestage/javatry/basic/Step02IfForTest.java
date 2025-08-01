@@ -19,7 +19,7 @@ import java.util.*;
 
 import org.docksidestage.unit.PlainTestCase;
 
-// TODO done tabata javadocのauthorお願いしますm(_ _)m by jflute (2025/07/31)
+// done tabata javadocのauthorお願いしますm(_ _)m by jflute (2025/07/31)
 /**
  * The test of if-for. <br>
  * Operate exercise as javadoc. If it's question style, write your answer before test execution. <br>
@@ -103,7 +103,9 @@ public class Step02IfForTest extends PlainTestCase {
         log(sea); // your answer? => 10
         // 一つ目のif文でseaが8,landがtrueになる.また、二つ目のif文の条件式にも当てはまるのでseaは7になるが、３つ目のif文の条件式にも当てはまるので最終的にsea
         // は10になる.
-        // TODO jflute 1on1にてソースコードリーディングのお話予定 (2025/07/31)
+        // done jflute 1on1にてソースコードリーディングのお話予定 (2025/07/31)
+        // 漠然読みで構造だけ先に把握する、フォーカス読みで知りたいところだけ読む(逆読みもする)
+        // BigDecimalの方のadd()でのソースコードリーディングの例も
     }
 
     // ===================================================================================
@@ -121,6 +123,9 @@ public class Step02IfForTest extends PlainTestCase {
         }
         log(sea); // your answer? => dockside
         // 出力されるのはiが1の時なので、配列の2番目の要素である "dockside" になる.
+        // #1on1: indexなら0始まり、numberなら1始まり、が多い。
+        // 少なくとも自分の中で統一的な書き方をしましょう。
+        // 読むときは多少先入観も使うけど、一応何originなのかを確認する。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -150,9 +155,11 @@ public class Step02IfForTest extends PlainTestCase {
         log(sea); // your answer? => hangar
         // continueは次のループに進むがbreakはループを抜ける。seaにhangarが代入されたとき、gaが含まれているのでbreakによりループを抜ける。
         // そのため、出力されるのは "hangar" になる.
-        // TODO done tabata [いいね] こちらがJavaの文法的には「拡張for文」と呼ばれるもので、普通のfor文読んじゃったりします by jflute (2025/07/31)
+        // done tabata [いいね] こちらがJavaの文法的には「拡張for文」と呼ばれるもので、普通のfor文読んじゃったりします by jflute (2025/07/31)
         // 次のforEach()と違って、Javaの文法として組み込まれているループ機能となります。
-        // TODO jflute 1on1にて、Javaのfor文いっぱい話 (2025/07/31)
+        // done jflute 1on1にて、Javaのfor文いっぱい話 (2025/07/31)
+        // #1on1: 文法用語と現場用語の違いの話、クラスメソッド、インスタンスメソッドなど (2025/08/01)
+        // 拡張for文も同じく。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -186,7 +193,6 @@ public class Step02IfForTest extends PlainTestCase {
         // write if-for here
         List<String> stageList = prepareStageList();
         List<String> resultList = new ArrayList<>();
-        resultList.iterator();
         for (String stage : stageList) {
             if (stage.contains("a")) {
                 resultList.add(stage);
@@ -196,10 +202,11 @@ public class Step02IfForTest extends PlainTestCase {
         //　通常のfor文はループの制御にインデックスを使用するが、拡張for文はインデックスを使用せずコレクションを直接取り出して処理する？
         // 今回の場合、for文とforEachメソッドをどのように使い分けるのが適切なのかわかりませんでした、、
         // break,continueやインデックスを使用する場合はfor文を使う必要がある？
-        // TODO tabata [ふぉろー]拡張for文は内部的には resultList.iterator() が利用されます。 by jflute (2025/07/31)
-        // TODO tabata [へんじ] 1on1にて使い分けふぉろー致しますね！ by jflute (2025/07/31)
-        
-        // TODO jflute 1on1にて、iterator()の挙動と現実的な使い分けについて (2025/07/31)
+        // done tabata [ふぉろー]拡張for文は内部的には resultList.iterator() が利用されます。 by jflute (2025/07/31)
+        // #1on1: iterator()のソースコードちょっと読んでみた (少しだけLinkedListの紹介)
+        // done tabata [へんじ] 1on1にて使い分けふぉろー致しますね！ by jflute (2025/07/31)
+        // #1on1: 何でもできることが便利とは限らない、何でもできる必要がない場面なら、最低限できる機能の方が安心 (2025/08/01)
+        // done jflute 1on1にて、iterator()の挙動と現実的な使い分けについて (2025/07/31)
     }
 
     // ===================================================================================
