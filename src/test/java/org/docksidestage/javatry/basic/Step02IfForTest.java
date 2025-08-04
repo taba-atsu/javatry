@@ -242,13 +242,13 @@ public class Step02IfForTest extends PlainTestCase {
         // forEachの中で何が変更できるのかまだあまり理解できていない。参照型なら変更できる、、？？？
         // res[0]の初期値をnullにしようと考えていたが、.containsメソッドでnullだとエラーが出てしまうので初期値を空文字で代用。
         // seaに代入する際に三項演算子を使って空文字の場合nullへ変換を行う。
-        // TODO tabata [いいね] ロジック的にはかなりスマートに実現できてますね！ by jflute (2025/07/31)
-        // TODO tabata [ふぉろー] この場合、break代わりの無駄ループは確かに走ってしまいますね。それを避けるとなったらもう例外throwとか使うしか無いかなと。 by jflute (2025/07/31)
+        // TODO done tabata [いいね] ロジック的にはかなりスマートに実現できてますね！ by jflute (2025/07/31)
+        // TODO done tabata [ふぉろー] この場合、break代わりの無駄ループは確かに走ってしまいますね。それを避けるとなったらもう例外throwとか使うしか無いかなと。 by jflute (2025/07/31)
         // ただ、例外をnewしてthrowすること自体もコストが掛かるので、空ループと比較するとそんなに変わらないかもしれません。(回数に依る)
-        // TODO tabata [ふぉろー] mutableな型をどうしても連れてこないといけないわけですが、配列を使われたというのはシンプルで良いと思います。 by jflute (2025/07/31)
+        // TODO done tabata [ふぉろー] mutableな型をどうしても連れてこないといけないわけですが、配列を使われたというのはシンプルで良いと思います。 by jflute (2025/07/31)
         // 他にもStringBuilderとかも代用できる候補ではあります。
         // (まあ、こういうforEach()を書くことが良いかどうかはさておいて: 1on1でお話します)
-        // TODO tabata [ふぉろー] 配列の初期値のnull, 一応こうすれば空文字初期化じゃなくnull初期化でもいけるかも!? by jflute (2025/07/31)
+        // TODO done tabata [ふぉろー] 配列の初期値のnull, 一応こうすれば空文字初期化じゃなくnull初期化でもいけるかも!? by jflute (2025/07/31)
         //  e.g. if(res[0] != null && res[0].contains("ga")){
     }
 
@@ -271,7 +271,7 @@ public class Step02IfForTest extends PlainTestCase {
         for (String fruit : fruits) {
             log(fruit);
         }
-        // TODO tabata Setというのがいいですね(^^、順不同で表示されます by jflute (2025/07/31)
+        // TODO done tabata Setというのがいいですね(^^、順不同で表示されます by jflute (2025/07/31)
     }
 
     // ===================================================================================
