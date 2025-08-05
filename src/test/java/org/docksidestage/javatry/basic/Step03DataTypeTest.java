@@ -26,7 +26,7 @@ import org.docksidestage.unit.PlainTestCase;
  * Operate exercise as javadoc. If it's question style, write your answer before test execution. <br>
  * (javadocの通りにエクササイズを実施。質問形式の場合はテストを実行する前に考えて答えを書いてみましょう)
  * @author jflute
- * @author your_name_here
+ * @author taba-atsu
  */
 public class Step03DataTypeTest extends PlainTestCase {
 
@@ -54,7 +54,10 @@ public class Step03DataTypeTest extends PlainTestCase {
             BigDecimal addedDecimal = amba.add(new BigDecimal(land));
             sea = String.valueOf(addedDecimal);
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 18.4
+        // Integerクラスは参照型なのでlandのには参照が入る。最終的にbonvo.getMonthValue();が代入されてからデクリメントされているので
+        // landのに代入されている参照先の値は9になる。if文のなかに入るので、seaにはaddedDecimalの値が代入される。
+        // BigDecimalのコンストラクタは数値型と文字列型の両方を受け取れる。したがって、addedDecimalの数字が最終的な出力となるので、答えは18.4。
     }
 
     // ===================================================================================
@@ -82,7 +85,14 @@ public class Step03DataTypeTest extends PlainTestCase {
         if ((int) dstore > piari) {
             sea = 0;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? =>0
+        // int型とfloat型を比較する際、暗黙の型変換が行われてint型は自動でfloat型になる。
+        // したがって、一つ目のif文の条件式は両方trueになり中に入る。bonvoにseaを代入することで127になる。landも127になる。
+        // seaにlandを代入するのでseaは引き続き127のまま。一つ目のif文の中のif文のtrueになるので、sea = (byte) amba;が実行される。
+        // 小数から整数へキャストされるときは、小数点以下は切り捨てられるのでseaの値は2へ変化する。
+        // 二つ目のif文の条件式でもfloat型がキャストされており小数点が切り捨てられ、1と1を比較することなるので条件式はfalseになり2つ目のif文の中には入らない。
+        // したがって、正しい答えは2になる。
+        // 自分が回答した時は、二つ目の条件式の>を>=に勘違いしてしまっており、0と回答してしまいました、、
     }
 
     // ===================================================================================
@@ -92,7 +102,8 @@ public class Step03DataTypeTest extends PlainTestCase {
     public void test_datatype_object() {
         St3ImmutableStage stage = new St3ImmutableStage("hangar");
         String sea = stage.getStageName();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => hangar
+        // getStageNameメソッドはstageName変数を返すので、答えばhangarになる。
     }
 
     private static class St3ImmutableStage {
