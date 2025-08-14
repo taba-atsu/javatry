@@ -96,6 +96,13 @@ public class Step03DataTypeTest extends PlainTestCase {
         // TODO tabata [いいね] よく頑張りました。これは本当にわかりにくいプログラムではあるので... by jflute (2025/08/11)
         // 実際には、こういった言語の細かい(レアで誰も覚えてないだろう)文法に依存したプログラムは極力書かないようにしたいという教訓でもあります。
         // でも、読まざるを得なくなったときは、すごく気をつけて調べながら読まないとという感じですね。
+        
+        // #1on1: 実際に現場で使われるプリミティブ型のお話。
+        // int, long, boolean がよく使われる。(Booleanはほとんど見かけない)
+        // float, doubleは誤差が生まれるので、BigDecimalに代替される。
+        
+        // TODO tabata [読み物課題] プリミティブ型とラッパー型 by jflute (2025/08/14)
+        // https://dbflute.seasar.org/ja/manual/topic/programming/java/beginners.html#primitivewrapper
     }
 
     // ===================================================================================
@@ -109,7 +116,8 @@ public class Step03DataTypeTest extends PlainTestCase {
         // getStageNameメソッドはstageName変数を返すので、答えばhangarになる。
         // TODO tabata [いいね] Immutableのクラスを自作するときのサンプルという感じです by jflute (2025/08/11)
         // finalなインスタンス変数に、setterが存在しないので差し替えようがないということで。
-        // TODO jflute 1on1にて、BigDecimalやStringなどと比較 (2025/08/11)
+        // done jflute 1on1にて、BigDecimalやStringなどと比較 (2025/08/11)
+        // #1on1 実際にBigDecimalとStringのクラスのコード見てみた。やってることは↓のStageと同じ。
     }
 
     private static class St3ImmutableStage {
