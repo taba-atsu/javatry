@@ -93,7 +93,7 @@ public class Step03DataTypeTest extends PlainTestCase {
         // 二つ目のif文の条件式でもfloat型がキャストされており小数点が切り捨てられ、1と1を比較することなるので条件式はfalseになり2つ目のif文の中には入らない。
         // したがって、正しい答えは2になる。
         // 自分が回答した時は、二つ目の条件式の>を>=に勘違いしてしまっており、0と回答してしまいました、、
-        // TODO tabata [いいね] よく頑張りました。これは本当にわかりにくいプログラムではあるので... by jflute (2025/08/11)
+        // done tabata [いいね] よく頑張りました。これは本当にわかりにくいプログラムではあるので... by jflute (2025/08/11)
         // 実際には、こういった言語の細かい(レアで誰も覚えてないだろう)文法に依存したプログラムは極力書かないようにしたいという教訓でもあります。
         // でも、読まざるを得なくなったときは、すごく気をつけて調べながら読まないとという感じですね。
         
@@ -101,7 +101,7 @@ public class Step03DataTypeTest extends PlainTestCase {
         // int, long, boolean がよく使われる。(Booleanはほとんど見かけない)
         // float, doubleは誤差が生まれるので、BigDecimalに代替される。
         
-        // TODO tabata [読み物課題] プリミティブ型とラッパー型 by jflute (2025/08/14)
+        // TODO done tabata [読み物課題] プリミティブ型とラッパー型 by jflute (2025/08/14)
         // https://dbflute.seasar.org/ja/manual/topic/programming/java/beginners.html#primitivewrapper
     }
 
@@ -114,7 +114,7 @@ public class Step03DataTypeTest extends PlainTestCase {
         String sea = stage.getStageName();
         log(sea); // your answer? => hangar
         // getStageNameメソッドはstageName変数を返すので、答えばhangarになる。
-        // TODO tabata [いいね] Immutableのクラスを自作するときのサンプルという感じです by jflute (2025/08/11)
+        // done tabata [いいね] Immutableのクラスを自作するときのサンプルという感じです by jflute (2025/08/11)
         // finalなインスタンス変数に、setterが存在しないので差し替えようがないということで。
         // done jflute 1on1にて、BigDecimalやStringなどと比較 (2025/08/11)
         // #1on1 実際にBigDecimalとStringのクラスのコード見てみた。やってることは↓のStageと同じ。

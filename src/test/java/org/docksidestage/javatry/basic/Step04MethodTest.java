@@ -22,7 +22,7 @@ import org.docksidestage.unit.PlainTestCase;
  * Operate exercise as javadoc. If it's question style, write your answer before test execution. <br>
  * (javadocの通りにエクササイズを実施。質問形式の場合はテストを実行する前に考えて答えを書いてみましょう)
  * @author jflute
- * @author your_name_here
+ * @author taba-atsu
  */
 public class Step04MethodTest extends PlainTestCase {
 
@@ -35,7 +35,8 @@ public class Step04MethodTest extends PlainTestCase {
      */
     public void test_method_call_basic() {
         String sea = supplySomething();
-        log(sea); // your answer? =>
+        log(sea); // your answer? => over
+        // supplySomething()メソッドではメソッド内で定義されているsea変数がreturnされているので、中身はoverになる。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -43,7 +44,9 @@ public class Step04MethodTest extends PlainTestCase {
         String sea = functionSomething("mystic");
         consumeSomething(supplySomething());
         runnableSomething();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => mysmys
+        // functionSomething()メソッドではticをmysに置き換えた文字列が返されており、他のメソッドでtest_method_call_many()内のsea
+        // に影響を与えていない。したがって、中身はmysmysになる。
     }
 
     private String functionSomething(String name) {
@@ -76,7 +79,10 @@ public class Step04MethodTest extends PlainTestCase {
         if (!land) {
             sea = sea + mutable.getStageName().length();
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 910
+        // helloMutable()メソッドの引数にseaとlandが使用されているが、別メソッドの引数は別の変数なのでtest_method_object()メソッドのseaとlandには影響がない
+        // ただ、mutableのstageNameをmysticに変更しているので長さは6になる。
+        // したがって、最終的な出力は904+6の結果の910になる。
     }
 
     private int helloMutable(int sea, Boolean land, St4MutableStage piari) {
@@ -115,7 +121,10 @@ public class Step04MethodTest extends PlainTestCase {
         }
         ++sea;
         sea = inParkCount;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 100
+        // 100になるだろうなと予想できたが、goToPark();が呼び出される時になぜhasAnnualPassportとinParkCountを使用できるのか説明できなかったので調べて深掘り。
+        // これが可能だったのは、hasAnnualPassportとinParkCountがインスタンス変数だから。ローカル変数ではないので、スコープが異なっている。
+        // インスタンス変数は同じインスタンス内の全てのメソッドからアクセス可能である。
     }
 
     private void offAnnualPassport(boolean hasAnnualPassport) {
@@ -152,12 +161,29 @@ public class Step04MethodTest extends PlainTestCase {
      */
     public void test_method_making() {
         // use after making these methods
-        //String replaced = replaceCwithB(replaceAwithB("ABC"));
-        //String sea = quote(replaced, "'");
-        //if (isAvailableLogging()) {
-        //    showSea(sea);
-        //}
+        String replaced = replaceCwithB(replaceAwithB("ABC"));
+        String sea = quote(replaced, "'");
+        if (isAvailableLogging()) {
+            showSea(sea);
+        }
     }
 
     // write methods here
+    private String replaceAwithB(String input){
+        return input.replace('A','B');
+    }
+    private  String replaceCwithB(String input){
+        return input.replace('C','B');
+    }
+    private String quote(String replaced, String quotation){
+        return quotation + replaced + quotation;
+    }
+    private boolean availableLogging = true;
+
+    private boolean isAvailableLogging() {
+        return availableLogging;
+    }
+    private void showSea(String input){
+        log(input);
+    }
 }
