@@ -101,7 +101,7 @@ public class Step03DataTypeTest extends PlainTestCase {
         // int, long, boolean がよく使われる。(Booleanはほとんど見かけない)
         // float, doubleは誤差が生まれるので、BigDecimalに代替される。
         
-        // TODO done tabata [読み物課題] プリミティブ型とラッパー型 by jflute (2025/08/14)
+        // done tabata [読み物課題] プリミティブ型とラッパー型 by jflute (2025/08/14)
         // https://dbflute.seasar.org/ja/manual/topic/programming/java/beginners.html#primitivewrapper
     }
 

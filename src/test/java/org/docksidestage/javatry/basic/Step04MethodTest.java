@@ -118,6 +118,7 @@ public class Step04MethodTest extends PlainTestCase {
         offAnnualPassport(hasAnnualPassport);
         for (int i = 0; i < 100; i++) {
             goToPark();
+            quote("", "'");
         }
         ++sea;
         sea = inParkCount;
@@ -125,6 +126,7 @@ public class Step04MethodTest extends PlainTestCase {
         // 100になるだろうなと予想できたが、goToPark();が呼び出される時になぜhasAnnualPassportとinParkCountを使用できるのか説明できなかったので調べて深掘り。
         // これが可能だったのは、hasAnnualPassportとinParkCountがインスタンス変数だから。ローカル変数ではないので、スコープが異なっている。
         // インスタンス変数は同じインスタンス内の全てのメソッドからアクセス可能である。
+        // #1on1: 全てのメソッド → 全てのインスタンスメソッド
     }
 
     private void offAnnualPassport(boolean hasAnnualPassport) {
@@ -168,6 +170,41 @@ public class Step04MethodTest extends PlainTestCase {
         }
     }
 
+    // TODO tabata [いいね] privateメソッドの定義順が呼び出し順序と一致してて直感的でわかりやすい by jflute (2025/08/29)
+    // #1on1: クラス内のカテゴリを意識して、メソッドを配置したい (タグコメント話) (2025/08/29)
+    // privateメソッドの種別:
+    // A. 単に意味的に大きさ的に切り出しただけで、再利用される想定ではないもの
+    // B. 再利用される想定のもの (若干グレーゾーンもあるが)
+    //
+    // (AからBに昇格する場合もある)
+    // 例えば、quote()が再利用されることになった場合の例: Small Helperで囲うなど
+    //
+    // (Aの場合でも、意味的に重要性の高い独立性の高いものは独立カテゴリにすることもある)
+    // 例えば、replace系が重要度の高いロジックの例: Replace Logicで囲うなど
+    //
+    // (privateメソッドから、独立クラスに昇格する場合もある)
+    //
+    // #1on1: 一番下に追加するパターンのなぜ？
+    // S. 既存クラスの構造が把握するスキルが足りない (コードを読む力が足りない)
+    // T. 既存クラスの構造を把握しようとしない (お邪魔します感)
+    //  → 会社のコードの責任の話、追加作業するからには自分も責任者の１人
+    //  → javatryにおける@authorのこだわりの話
+    // U. そもそも既存クラスの構造がぐちゃぐちゃ (既存を書いた人の力不足)
+    //  → 次のジレンマへ
+    //
+    // #1on1: 既存コードがぐちゃぐちゃ直したくてしょうがないケースどうする？
+    // E: その場で直してチケットブランチのプルリクで一緒に出す
+    // F: 別のチケットに登録して後で別タスクとして直す
+    //     → だいたい、その別タスクが後回しになって3年後も残ってる by jflute
+    //     → なので、週1のリファクタリングタイムなどを設ける現場もある by jflute
+    //     → なのでなので、"F" は相当な覚悟と仕組みがないと成り立たない？ by jflute
+    // G: その間の子、プルリク差分が見にくくなければ一緒でOK (程度の問題)
+    //     → 程度が人に依るって感じになっちゃうけど...現実的 by jflute
+    // H: 直さない、スルー
+    //
+    // ↑チームでポリシーを決めないことにはどうにもならない
+    //  チームで決めてなかったら決めるように促す
+    //
     // write methods here
     private String replaceAwithB(String input){
         return input.replace('A','B');
@@ -175,9 +212,11 @@ public class Step04MethodTest extends PlainTestCase {
     private  String replaceCwithB(String input){
         return input.replace('C','B');
     }
+    // TODO tabata [いいね] 第二引数の引数名が業務的な名前が付いててわかりやすい by jflute (2025/08/29)
     private String quote(String replaced, String quotation){
         return quotation + replaced + quotation;
     }
+    // TODO tabata [いいね] 第二引数の引数名が業務的な名前が付いててわかりやすい by jflute (2025/08/29)
     private boolean availableLogging = true;
 
     private boolean isAvailableLogging() {
