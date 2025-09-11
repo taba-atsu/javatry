@@ -64,13 +64,20 @@ public class TicketBooth {
             throw new TicketShortMoneyException("Short money: " + handedMoney);
         }
         --quantity;
+        // #1on1: なんだかんだ手順がすべて、一つ一つは正しくても順序が変われば間違いも起きる
         if (salesProceeds != null) { // second or more purchase
             salesProceeds = salesProceeds + ONE_DAY_PRICE;
         } else { // first purchase
             salesProceeds = ONE_DAY_PRICE;
         }
     }
-
+    
+    // #1on1: コピペをしない仕組みを作る意識の一方で、コピペは時々やらざるを得ないので...
+    // 開発者としては、コピペ修正で漏れがおきないような工夫を持っておくと良い。
+    // o 変数のハイライトで指差し確認
+    // o キーワード検索で指差し確認 (別のファイルに一時的にコピーして確認など)
+    // o そもそも修正を別ファイルで一括置換で直す
+    // #1on1: 一時的な作業するテキストファイルをバッと開けるようにしておくといいかも。
     public int buyTwoDayPassport(int handedMoney){
         if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
@@ -78,12 +85,15 @@ public class TicketBooth {
         if (handedMoney < TWO_DAY_PRICE) {
             throw new TicketShortMoneyException("Short money: " + handedMoney);
         }
+        // #1on1: 在庫の共有スタイルの話をした
         quantity-=2;
         if (salesProceeds != null) { // second or more purchase
             salesProceeds = salesProceeds + TWO_DAY_PRICE;
         } else { // first purchase
             salesProceeds = TWO_DAY_PRICE;
         }
+        // #1on1: (特にローカル)変数のスコープは短ければ短いほどよい。
+        // いまここでは業務的な順序に制限がないので、プログラミングの都合(安全)を優先して良い。
         int change = handedMoney - TWO_DAY_PRICE;
         return change;
     }
