@@ -127,6 +127,7 @@ public class Step05ClassTest extends PlainTestCase {
         Integer sea = booth.getSalesProceeds() + change;
         log(sea); // should be same as money
         // buyOneDayPassportを真似して作った。ただchangeをどの位置で定義するのか少し迷った。
+        // TODO jflute 1on1でふぉろー予定 (2025/09/11)
 
         // and show two-day passport quantity here
         log(booth.getQuantity());
