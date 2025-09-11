@@ -28,7 +28,7 @@ import org.docksidestage.unit.PlainTestCase;
  * (要件が曖昧なところがあれば、適切だと思われる仕様を決めても良いです)
  * 
  * @author jflute
- * @author your_name_here
+ * @author taba-atsu
  */
 public class Step05ClassTest extends PlainTestCase {
 
@@ -43,7 +43,8 @@ public class Step05ClassTest extends PlainTestCase {
         TicketBooth booth = new TicketBooth();
         booth.buyOneDayPassport(7400);
         int sea = booth.getQuantity();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 9
+        // buyOneDayPassportメソッドではquntityが0でない場合、-1するので9になる。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -51,20 +52,29 @@ public class Step05ClassTest extends PlainTestCase {
         TicketBooth booth = new TicketBooth();
         booth.buyOneDayPassport(10000);
         Integer sea = booth.getSalesProceeds();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 10000
+        // buyOneDayPassportメソッドでsalesProceedsがnullだとhandMoneyの値がそのまま代入されるので10000になる。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_class_howToUse_nosales() {
         TicketBooth booth = new TicketBooth();
         Integer sea = booth.getSalesProceeds();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => null
+        // salesProceedsは初期化されていないのに取得されているので、javaの仕様でnullになる。
+        // Integerはオブジェクトなので初期値はnullに設定される。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_class_howToUse_wrongQuantity() {
         Integer sea = doTest_class_ticket_wrongQuantity();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 9
+        // doTest_class_ticket_wrongQuantityメソッドが呼ばれるとTicketBoothクラスのオブジェクトが作成される
+        // そして↓のメソッドではクラスのメソッドであるbuyOneDayPassportメソッドとgetQuantityメソッドが呼ばれており
+        // 最終的にreturnされているのはgetQuantityメソッドの結果である。
+        // したがってTicketBooth.javaファイルで実装を見てみるとquantityが返されている。上の実装をみると
+        // quantityはMAX_QUANTITYという定数で初期化されており、今回は初期値が10。
+        // buyOneDayPassportメソッドでデクリメントされているので、最終的には9が返される。
     }
 
     private Integer doTest_class_ticket_wrongQuantity() {
@@ -89,6 +99,8 @@ public class Step05ClassTest extends PlainTestCase {
     public void test_class_letsFix_ticketQuantityReduction() {
         Integer sea = doTest_class_ticket_wrongQuantity();
         log(sea); // should be max quantity, visual check here
+        // handedMoney < ONE_DAY_PRICEという条件が書かれたif文より先にquantityのデクリメントが行われているのが原因と考えて
+        // デクリメントする位置をそのif文の下へ変更
     }
 
     /**
@@ -100,6 +112,7 @@ public class Step05ClassTest extends PlainTestCase {
         booth.buyOneDayPassport(10000);
         Integer sea = booth.getSalesProceeds();
         log(sea); // should be same as one-day price, visual check here
+        // salesProceedsにhandMoneyを足すのではなく、ONE_DAY_PRICEを足すように修正。
     }
 
     /**
@@ -108,13 +121,16 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_letsFix_makeMethod_twoday() {
         // uncomment after making the method
-        //TicketBooth booth = new TicketBooth();
-        //int money = 14000;
-        //int change = booth.buyTwoDayPassport(money);
-        //Integer sea = booth.getSalesProceeds() + change;
-        //log(sea); // should be same as money
+        TicketBooth booth = new TicketBooth();
+        int money = 14000;
+        int change = booth.buyTwoDayPassport(money);
+        Integer sea = booth.getSalesProceeds() + change;
+        log(sea); // should be same as money
+        // buyOneDayPassportを真似して作った。ただchangeをどの位置で定義するのか少し迷った。
 
         // and show two-day passport quantity here
+        log(booth.getQuantity());
+        // デクリメントする数を2に変更
     }
 
     /**

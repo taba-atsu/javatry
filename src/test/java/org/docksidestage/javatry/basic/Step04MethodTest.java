@@ -170,7 +170,7 @@ public class Step04MethodTest extends PlainTestCase {
         }
     }
 
-    // TODO tabata [いいね] privateメソッドの定義順が呼び出し順序と一致してて直感的でわかりやすい by jflute (2025/08/29)
+    // TODO done tabata [いいね] privateメソッドの定義順が呼び出し順序と一致してて直感的でわかりやすい by jflute (2025/08/29)
     // #1on1: クラス内のカテゴリを意識して、メソッドを配置したい (タグコメント話) (2025/08/29)
     // privateメソッドの種別:
     // A. 単に意味的に大きさ的に切り出しただけで、再利用される想定ではないもの
@@ -212,11 +212,11 @@ public class Step04MethodTest extends PlainTestCase {
     private  String replaceCwithB(String input){
         return input.replace('C','B');
     }
-    // TODO tabata [いいね] 第二引数の引数名が業務的な名前が付いててわかりやすい by jflute (2025/08/29)
+    // TODO done tabata [いいね] 第二引数の引数名が業務的な名前が付いててわかりやすい by jflute (2025/08/29)
     private String quote(String replaced, String quotation){
         return quotation + replaced + quotation;
     }
-    // TODO tabata [いいね] 第二引数の引数名が業務的な名前が付いててわかりやすい by jflute (2025/08/29)
+    // TODO done tabata [いいね] 第二引数の引数名が業務的な名前が付いててわかりやすい by jflute (2025/08/29)
     private boolean availableLogging = true;
 
     private boolean isAvailableLogging() {
