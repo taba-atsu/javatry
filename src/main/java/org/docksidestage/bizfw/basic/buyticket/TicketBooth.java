@@ -56,20 +56,8 @@ public class TicketBooth {
      * @throws TicketSoldOutException When ticket in booth is sold out.
      * @throws TicketShortMoneyException When the specified money is short for purchase.
      */
-    public void buyOneDayPassport(Integer handedMoney) {
-        if (quantity <= 0) {
-            throw new TicketSoldOutException("Sold out");
-        }
-        if (handedMoney < ONE_DAY_PRICE) {
-            throw new TicketShortMoneyException("Short money: " + handedMoney);
-        }
-        --quantity;
-        // #1on1: なんだかんだ手順がすべて、一つ一つは正しくても順序が変われば間違いも起きる
-        if (salesProceeds != null) { // second or more purchase
-            salesProceeds = salesProceeds + ONE_DAY_PRICE;
-        } else { // first purchase
-            salesProceeds = ONE_DAY_PRICE;
-        }
+    public Ticket buyOneDayPassport(Integer handedMoney) {
+        return buyPassport(handedMoney,ONE_DAY_PRICE);
     }
     
     // #1on1: コピペをしない仕組みを作る意識の一方で、コピペは時々やらざるを得ないので...
@@ -79,23 +67,29 @@ public class TicketBooth {
     // o そもそも修正を別ファイルで一括置換で直す
     // #1on1: 一時的な作業するテキストファイルをバッと開けるようにしておくといいかも。
     public int buyTwoDayPassport(int handedMoney){
-        if (quantity <= 0) {
-            throw new TicketSoldOutException("Sold out");
-        }
-        if (handedMoney < TWO_DAY_PRICE) {
-            throw new TicketShortMoneyException("Short money: " + handedMoney);
-        }
-        // #1on1: 在庫の共有スタイルの話をした
-        quantity-=2;
-        if (salesProceeds != null) { // second or more purchase
-            salesProceeds = salesProceeds + TWO_DAY_PRICE;
-        } else { // first purchase
-            salesProceeds = TWO_DAY_PRICE;
-        }
+        buyPassport(handedMoney,TWO_DAY_PRICE);
         // #1on1: (特にローカル)変数のスコープは短ければ短いほどよい。
         // いまここでは業務的な順序に制限がないので、プログラミングの都合(安全)を優先して良い。
         int change = handedMoney - TWO_DAY_PRICE;
         return change;
+    }
+
+    private Ticket buyPassport(Integer handedMoney,int price){
+        if (quantity <= 0) {
+            throw new TicketSoldOutException("Sold out");
+        }
+        if (handedMoney < price) {
+            throw new TicketShortMoneyException("Short money: " + handedMoney);
+        }
+        quantity--;
+        if (salesProceeds != null) { // second or more purchase
+            salesProceeds = salesProceeds + price;
+        } else { // first purchase
+            salesProceeds = price;
+        }
+        Ticket recievedTicket = new Ticket(price);
+        return recievedTicket;
+        // 共通している処理をまとめるprivate関数を追加した。全て引数に持たせるようにしたが、これが筋の良いやり方なのか自分ではあまり判断できなかった、、
     }
 
     public static class TicketSoldOutException extends RuntimeException {

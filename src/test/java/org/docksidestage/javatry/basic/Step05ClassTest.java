@@ -18,6 +18,7 @@ package org.docksidestage.javatry.basic;
 import org.docksidestage.bizfw.basic.buyticket.TicketBooth;
 import org.docksidestage.bizfw.basic.buyticket.TicketBooth.TicketShortMoneyException;
 import org.docksidestage.unit.PlainTestCase;
+import org.docksidestage.bizfw.basic.buyticket.Ticket;
 
 /**
  * The test of class. <br>
@@ -142,6 +143,7 @@ public class Step05ClassTest extends PlainTestCase {
         TicketBooth booth = new TicketBooth();
         booth.buyOneDayPassport(10000);
         log(booth.getQuantity(), booth.getSalesProceeds()); // should be same as before-fix
+        // この問題まではtwoDaypssportを購入した場合quantityが2減る仕様にしていたが、不自然な仕様だと考えてquantityが2減るのではなく1減るように変更しました。
     }
 
     // ===================================================================================
@@ -153,12 +155,12 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_return_ticket() {
         // uncomment out after modifying the method
-        //TicketBooth booth = new TicketBooth();
-        //Ticket oneDayPassport = booth.buyOneDayPassport(10000);
-        //log(oneDayPassport.getDisplayPrice()); // should be same as one-day price
-        //log(oneDayPassport.isAlreadyIn()); // should be false
-        //oneDayPassport.doInPark();
-        //log(oneDayPassport.isAlreadyIn()); // should be true
+        TicketBooth booth = new TicketBooth();
+        Ticket oneDayPassport = booth.buyOneDayPassport(10000);
+        log(oneDayPassport.getDisplayPrice()); // should be same as one-day price
+        log(oneDayPassport.isAlreadyIn()); // should be false
+        oneDayPassport.doInPark();
+        log(oneDayPassport.isAlreadyIn()); // should be true
     }
 
     /**
@@ -173,6 +175,11 @@ public class Step05ClassTest extends PlainTestCase {
         //Ticket twoDayPassport = buyResult.getTicket();
         //int change = buyResult.getChange();
         //log(twoDayPassport.getDisplayPrice() + change); // should be same as money
+
+
+        // 実装前メモ：booth.buyTwoDayPassport(handedMoney)の型がTicketBuyResultになっている
+        // つまりTicketBoothクラスのbuyTwoDayPassportメソッドの返り値をTicketBuyResultクラスのインスタンスにする
+        // また、TicketBuyResultクラスにはgetTicketメソッドとgetChangeメソッドを持っており、それぞれ返り値がTicketクラスのインスタンスとint型の整数である
     }
 
     /**
