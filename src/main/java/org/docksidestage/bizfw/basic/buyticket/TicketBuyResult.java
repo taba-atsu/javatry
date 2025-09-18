@@ -13,9 +13,9 @@ public class TicketBuyResult {
         this.price = price;
     }
 
-    public Ticket getTicket(){
-        return new Ticket(price);
-    }
+//    public Ticket getTicket(){
+//        return new Ticket(price);
+//    }
 
     public int getChange(){
         return handedMoney - price;

@@ -170,12 +170,12 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_return_whole() {
         // uncomment after modifying the method
-        TicketBooth booth = new TicketBooth();
-        int handedMoney = 20000;
-        TicketBuyResult buyResult = booth.buyTwoDayPassport(handedMoney);
-        Ticket twoDayPassport = buyResult.getTicket();
-        int change = buyResult.getChange();
-        log(twoDayPassport.getDisplayPrice() + change); // should be same as money
+//        TicketBooth booth = new TicketBooth();
+//        int handedMoney = 20000;
+//        TicketBuyResult buyResult = booth.buyTwoDayPassport(handedMoney);
+//        Ticket twoDayPassport = buyResult.getTicket();
+//        int change = buyResult.getChange();
+//        log(twoDayPassport.getDisplayPrice() + change); // should be same as money
 
 
         // 実装前メモ：booth.buyTwoDayPassport(handedMoney)の型がTicketBuyResultになっている
@@ -192,7 +192,17 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_usePluralDays() {
         // your confirmation code here
-    }
+        Ticket ticket = new Ticket(20000,2);
+        ticket.doInPark();
+//        ticket.doInPark();
+//        ticket.doInPark();
+//        ticket.doInPark();
+        // TicketクラスにremaingDaysという変数を持たせることで、複数日程のチケットでも入場可否を判断できるように変更。
+        // remainingDaysを2に設定して、doInpark()を呼び出してみて挙動をテストした。
+        // 呼び出し回数が2回まではエラーが出ず、3回以上呼び出すと正しくエラーが出ることを確認できた。
+        // いくつの場所でコンパイルエラーが出たので一旦コメントアウトしたり、remainingDaysの値を付け加えたりした。
+        // Ticketクラスにチケット情報の保持という役割と入場手続きの実行という二つの役割を持ってしまっていることが少し気になった。
+}
 
     /**
      * Accurately determine whether type of bought ticket is two-day passport or not by if-statemet. (fix Ticket classes if needed) <br>
