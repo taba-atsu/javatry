@@ -58,7 +58,7 @@ public class TicketBooth {
      */
     public TicketBuyResult buyOneDayPassport(Integer handedMoney) {
         buyPassport(handedMoney,ONE_DAY_PRICE);
-        TicketBuyResult result = new TicketBuyResult(handedMoney,ONE_DAY_PRICE);
+        TicketBuyResult result = new TicketBuyResult(handedMoney,ONE_DAY_PRICE,1);
         return result;
     }
     
@@ -72,7 +72,7 @@ public class TicketBooth {
         buyPassport(handedMoney,TWO_DAY_PRICE);
         // #1on1: (特にローカル)変数のスコープは短ければ短いほどよい。
         // いまここでは業務的な順序に制限がないので、プログラミングの都合(安全)を優先して良い。
-        TicketBuyResult result = new TicketBuyResult(handedMoney,TWO_DAY_PRICE);
+        TicketBuyResult result = new TicketBuyResult(handedMoney,TWO_DAY_PRICE,2);
         return result;
     }
 

@@ -210,22 +210,27 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_whetherTicketType() {
         // uncomment when you implement this exercise
-        //TicketBooth booth = new TicketBooth();
-        //Ticket oneDayPassport = booth.buyOneDayPassport(10000);
-        //showTicketIfNeeds(oneDayPassport);
-        //TicketBuyResult buyResult = booth.buyTwoDayPassport(10000);
-        //Ticket twoDayPassport = buyResult.getTicket();
-        //showTicketIfNeeds(twoDayPassport);
+        TicketBooth booth = new TicketBooth();
+        TicketBuyResult buyOneDayPassportResult = booth.buyOneDayPassport(10000);
+        Ticket oneDayPassport = buyOneDayPassportResult.getTicket();
+        showTicketIfNeeds(oneDayPassport);
+        TicketBuyResult buyTwoDayPassportResult = booth.buyTwoDayPassport(20000);
+        Ticket twoDayPassport = buyTwoDayPassportResult.getTicket();
+        showTicketIfNeeds(twoDayPassport);
+        // 今までの問題をといていた影響で元々書かれていたコードではコンパイルエラーが起きるので、実行できるように修正した。
+        // 解決策としてはTicketクラスにticketDaysというインスタンス変数を持たせるように変更して、いつでもチケット種別を判定しやすいようにした。
+        // その際にその変数を文字列型にするかint型にするか少し迷ったが、int型で日数を渡す方がインスタンスを作成する時にわかりやすく、チケットを使用できる残り日数を
+        // 保存しているremainingDays変数の初期化にも活用することができると考えてint型の変数にした。
     }
 
     // uncomment when you implement this exercise
-    //private void showTicketIfNeeds(Ticket ticket) {
-    //    if (xxxxxxxxxxxxxxxxxx) { // write determination for two-day passport
-    //        log("two-day passport");
-    //    } else {
-    //        log("other");
-    //    }
-    //}
+    private void showTicketIfNeeds(Ticket ticket) {
+        if (ticket.getTicketDays() == 2) { // write determination for two-day passport
+            log("two-day passport");
+        } else {
+            log("other");
+        }
+    }
 
     // ===================================================================================
     //                                                                           Good Luck
