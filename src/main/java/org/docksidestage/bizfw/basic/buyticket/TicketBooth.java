@@ -26,6 +26,7 @@ public class TicketBooth {
     private static final int MAX_QUANTITY = 10;
     private static final int ONE_DAY_PRICE = 7400;// when 2019/06/15
     private static final int TWO_DAY_PRICE = 13200;
+    private static final int FOUR_DAY_PRICE = 22400;
 
     // ===================================================================================
     //                                                                           Attribute
@@ -73,6 +74,12 @@ public class TicketBooth {
         // #1on1: (特にローカル)変数のスコープは短ければ短いほどよい。
         // いまここでは業務的な順序に制限がないので、プログラミングの都合(安全)を優先して良い。
         TicketBuyResult result = new TicketBuyResult(handedMoney,TWO_DAY_PRICE,2);
+        return result;
+    }
+
+    public TicketBuyResult buyFourDayPassport(int handedMoney){
+        buyPassport(handedMoney,FOUR_DAY_PRICE);
+        TicketBuyResult result = new TicketBuyResult(handedMoney,FOUR_DAY_PRICE,4);
         return result;
     }
 
