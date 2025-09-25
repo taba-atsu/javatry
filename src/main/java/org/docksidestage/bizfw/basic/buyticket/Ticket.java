@@ -24,6 +24,11 @@ public class Ticket {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
+    // #1on1: インスタンス変数の定義順序の選択肢。
+    // ticketDays と remainingDays が近いカテゴリの変数なので、一緒にしておくってのもGood。
+    // 一方で、finalが付いてないものは、オブジェクトの状態を示すもので...
+    // finalが付いているものは、オブジェクトの固定の属性を示すもの...
+    // (インスタンス変数の定義順序というのもにも意識を)
     private final int displayPrice; // written on ticket, park guest can watch this
     private boolean alreadyIn; // true means this ticket is unavailable
     private final int ticketDays;
@@ -60,5 +65,6 @@ public class Ticket {
         return alreadyIn;
     }
 
+    // TODO tabata ここだけ突然の1行スタイル、悪くはないけど、であれば上もその方が良いしと統一を by jflute (2025/09/25)
     public int getTicketDays(){ return ticketDays;}
 }

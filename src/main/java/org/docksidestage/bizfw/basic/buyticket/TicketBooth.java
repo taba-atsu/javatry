@@ -15,6 +15,7 @@
  */
 package org.docksidestage.bizfw.basic.buyticket;
 
+// TODO tabata author追加お願いします (他のクラスも、さわったらauthor追加を) by jflute (2025/09/25)
 /**
  * @author jflute
  */
@@ -51,6 +52,10 @@ public class TicketBooth {
     // * @throws TicketSoldOutException ブース内のチケットが売り切れだったら
     // * @throws TicketShortMoneyException 買うのに金額が足りなかったら
     // */
+    // TODO tabata javadoc, @return を書いてみましょう (日本語でOK: ↑を参考に) by jflute (2025/09/25)
+    // #1on1: JavaDocは、Javaで決められたフォーマットになっています。/** ... */
+    // JavaDocにしておくと、メソッドの補完時などに表示されて、呼び出し側が助かる。
+    // IntelliJで、メソッド補完時にcontrol+Jを押すとJavaDoc表示されるので、見たいときはぱっとcontrol+J！
     /**
      * Buy one-day passport, method for park guest.
      * @param handedMoney The money (amount) handed over from park guest. (NotNull, NotMinus)
@@ -83,6 +88,14 @@ public class TicketBooth {
         return result;
     }
 
+    // TODO tabata publicのbuyとprivateのbuyが先頭同じだと何かと紛らわしいので... by jflute (2025/09/25)
+    // doBuy... というように、先頭文字を変えるという慣習もある。
+    // e.g. doBuyPassport(), internalBuyPassport()
+    // jfluteは、do... をよく使う。jfluteも、世の中のOSSのコードを読んで真似た。
+    // IntelliJ で rename のショートカットを使って、名前を変えてみましょう。
+    // #1on1: shift + shift からの ren で Rename... でやる方法と...
+    // control + T から Refacter Thisメニューで Rename... を選択 (こっちがオススメ)
+    // Renameが気軽にできると、ちょっと名前こうした方がいいな、ってのを積極的にできるようになる。
     private void buyPassport(Integer handedMoney,int price){
         if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
@@ -97,6 +110,12 @@ public class TicketBooth {
             salesProceeds = price;
         }
         // 共通している処理をまとめるprivate関数を追加した。全て引数に持たせるようにしたが、これが筋の良いやり方なのか自分ではあまり判断できなかった、、
+        // #1on1: 引数がまだ少ないので、全然悪くないです。よくやります。
+        // つまり、引数で業務(チケットの種類)を抽象化して再利用できるようにしたと言える。
+        // ただ、引数が多くなってきたら、だんだんつらくなってくる。
+        // なので、引数が多くなってきたら、privateメソッドではなく、
+        // 引数オブジェクトを作るとか、別クラスに切り出すとか...そういったもう少し大きな対応が必要になる。
+        // という感じなので、人間の限界を超えるか？超えないか？の話なので線引は若干曖昧にある。
     }
 
     public static class TicketSoldOutException extends RuntimeException {

@@ -129,7 +129,7 @@ public class Step05ClassTest extends PlainTestCase {
 //        Integer sea = booth.getSalesProceeds() + change;
 //        log(sea); // should be same as money
         // buyOneDayPassportを真似して作った。ただchangeをどの位置で定義するのか少し迷った。
-        // TODO jflute 1on1でふぉろー予定 (2025/09/11)
+        // done jflute 1on1でふぉろー予定 (2025/09/11)
 
         // and show two-day passport quantity here
         //log(booth.getQuantity());
@@ -246,6 +246,7 @@ public class Step05ClassTest extends PlainTestCase {
         Ticket fourDayPassport = buyFourDayPassprtResult.getTicket();
         log(fourDayPassport.getTicketDays());
     }
+    // TODO jflute 次回1on1こっから (2025/09/25)
 
     /**
      * Fix it to be able to buy night-only two-day passport (price is 7400), which can be used at only night. <br>
