@@ -192,8 +192,8 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_usePluralDays() {
         // your confirmation code here
-        Ticket ticket = new Ticket(20000,2);
-        ticket.doInPark();
+//        Ticket ticket = new Ticket(20000,2);
+//        ticket.doInPark();
 //        ticket.doInPark();
 //        ticket.doInPark();
 //        ticket.doInPark();
@@ -210,13 +210,13 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_whetherTicketType() {
         // uncomment when you implement this exercise
-        TicketBooth booth = new TicketBooth();
-        TicketBuyResult buyOneDayPassportResult = booth.buyOneDayPassport(10000);
-        Ticket oneDayPassport = buyOneDayPassportResult.getTicket();
-        showTicketIfNeeds(oneDayPassport);
-        TicketBuyResult buyTwoDayPassportResult = booth.buyTwoDayPassport(20000);
-        Ticket twoDayPassport = buyTwoDayPassportResult.getTicket();
-        showTicketIfNeeds(twoDayPassport);
+//        TicketBooth booth = new TicketBooth();
+//        TicketBuyResult buyOneDayPassportResult = booth.buyOneDayPassport(10000);
+//        Ticket oneDayPassport = buyOneDayPassportResult.getTicket();
+//        showTicketIfNeeds(oneDayPassport);
+//        TicketBuyResult buyTwoDayPassportResult = booth.buyTwoDayPassport(20000);
+//        Ticket twoDayPassport = buyTwoDayPassportResult.getTicket();
+//        showTicketIfNeeds(twoDayPassport);
         // 今までの問題をといていた影響で元々書かれていたコードではコンパイルエラーが起きるので、実行できるように修正した。
         // 解決策としてはTicketクラスにticketDaysというインスタンス変数を持たせるように変更して、いつでもチケット種別を判定しやすいようにした。
         // その際にその変数を文字列型にするかint型にするか少し迷ったが、int型で日数を渡す方がインスタンスを作成する時にわかりやすく、チケットを使用できる残り日数を
@@ -241,10 +241,10 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_wonder_four() {
         // your confirmation code here
-        TicketBooth booth = new TicketBooth();
-        TicketBuyResult buyFourDayPassprtResult = booth.buyFourDayPassport(30000);
-        Ticket fourDayPassport = buyFourDayPassprtResult.getTicket();
-        log(fourDayPassport.getTicketDays());
+//        TicketBooth booth = new TicketBooth();
+//        TicketBuyResult buyFourDayPassprtResult = booth.buyFourDayPassport(30000);
+//        Ticket fourDayPassport = buyFourDayPassprtResult.getTicket();
+//        log(fourDayPassport.getTicketDays());
     }
     // TODO jflute 次回1on1こっから (2025/09/25)
 

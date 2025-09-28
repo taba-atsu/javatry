@@ -65,6 +65,9 @@ public class Ticket {
         return alreadyIn;
     }
 
-    // TODO tabata ここだけ突然の1行スタイル、悪くはないけど、であれば上もその方が良いしと統一を by jflute (2025/09/25)
-    public int getTicketDays(){ return ticketDays;}
+    // TODO done tabata ここだけ突然の1行スタイル、悪くはないけど、であれば上もその方が良いしと統一を by jflute (2025/09/25)
+    // IntelliJの機能で上2つのメソッドが自動的に1行スタイルに見えるようになっていました、、
+    public int getTicketDays(){
+        return ticketDays;
+    }
 }

@@ -15,9 +15,10 @@
  */
 package org.docksidestage.bizfw.basic.buyticket;
 
-// TODO tabata author追加お願いします (他のクラスも、さわったらauthor追加を) by jflute (2025/09/25)
+// TODO done tabata author追加お願いします (他のクラスも、さわったらauthor追加を) by jflute (2025/09/25)
 /**
  * @author jflute
+ * @author taba-atsu
  */
 public class TicketBooth {
 
@@ -52,21 +53,25 @@ public class TicketBooth {
     // * @throws TicketSoldOutException ブース内のチケットが売り切れだったら
     // * @throws TicketShortMoneyException 買うのに金額が足りなかったら
     // */
-    // TODO tabata javadoc, @return を書いてみましょう (日本語でOK: ↑を参考に) by jflute (2025/09/25)
+    // TODO done tabata javadoc, @return を書いてみましょう (日本語でOK: ↑を参考に) by jflute (2025/09/25)
     // #1on1: JavaDocは、Javaで決められたフォーマットになっています。/** ... */
     // JavaDocにしておくと、メソッドの補完時などに表示されて、呼び出し側が助かる。
     // IntelliJで、メソッド補完時にcontrol+Jを押すとJavaDoc表示されるので、見たいときはぱっとcontrol+J！
     /**
      * Buy one-day passport, method for park guest.
      * @param handedMoney The money (amount) handed over from park guest. (NotNull, NotMinus)
+     * @return TicketBuyResult The result data of the 1-Day passport purchase.
      * @throws TicketSoldOutException When ticket in booth is sold out.
      * @throws TicketShortMoneyException When the specified money is short for purchase.
      */
     public TicketBuyResult buyOneDayPassport(Integer handedMoney) {
-        buyPassport(handedMoney,ONE_DAY_PRICE);
-        TicketBuyResult result = new TicketBuyResult(handedMoney,ONE_DAY_PRICE,1);
+        doBuyPassport(handedMoney,ONE_DAY_PRICE);
+        Ticket purchasedTicket = new Ticket(ONE_DAY_PRICE, 1);
+        int change = handedMoney - ONE_DAY_PRICE;
+        TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
         return result;
     }
+    // TicketBuyResultクラスを変更したので、それにともなってTicketBoothクラスも変更
     
     // #1on1: コピペをしない仕組みを作る意識の一方で、コピペは時々やらざるを得ないので...
     // 開発者としては、コピペ修正で漏れがおきないような工夫を持っておくと良い。
@@ -75,20 +80,24 @@ public class TicketBooth {
     // o そもそも修正を別ファイルで一括置換で直す
     // #1on1: 一時的な作業するテキストファイルをバッと開けるようにしておくといいかも。
     public TicketBuyResult buyTwoDayPassport(int handedMoney){
-        buyPassport(handedMoney,TWO_DAY_PRICE);
+        doBuyPassport(handedMoney,TWO_DAY_PRICE);
         // #1on1: (特にローカル)変数のスコープは短ければ短いほどよい。
         // いまここでは業務的な順序に制限がないので、プログラミングの都合(安全)を優先して良い。
-        TicketBuyResult result = new TicketBuyResult(handedMoney,TWO_DAY_PRICE,2);
+        Ticket purchasedTicket = new Ticket(TWO_DAY_PRICE, 2);
+        int change = handedMoney - TWO_DAY_PRICE;
+        TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
         return result;
     }
 
     public TicketBuyResult buyFourDayPassport(int handedMoney){
-        buyPassport(handedMoney,FOUR_DAY_PRICE);
-        TicketBuyResult result = new TicketBuyResult(handedMoney,FOUR_DAY_PRICE,4);
+        doBuyPassport(handedMoney,FOUR_DAY_PRICE);
+        Ticket purchasedTicket = new Ticket(FOUR_DAY_PRICE, 4);
+        int change = handedMoney - FOUR_DAY_PRICE;
+        TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
         return result;
     }
 
-    // TODO tabata publicのbuyとprivateのbuyが先頭同じだと何かと紛らわしいので... by jflute (2025/09/25)
+    // TODO done tabata publicのbuyとprivateのbuyが先頭同じだと何かと紛らわしいので... by jflute (2025/09/25)
     // doBuy... というように、先頭文字を変えるという慣習もある。
     // e.g. doBuyPassport(), internalBuyPassport()
     // jfluteは、do... をよく使う。jfluteも、世の中のOSSのコードを読んで真似た。
@@ -96,7 +105,7 @@ public class TicketBooth {
     // #1on1: shift + shift からの ren で Rename... でやる方法と...
     // control + T から Refacter Thisメニューで Rename... を選択 (こっちがオススメ)
     // Renameが気軽にできると、ちょっと名前こうした方がいいな、ってのを積極的にできるようになる。
-    private void buyPassport(Integer handedMoney,int price){
+    private void doBuyPassport(Integer handedMoney,int price){
         if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
         }
