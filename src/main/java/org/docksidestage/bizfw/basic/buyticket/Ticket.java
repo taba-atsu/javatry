@@ -15,11 +15,20 @@
  */
 package org.docksidestage.bizfw.basic.buyticket;
 
+import java.time.LocalTime;
+
 /**
  * @author jflute
  * @author taba-atsu
  */
 public class Ticket {
+
+    // ===================================================================================
+    //                                                                          Definition
+    //                                                                          ==========
+    private static final LocalTime nightPassStartTime = LocalTime.of(17,0);
+    private static final LocalTime lastEntryTime = LocalTime.of(20,0);
+
 
     // ===================================================================================
     //                                                                           Attribute
@@ -31,16 +40,20 @@ public class Ticket {
     // (インスタンス変数の定義順序というのもにも意識を)
     private final int displayPrice; // written on ticket, park guest can watch this
     private boolean alreadyIn; // true means this ticket is unavailable
+
     private final int ticketDays;
     private int remainingDays;
+
+    private final boolean isNightOnlyPassport;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public Ticket(int displayPrice, int ticketDays) {
+    public Ticket(int displayPrice, int ticketDays, boolean isNightOnlyPassport) {
         this.displayPrice = displayPrice;
         this.ticketDays = ticketDays;
         this.remainingDays = ticketDays;
+        this.isNightOnlyPassport = isNightOnlyPassport;
     }
 
     // ===================================================================================
@@ -50,8 +63,19 @@ public class Ticket {
         if (remainingDays == 0) {
             throw new IllegalStateException("Already in park by this ticket: displayedPrice=" + displayPrice);
         }
+        if (this.isNightOnlyPassport){
+            if (!isNightPassportAvailable()){
+                throw new IllegalStateException(String.format("Night Pass is not available at this time.Night Pass is only valid between %s and %s.",nightPassStartTime,lastEntryTime));
+            }
+        }
         remainingDays--;
         alreadyIn = true;
+    }
+    // doInParkメソッドにナイトパスの場合夜か判定して入場できるか判断する処理を追加する
+
+    private boolean isNightPassportAvailable(){
+        LocalTime currentTime = LocalTime.now();
+        return currentTime.isAfter(nightPassStartTime) && currentTime.isBefore(lastEntryTime);
     }
 
     // ===================================================================================

@@ -29,6 +29,7 @@ public class TicketBooth {
     private static final int ONE_DAY_PRICE = 7400;// when 2019/06/15
     private static final int TWO_DAY_PRICE = 13200;
     private static final int FOUR_DAY_PRICE = 22400;
+    private static final int NIGHT_ONLY_TWO_DAY_PASSPORT = 7400;
 
     // ===================================================================================
     //                                                                           Attribute
@@ -66,7 +67,7 @@ public class TicketBooth {
      */
     public TicketBuyResult buyOneDayPassport(Integer handedMoney) {
         doBuyPassport(handedMoney,ONE_DAY_PRICE);
-        Ticket purchasedTicket = new Ticket(ONE_DAY_PRICE, 1);
+        Ticket purchasedTicket = new Ticket(ONE_DAY_PRICE, 1,false);
         int change = handedMoney - ONE_DAY_PRICE;
         TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
         return result;
@@ -83,7 +84,7 @@ public class TicketBooth {
         doBuyPassport(handedMoney,TWO_DAY_PRICE);
         // #1on1: (特にローカル)変数のスコープは短ければ短いほどよい。
         // いまここでは業務的な順序に制限がないので、プログラミングの都合(安全)を優先して良い。
-        Ticket purchasedTicket = new Ticket(TWO_DAY_PRICE, 2);
+        Ticket purchasedTicket = new Ticket(TWO_DAY_PRICE, 2, false);
         int change = handedMoney - TWO_DAY_PRICE;
         TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
         return result;
@@ -91,8 +92,16 @@ public class TicketBooth {
 
     public TicketBuyResult buyFourDayPassport(int handedMoney){
         doBuyPassport(handedMoney,FOUR_DAY_PRICE);
-        Ticket purchasedTicket = new Ticket(FOUR_DAY_PRICE, 4);
+        Ticket purchasedTicket = new Ticket(FOUR_DAY_PRICE, 4, false);
         int change = handedMoney - FOUR_DAY_PRICE;
+        TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
+        return result;
+    }
+
+    public TicketBuyResult buyNightOnlyTwoDayPassport(int handedMoney){
+        doBuyPassport(handedMoney, NIGHT_ONLY_TWO_DAY_PASSPORT);
+        Ticket purchasedTicket = new Ticket(NIGHT_ONLY_TWO_DAY_PASSPORT, 2, true);
+        int change = handedMoney - NIGHT_ONLY_TWO_DAY_PASSPORT;
         TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
         return result;
     }

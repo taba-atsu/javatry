@@ -20,6 +20,8 @@ import org.docksidestage.bizfw.basic.buyticket.TicketBooth.TicketShortMoneyExcep
 import org.docksidestage.unit.PlainTestCase;
 import org.docksidestage.bizfw.basic.buyticket.Ticket;
 import org.docksidestage.bizfw.basic.buyticket.TicketBuyResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The test of class. <br>
@@ -33,6 +35,7 @@ import org.docksidestage.bizfw.basic.buyticket.TicketBuyResult;
  * @author taba-atsu
  */
 public class Step05ClassTest extends PlainTestCase {
+    private static final Logger log = LoggerFactory.getLogger(Step05ClassTest.class);
 
     // ===================================================================================
     //                                                                          How to Use
@@ -254,6 +257,13 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_wonder_night() {
         // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        TicketBuyResult buyNightOnlyTwoDayPassResult = booth.buyNightOnlyTwoDayPassport(10000);
+        Ticket nightOnlyTwoDayPassport = buyNightOnlyTwoDayPassResult.getTicket();
+        log(nightOnlyTwoDayPassport.getTicketDays());
+        nightOnlyTwoDayPassport.doInPark();
+        // Ticketクラスに夜限定かどうかを保持する変数を作成する
+        // 方針としてはTicketクラスに時間で判定できるロジックを作成して、それをdoInParkメソッドで呼び出す方針にする
     }
 
     // ===================================================================================

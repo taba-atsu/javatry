@@ -5,9 +5,6 @@ package org.docksidestage.bizfw.basic.buyticket;
  */
 public class TicketBuyResult {
 
-    private final int handedMoney;
-    private final int price;
-    private final int ticketDays;
     private final Ticket purchasedTicket;
     private final int change;
 
