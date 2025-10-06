@@ -35,7 +35,7 @@ public class TicketBooth {
     //                                                                           Attribute
     //                                                                           =========
     private int quantity = MAX_QUANTITY;
-    private Integer salesProceeds; // null allowed: until first purchase
+    private int salesProceeds = 0;
 
     // ===================================================================================
     //                                                                         Constructor
@@ -65,8 +65,8 @@ public class TicketBooth {
      * @throws TicketSoldOutException When ticket in booth is sold out.
      * @throws TicketShortMoneyException When the specified money is short for purchase.
      */
-    public TicketBuyResult buyOneDayPassport(Integer handedMoney) {
-        doBuyPassport(handedMoney,ONE_DAY_PRICE);
+    public TicketBuyResult buyOneDayPassport(int handedMoney) {
+        validateAndRegisterSale(handedMoney,ONE_DAY_PRICE);
         Ticket purchasedTicket = new Ticket(ONE_DAY_PRICE, 1,false);
         int change = handedMoney - ONE_DAY_PRICE;
         TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
@@ -81,7 +81,7 @@ public class TicketBooth {
     // o そもそも修正を別ファイルで一括置換で直す
     // #1on1: 一時的な作業するテキストファイルをバッと開けるようにしておくといいかも。
     public TicketBuyResult buyTwoDayPassport(int handedMoney){
-        doBuyPassport(handedMoney,TWO_DAY_PRICE);
+        validateAndRegisterSale(handedMoney,TWO_DAY_PRICE);
         // #1on1: (特にローカル)変数のスコープは短ければ短いほどよい。
         // いまここでは業務的な順序に制限がないので、プログラミングの都合(安全)を優先して良い。
         Ticket purchasedTicket = new Ticket(TWO_DAY_PRICE, 2, false);
@@ -91,7 +91,7 @@ public class TicketBooth {
     }
 
     public TicketBuyResult buyFourDayPassport(int handedMoney){
-        doBuyPassport(handedMoney,FOUR_DAY_PRICE);
+        validateAndRegisterSale(handedMoney,FOUR_DAY_PRICE);
         Ticket purchasedTicket = new Ticket(FOUR_DAY_PRICE, 4, false);
         int change = handedMoney - FOUR_DAY_PRICE;
         TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
@@ -99,7 +99,7 @@ public class TicketBooth {
     }
 
     public TicketBuyResult buyNightOnlyTwoDayPassport(int handedMoney){
-        doBuyPassport(handedMoney, NIGHT_ONLY_TWO_DAY_PASSPORT);
+        validateAndRegisterSale(handedMoney, NIGHT_ONLY_TWO_DAY_PASSPORT);
         Ticket purchasedTicket = new Ticket(NIGHT_ONLY_TWO_DAY_PASSPORT, 2, true);
         int change = handedMoney - NIGHT_ONLY_TWO_DAY_PASSPORT;
         TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
@@ -114,19 +114,14 @@ public class TicketBooth {
     // #1on1: shift + shift からの ren で Rename... でやる方法と...
     // control + T から Refacter Thisメニューで Rename... を選択 (こっちがオススメ)
     // Renameが気軽にできると、ちょっと名前こうした方がいいな、ってのを積極的にできるようになる。
-    private void doBuyPassport(Integer handedMoney,int price){
+    private void validateAndRegisterSale(int handedMoney,int price){
         if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
         }
         if (handedMoney < price) {
             throw new TicketShortMoneyException("Short money: " + handedMoney);
         }
-        quantity--;
-        if (salesProceeds != null) { // second or more purchase
-            salesProceeds = salesProceeds + price;
-        } else { // first purchase
-            salesProceeds = price;
-        }
+        registerSale(price);
         // 共通している処理をまとめるprivate関数を追加した。全て引数に持たせるようにしたが、これが筋の良いやり方なのか自分ではあまり判断できなかった、、
         // #1on1: 引数がまだ少ないので、全然悪くないです。よくやります。
         // つまり、引数で業務(チケットの種類)を抽象化して再利用できるようにしたと言える。
@@ -134,6 +129,11 @@ public class TicketBooth {
         // なので、引数が多くなってきたら、privateメソッドではなく、
         // 引数オブジェクトを作るとか、別クラスに切り出すとか...そういったもう少し大きな対応が必要になる。
         // という感じなので、人間の限界を超えるか？超えないか？の話なので線引は若干曖昧にある。
+    }
+
+    private void registerSale(int price){
+        quantity--;
+        salesProceeds += price;
     }
 
     public static class TicketSoldOutException extends RuntimeException {
@@ -161,7 +161,7 @@ public class TicketBooth {
         return quantity;
     }
 
-    public Integer getSalesProceeds() {
+    public int getSalesProceeds() {
         return salesProceeds;
     }
 }

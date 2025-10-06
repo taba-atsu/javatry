@@ -275,7 +275,20 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_yourRefactoring() {
         // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        log(booth.getSalesProceeds());
+        TicketBuyResult buyTwoDayPassResult = booth.buyTwoDayPassport(20000);
+        Ticket twoDayPassport = buyTwoDayPassResult.getTicket();
+        log(twoDayPassport.getTicketDays());
+        log(booth.getSalesProceeds());
     }
+    // 可読性が高いコードとは何なのかよくわからなかったので整理
+    // 意図が明確で一貫性があり余計な記述がないことが大事そう
+    // 具体的には、変数関数の命名はわかりやすく、一つの関数に一つの責務、コメントにはコードから読み取りにくいwhyを書く、ネストは深くしすぎない、クラスの責務が明確
+    // などを意識してリファクタリングする
+    // 変更点↓
+    // TicketBoothクラスのdoBuyPassportメソッドを責務分割して、関数名を修正する
+    // TicketBoothクラスのsalesProceedsがnullableになっているが、int型の変数にして初期値を0にする方が適切ではないかと判断し修正
 
     /**
      * Write intelligent JavaDoc comments seriously on the public classes/constructors/methods of the Ticket class. <br>
