@@ -2,6 +2,8 @@ package org.docksidestage.bizfw.basic.buyticket;
 
 /**
  * @author taba-atsu
+ * パークの入場チケットを購入した際の結果を表すクラスです。
+ * 購入したチケットの種類と、購入時のお釣りの金額を保持します。
  */
 public class TicketBuyResult {
 

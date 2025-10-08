@@ -19,6 +19,9 @@ package org.docksidestage.bizfw.basic.buyticket;
 /**
  * @author jflute
  * @author taba-atsu
+ * パークの入場チケットを販売するチケットブースを表すクラスです。
+ * チケットブースで購入できるチケットの上限の枚数、チケットの種類ごとの値段、チケットブースでの売り上げの金額を保持します。
+ * チケットを購入するロジックを持ちます。チケットが購入可能かの判定、売り上げ金額の計算ができます。
  */
 public class TicketBooth {
 
