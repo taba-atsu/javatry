@@ -74,10 +74,14 @@ public class Ticket {
         remainingDays--;
         alreadyIn = true;
     }
+    // TODO tabata このコメント、isNightPassportAvailable()の説明だと思うので空行なしでOK by jflute (2025/10/08)
     // doInParkメソッドにナイトパスの場合夜か判定して入場できるか判断する処理を追加する
 
     private boolean isNightPassportAvailable(){
         LocalTime currentTime = LocalTime.now();
+        // TODO tabata 17:00:01 〜 19:59:59 なら入れるという仕様になっているが意図しているか？ by jflute (2025/10/08)
+        // 境界値が含むのか？含まないのか？意識して判定をしましょう。e.g. 17時ぴったりは入れていいのでは？
+        // (DBのEND_TIME含むの？ややこしい話)
         return currentTime.isAfter(nightPassStartTime) && currentTime.isBefore(lastEntryTime);
     }
 
@@ -92,8 +96,11 @@ public class Ticket {
         return alreadyIn;
     }
 
-    // TODO done tabata ここだけ突然の1行スタイル、悪くはないけど、であれば上もその方が良いしと統一を by jflute (2025/09/25)
+    // done tabata ここだけ突然の1行スタイル、悪くはないけど、であれば上もその方が良いしと統一を by jflute (2025/09/25)
     // IntelliJの機能で上2つのメソッドが自動的に1行スタイルに見えるようになっていました、、
+    // #1on1: 自分が使ってるツール、オープンソースなのか？closedなのか？
+    // オープンソースにしても、企業ベースでビジネス的なのか？コミュニティでボランティア的なのか？(個人でボランティア的なのか？)
+    // DBFluteの例、Spring Frameworkの例
     public int getTicketDays(){
         return ticketDays;
     }

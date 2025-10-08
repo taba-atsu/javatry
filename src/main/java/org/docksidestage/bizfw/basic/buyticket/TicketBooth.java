@@ -15,7 +15,9 @@
  */
 package org.docksidestage.bizfw.basic.buyticket;
 
-// TODO done tabata author追加お願いします (他のクラスも、さわったらauthor追加を) by jflute (2025/09/25)
+// done tabata author追加お願いします (他のクラスも、さわったらauthor追加を) by jflute (2025/09/25)
+// TODO tabata javadoc, 説明が先で、あっとまーくのタグが後ろ by jflute (2025/10/08)
+// IntelliJで行移動、shift+option+上下
 /**
  * @author jflute
  * @author taba-atsu
@@ -57,10 +59,16 @@ public class TicketBooth {
     // * @throws TicketSoldOutException ブース内のチケットが売り切れだったら
     // * @throws TicketShortMoneyException 買うのに金額が足りなかったら
     // */
-    // TODO done tabata javadoc, @return を書いてみましょう (日本語でOK: ↑を参考に) by jflute (2025/09/25)
+    // done tabata javadoc, @return を書いてみましょう (日本語でOK: ↑を参考に) by jflute (2025/09/25)
     // #1on1: JavaDocは、Javaで決められたフォーマットになっています。/** ... */
     // JavaDocにしておくと、メソッドの補完時などに表示されて、呼び出し側が助かる。
     // IntelliJで、メソッド補完時にcontrol+Jを押すとJavaDoc表示されるので、見たいときはぱっとcontrol+J！
+    // TODO tabata returnは、型宣言は不要です。説明だけでOK。 by jflute (2025/10/08)
+    // 恐らく、@param, @throws に引きづられて入れたと想像。
+    // @paramは、引数って複数ありえるので、どの引数？って特定して説明しないといけない。
+    // @throwsも、複数ありえるので、どの例外？って特定して説明しないといけない。
+    // 戻り値は、絶対に一個しかないので、なので識別する必要がない。
+    // (基本的に、メソッド宣言を読めばわかることは書かない)
     /**
      * Buy one-day passport, method for park guest.
      * @param handedMoney The money (amount) handed over from park guest. (NotNull, NotMinus)
@@ -72,6 +80,8 @@ public class TicketBooth {
         validateAndRegisterSale(handedMoney,ONE_DAY_PRICE);
         Ticket purchasedTicket = new Ticket(ONE_DAY_PRICE, 1,false);
         int change = handedMoney - ONE_DAY_PRICE;
+        // TODO tabata この場合、直接newしたものをreturnしちゃってもいいかなと(少しでも行削減) by jflute (2025/10/08)
+        //  e.g. return new TicketBuyResult(purchasedTicket, change);
         TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
         return result;
     }
@@ -109,7 +119,7 @@ public class TicketBooth {
         return result;
     }
 
-    // TODO done tabata publicのbuyとprivateのbuyが先頭同じだと何かと紛らわしいので... by jflute (2025/09/25)
+    // done tabata publicのbuyとprivateのbuyが先頭同じだと何かと紛らわしいので... by jflute (2025/09/25)
     // doBuy... というように、先頭文字を変えるという慣習もある。
     // e.g. doBuyPassport(), internalBuyPassport()
     // jfluteは、do... をよく使う。jfluteも、世の中のOSSのコードを読んで真似た。

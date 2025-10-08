@@ -224,10 +224,13 @@ public class Step05ClassTest extends PlainTestCase {
         // 解決策としてはTicketクラスにticketDaysというインスタンス変数を持たせるように変更して、いつでもチケット種別を判定しやすいようにした。
         // その際にその変数を文字列型にするかint型にするか少し迷ったが、int型で日数を渡す方がインスタンスを作成する時にわかりやすく、チケットを使用できる残り日数を
         // 保存しているremainingDays変数の初期化にも活用することができると考えてint型の変数にした。
+        // TODO tabata ↑コンパイルエラーになったところは、辻褄合うように修正しましょう by jflute (2025/10/08)
     }
 
     // uncomment when you implement this exercise
     private void showTicketIfNeeds(Ticket ticket) {
+        // TODO tabata 「あっ、nightパスポートが」byたばたさん、の通り by jflute (2025/10/08)
+        // これは怖いパターン話。新機能追加で、修正何もしてない既存のプログラムが正しく動かなくなる。
         if (ticket.getTicketDays() == 2) { // write determination for two-day passport
             log("two-day passport");
         } else {

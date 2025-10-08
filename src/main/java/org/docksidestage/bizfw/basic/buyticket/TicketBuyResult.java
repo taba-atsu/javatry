@@ -1,9 +1,13 @@
 package org.docksidestage.bizfw.basic.buyticket;
 
+// TODO tabata 購入したチケットの種類、購入時のお釣りの金額と具体例を列挙することでわかりやすい一方で... by jflute (2025/10/08)
+// 列挙を断定してしまうと、将来項目が追加された時に、ちょっと誤解を生みやすい文章になってしまう可能性あり。
+// 列挙断定の情報はjavadocになくてよくて、具体例を出してイメージを沸かせることだけで良いかなと。
+// e.g. 購入時のお釣りの金額 "など" を保持します。他には、"とか"、"e.g."、"例えば" ....
 /**
  * @author taba-atsu
  * パークの入場チケットを購入した際の結果を表すクラスです。
- * 購入したチケットの種類と、購入時のお釣りの金額を保持します。
+ * 購入したチケットの種類と購入時のお釣りの金額を保持します。
  */
 public class TicketBuyResult {
 
@@ -15,8 +19,10 @@ public class TicketBuyResult {
         this.change = change;
     }
 
+    // TODO tabata 外部はスッキリ内部は明示的ってのもアリだし、統一概念でgetPurchasedTicket()もアリ by jflute (2025/10/08)
+    // まあ、意図してなかったということなので、意図しましょう。
     public Ticket getTicket(){
-        // TODO done tabata getが複数呼ばれた時に、違うインスタンスが戻ってしまうと紛らわしいことがある by jflute (2025/09/25)
+        // done tabata getが複数呼ばれた時に、違うインスタンスが戻ってしまうと紛らわしいことがある by jflute (2025/09/25)
         // 呼び出し側は、getを2回呼んでも同じものが戻ってくると思ってしまいがち。(getは特別なニュアンスを持つので)
 
         // チケットオブジェクトをTicketBuyResultクラスでnewするのではなく、TicketBoothクラスでnewする仕様に変更する。
@@ -26,7 +32,7 @@ public class TicketBuyResult {
     }
 
     public int getChange(){
-        // TODO done tabata getが複数呼ばれた時に、同じ金額が戻ってくるけど...計算処理が毎回走るのが無駄感ある by jflute (2025/09/25)
+        // done tabata getが複数呼ばれた時に、同じ金額が戻ってくるけど...計算処理が毎回走るのが無駄感ある by jflute (2025/09/25)
         // もちろん、この程度だったらというのはあるけど、万が一少し重い処理とかだったらあまりgetでやりたくない。
         // そういうことを考えるのも面倒ではあるので、最初からgetではロジック計算しない方が無難って考え方も。
 
