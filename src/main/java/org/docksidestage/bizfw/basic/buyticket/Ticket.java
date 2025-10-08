@@ -18,11 +18,11 @@ package org.docksidestage.bizfw.basic.buyticket;
 import java.time.LocalTime;
 
 /**
+ * パークへの入場チケットを表すクラスです。チケットが利用可能なのか判定するロジックを持ちます。購入するロジックは含みません。
+ * チケットの値段、入場可能日数、夜限定チケットなのか、そのチケットであと何日パークに入場可能かなどの情報を保持します。
+ * また、チケットが利用可能か判定するメソッドなどを持ちます。
  * @author jflute
  * @author taba-atsu
- * パークへの入場チケットを表すクラスです。チケットが利用可能なのか判定するロジックを持ちます。購入するロジックは含みません。
- * チケットの値段、入場可能日数、夜限定チケットなのか、そのチケットであと何日パークに入場可能かの情報を保持します。
- * また、チケットが利用可能か判定するメソッドを持ちます。
  */
 public class Ticket {
 
@@ -74,15 +74,15 @@ public class Ticket {
         remainingDays--;
         alreadyIn = true;
     }
-    // TODO tabata このコメント、isNightPassportAvailable()の説明だと思うので空行なしでOK by jflute (2025/10/08)
+    // TODO done tabata このコメント、isNightPassportAvailable()の説明だと思うので空行なしでOK by jflute (2025/10/08)
     // doInParkメソッドにナイトパスの場合夜か判定して入場できるか判断する処理を追加する
-
     private boolean isNightPassportAvailable(){
         LocalTime currentTime = LocalTime.now();
-        // TODO tabata 17:00:01 〜 19:59:59 なら入れるという仕様になっているが意図しているか？ by jflute (2025/10/08)
+        // TODO done tabata 17:00:01 〜 19:59:59 なら入れるという仕様になっているが意図しているか？ by jflute (2025/10/08)
         // 境界値が含むのか？含まないのか？意識して判定をしましょう。e.g. 17時ぴったりは入れていいのでは？
         // (DBのEND_TIME含むの？ややこしい話)
-        return currentTime.isAfter(nightPassStartTime) && currentTime.isBefore(lastEntryTime);
+        // 17:00:00 〜 19:59:59なら入れる仕様にしました by taba-atsu
+        return !currentTime.isBefore(nightPassStartTime) && currentTime.isBefore(lastEntryTime);
     }
 
     // ===================================================================================
@@ -103,5 +103,9 @@ public class Ticket {
     // DBFluteの例、Spring Frameworkの例
     public int getTicketDays(){
         return ticketDays;
+    }
+
+    public boolean isNightOnlyPassport(){
+        return isNightOnlyPassport;
     }
 }

@@ -126,11 +126,10 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_letsFix_makeMethod_twoday() {
         // uncomment after making the method
-//        TicketBooth booth = new TicketBooth();
-//        int money = 14000;
-//        int change = booth.buyTwoDayPassport(money);
-//        Integer sea = booth.getSalesProceeds() + change;
-//        log(sea); // should be same as money
+        TicketBooth booth = new TicketBooth();
+        int money = 14000;
+        TicketBuyResult result = booth.buyTwoDayPassport(money);
+        log(result.getPurchasedTicket().getTicketDays()); // should be same as money
         // buyOneDayPassportを真似して作った。ただchangeをどの位置で定義するのか少し迷った。
         // done jflute 1on1でふぉろー予定 (2025/09/11)
 
@@ -159,12 +158,12 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_return_ticket() {
         // uncomment out after modifying the method
-//        TicketBooth booth = new TicketBooth();
-//        Ticket oneDayPassport = booth.buyOneDayPassport(10000);
-//        log(oneDayPassport.getDisplayPrice()); // should be same as one-day price
-//        log(oneDayPassport.isAlreadyIn()); // should be false
-//        oneDayPassport.doInPark();
-//        log(oneDayPassport.isAlreadyIn()); // should be true
+        TicketBooth booth = new TicketBooth();
+        TicketBuyResult result = booth.buyOneDayPassport(10000);
+        log(result.getPurchasedTicket().getDisplayPrice()); // should be same as one-day price
+        log(result.getPurchasedTicket().isAlreadyIn()); // should be false
+        result.getPurchasedTicket().doInPark();
+        log(result.getPurchasedTicket().isAlreadyIn()); // should be true
     }
 
     /**
@@ -173,14 +172,12 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_return_whole() {
         // uncomment after modifying the method
-//        TicketBooth booth = new TicketBooth();
-//        int handedMoney = 20000;
-//        TicketBuyResult buyResult = booth.buyTwoDayPassport(handedMoney);
-//        Ticket twoDayPassport = buyResult.getTicket();
-//        int change = buyResult.getChange();
-//        log(twoDayPassport.getDisplayPrice() + change); // should be same as money
-
-
+        TicketBooth booth = new TicketBooth();
+        int handedMoney = 20000;
+        TicketBuyResult buyResult = booth.buyTwoDayPassport(handedMoney);
+        Ticket twoDayPassport = buyResult.getPurchasedTicket();
+        int change = buyResult.getChange();
+        log(twoDayPassport.getDisplayPrice() + change); // should be same as money
         // 実装前メモ：booth.buyTwoDayPassport(handedMoney)の型がTicketBuyResultになっている
         // つまりTicketBoothクラスのbuyTwoDayPassportメソッドの返り値をTicketBuyResultクラスのインスタンスにする
         // また、TicketBuyResultクラスにはgetTicketメソッドとgetChangeメソッドを持っており、それぞれ返り値がTicketクラスのインスタンスとint型の整数である
@@ -195,11 +192,9 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_usePluralDays() {
         // your confirmation code here
-//        Ticket ticket = new Ticket(20000,2);
-//        ticket.doInPark();
-//        ticket.doInPark();
-//        ticket.doInPark();
-//        ticket.doInPark();
+        Ticket ticket = new Ticket(20000,2,false);
+        ticket.doInPark();
+        ticket.doInPark();
         // TicketクラスにremaingDaysという変数を持たせることで、複数日程のチケットでも入場可否を判断できるように変更。
         // remainingDaysを2に設定して、doInpark()を呼び出してみて挙動をテストした。
         // 呼び出し回数が2回まではエラーが出ず、3回以上呼び出すと正しくエラーが出ることを確認できた。
@@ -213,25 +208,26 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_whetherTicketType() {
         // uncomment when you implement this exercise
-//        TicketBooth booth = new TicketBooth();
-//        TicketBuyResult buyOneDayPassportResult = booth.buyOneDayPassport(10000);
-//        Ticket oneDayPassport = buyOneDayPassportResult.getTicket();
-//        showTicketIfNeeds(oneDayPassport);
-//        TicketBuyResult buyTwoDayPassportResult = booth.buyTwoDayPassport(20000);
-//        Ticket twoDayPassport = buyTwoDayPassportResult.getTicket();
-//        showTicketIfNeeds(twoDayPassport);
+        TicketBooth booth = new TicketBooth();
+        TicketBuyResult buyOneDayPassportResult = booth.buyOneDayPassport(10000);
+        Ticket oneDayPassport = buyOneDayPassportResult.getPurchasedTicket();
+        showTicketIfNeeds(oneDayPassport);
+        TicketBuyResult buyTwoDayPassportResult = booth.buyTwoDayPassport(20000);
+        Ticket twoDayPassport = buyTwoDayPassportResult.getPurchasedTicket();
+        showTicketIfNeeds(twoDayPassport);
         // 今までの問題をといていた影響で元々書かれていたコードではコンパイルエラーが起きるので、実行できるように修正した。
         // 解決策としてはTicketクラスにticketDaysというインスタンス変数を持たせるように変更して、いつでもチケット種別を判定しやすいようにした。
         // その際にその変数を文字列型にするかint型にするか少し迷ったが、int型で日数を渡す方がインスタンスを作成する時にわかりやすく、チケットを使用できる残り日数を
         // 保存しているremainingDays変数の初期化にも活用することができると考えてint型の変数にした。
-        // TODO tabata ↑コンパイルエラーになったところは、辻褄合うように修正しましょう by jflute (2025/10/08)
+        // TODO done tabata ↑コンパイルエラーになったところは、辻褄合うように修正しましょう by jflute (2025/10/08)
     }
 
     // uncomment when you implement this exercise
     private void showTicketIfNeeds(Ticket ticket) {
-        // TODO tabata 「あっ、nightパスポートが」byたばたさん、の通り by jflute (2025/10/08)
+        // TODO done tabata 「あっ、nightパスポートが」byたばたさん、の通り by jflute (2025/10/08)
         // これは怖いパターン話。新機能追加で、修正何もしてない既存のプログラムが正しく動かなくなる。
-        if (ticket.getTicketDays() == 2) { // write determination for two-day passport
+        // 夜限定パスポートだと弾くように条件を修正しました by taba-atsu
+        if (ticket.getTicketDays() == 2 && !ticket.isNightOnlyPassport()) { // write determination for two-day passport
             log("two-day passport");
         } else {
             log("other");
@@ -247,10 +243,10 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_wonder_four() {
         // your confirmation code here
-//        TicketBooth booth = new TicketBooth();
-//        TicketBuyResult buyFourDayPassprtResult = booth.buyFourDayPassport(30000);
-//        Ticket fourDayPassport = buyFourDayPassprtResult.getTicket();
-//        log(fourDayPassport.getTicketDays());
+        TicketBooth booth = new TicketBooth();
+        TicketBuyResult buyFourDayPassportResult = booth.buyFourDayPassport(30000);
+        Ticket fourDayPassport = buyFourDayPassportResult.getPurchasedTicket();
+        log(fourDayPassport.getTicketDays());
     }
     // TODO jflute 次回1on1こっから (2025/09/25)
 
@@ -262,7 +258,7 @@ public class Step05ClassTest extends PlainTestCase {
         // your confirmation code here
         TicketBooth booth = new TicketBooth();
         TicketBuyResult buyNightOnlyTwoDayPassResult = booth.buyNightOnlyTwoDayPassport(10000);
-        Ticket nightOnlyTwoDayPassport = buyNightOnlyTwoDayPassResult.getTicket();
+        Ticket nightOnlyTwoDayPassport = buyNightOnlyTwoDayPassResult.getPurchasedTicket();
         log(nightOnlyTwoDayPassport.getTicketDays());
         nightOnlyTwoDayPassport.doInPark();
         // Ticketクラスに夜限定かどうかを保持する変数を作成する
@@ -281,7 +277,7 @@ public class Step05ClassTest extends PlainTestCase {
         TicketBooth booth = new TicketBooth();
         log(booth.getSalesProceeds());
         TicketBuyResult buyTwoDayPassResult = booth.buyTwoDayPassport(20000);
-        Ticket twoDayPassport = buyTwoDayPassResult.getTicket();
+        Ticket twoDayPassport = buyTwoDayPassResult.getPurchasedTicket();
         log(twoDayPassport.getTicketDays());
         log(booth.getSalesProceeds());
     }

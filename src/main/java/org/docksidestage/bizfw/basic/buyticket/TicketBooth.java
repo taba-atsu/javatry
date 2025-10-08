@@ -16,14 +16,14 @@
 package org.docksidestage.bizfw.basic.buyticket;
 
 // done tabata author追加お願いします (他のクラスも、さわったらauthor追加を) by jflute (2025/09/25)
-// TODO tabata javadoc, 説明が先で、あっとまーくのタグが後ろ by jflute (2025/10/08)
+// TODO done tabata javadoc, 説明が先で、あっとまーくのタグが後ろ by jflute (2025/10/08)
 // IntelliJで行移動、shift+option+上下
 /**
+ * パークの入場チケットを販売するチケットブースを表すクラスです。
+ * チケットブースで購入できるチケットの上限の枚数、チケットの種類ごとの値段、チケットブースでの売り上げの金額などを保持します。
+ * チケットを購入するロジックなどを持ちます。チケットが購入可能かの判定、売り上げ金額の計算などができます。
  * @author jflute
  * @author taba-atsu
- * パークの入場チケットを販売するチケットブースを表すクラスです。
- * チケットブースで購入できるチケットの上限の枚数、チケットの種類ごとの値段、チケットブースでの売り上げの金額を保持します。
- * チケットを購入するロジックを持ちます。チケットが購入可能かの判定、売り上げ金額の計算ができます。
  */
 public class TicketBooth {
 
@@ -63,7 +63,7 @@ public class TicketBooth {
     // #1on1: JavaDocは、Javaで決められたフォーマットになっています。/** ... */
     // JavaDocにしておくと、メソッドの補完時などに表示されて、呼び出し側が助かる。
     // IntelliJで、メソッド補完時にcontrol+Jを押すとJavaDoc表示されるので、見たいときはぱっとcontrol+J！
-    // TODO tabata returnは、型宣言は不要です。説明だけでOK。 by jflute (2025/10/08)
+    // TODO done tabata returnは、型宣言は不要です。説明だけでOK。 by jflute (2025/10/08)
     // 恐らく、@param, @throws に引きづられて入れたと想像。
     // @paramは、引数って複数ありえるので、どの引数？って特定して説明しないといけない。
     // @throwsも、複数ありえるので、どの例外？って特定して説明しないといけない。
@@ -72,7 +72,7 @@ public class TicketBooth {
     /**
      * Buy one-day passport, method for park guest.
      * @param handedMoney The money (amount) handed over from park guest. (NotNull, NotMinus)
-     * @return TicketBuyResult The result data of the 1-Day passport purchase.
+     * @return The result data of the 1-Day passport purchase.
      * @throws TicketSoldOutException When ticket in booth is sold out.
      * @throws TicketShortMoneyException When the specified money is short for purchase.
      */
@@ -80,10 +80,9 @@ public class TicketBooth {
         validateAndRegisterSale(handedMoney,ONE_DAY_PRICE);
         Ticket purchasedTicket = new Ticket(ONE_DAY_PRICE, 1,false);
         int change = handedMoney - ONE_DAY_PRICE;
-        // TODO tabata この場合、直接newしたものをreturnしちゃってもいいかなと(少しでも行削減) by jflute (2025/10/08)
+        // TODO done tabata この場合、直接newしたものをreturnしちゃってもいいかなと(少しでも行削減) by jflute (2025/10/08)
         //  e.g. return new TicketBuyResult(purchasedTicket, change);
-        TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
-        return result;
+        return new TicketBuyResult(purchasedTicket, change);
     }
     // TicketBuyResultクラスを変更したので、それにともなってTicketBoothクラスも変更
     
@@ -99,24 +98,21 @@ public class TicketBooth {
         // いまここでは業務的な順序に制限がないので、プログラミングの都合(安全)を優先して良い。
         Ticket purchasedTicket = new Ticket(TWO_DAY_PRICE, 2, false);
         int change = handedMoney - TWO_DAY_PRICE;
-        TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
-        return result;
+        return new TicketBuyResult(purchasedTicket, change);
     }
 
     public TicketBuyResult buyFourDayPassport(int handedMoney){
         validateAndRegisterSale(handedMoney,FOUR_DAY_PRICE);
         Ticket purchasedTicket = new Ticket(FOUR_DAY_PRICE, 4, false);
         int change = handedMoney - FOUR_DAY_PRICE;
-        TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
-        return result;
+        return new TicketBuyResult(purchasedTicket, change);
     }
 
     public TicketBuyResult buyNightOnlyTwoDayPassport(int handedMoney){
         validateAndRegisterSale(handedMoney, NIGHT_ONLY_TWO_DAY_PASSPORT);
         Ticket purchasedTicket = new Ticket(NIGHT_ONLY_TWO_DAY_PASSPORT, 2, true);
         int change = handedMoney - NIGHT_ONLY_TWO_DAY_PASSPORT;
-        TicketBuyResult result = new TicketBuyResult(purchasedTicket, change);
-        return result;
+        return new TicketBuyResult(purchasedTicket, change);
     }
 
     // done tabata publicのbuyとprivateのbuyが先頭同じだと何かと紛らわしいので... by jflute (2025/09/25)
