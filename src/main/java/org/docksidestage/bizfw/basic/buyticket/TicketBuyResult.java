@@ -14,6 +14,11 @@ public class TicketBuyResult {
     private final Ticket purchasedTicket;
     private final int change;
 
+    /**
+     * チケットの購入結果を作成するコンストラクタ
+     * @param purchasedTicket 購入されたチケット
+     * @param change　購入の際のお釣り
+     */
     public TicketBuyResult(Ticket purchasedTicket, int change) {
         this.purchasedTicket = purchasedTicket;
         this.change = change;
@@ -22,6 +27,9 @@ public class TicketBuyResult {
     // TODO done tabata 外部はスッキリ内部は明示的ってのもアリだし、統一概念でgetPurchasedTicket()もアリ by jflute (2025/10/08)
     // まあ、意図してなかったということなので、意図しましょう。
     // 統一した方が他の人が混乱する可能性が低くなるのではないかと考えたので、getメソッドの名前を変更しました！ by taba-atsu
+    /**
+     * @return 購入されたチケットを返す
+     */
     public Ticket getPurchasedTicket(){
         // done tabata getが複数呼ばれた時に、違うインスタンスが戻ってしまうと紛らわしいことがある by jflute (2025/09/25)
         // 呼び出し側は、getを2回呼んでも同じものが戻ってくると思ってしまいがち。(getは特別なニュアンスを持つので)
@@ -32,6 +40,9 @@ public class TicketBuyResult {
         return purchasedTicket;
     }
 
+    /**
+     * @return 購入した際のお釣りの金額を返す
+     */
     public int getChange(){
         // done tabata getが複数呼ばれた時に、同じ金額が戻ってくるけど...計算処理が毎回走るのが無駄感ある by jflute (2025/09/25)
         // もちろん、この程度だったらというのはあるけど、万が一少し重い処理とかだったらあまりgetでやりたくない。

@@ -52,6 +52,13 @@ public class Ticket {
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
+    /**
+     * チケットを作るコンストラクタ。
+     * チケットで入場可能な残り日数を表すremainingDaysはticketDaysで初期化される。
+     * @param displayPrice チケットの値段
+     * @param ticketDays チケットの利用可能な日数
+     * @param isNightOnlyPassport 夜限定パスポートだとtrueになる
+     */
     public Ticket(int displayPrice, int ticketDays, boolean isNightOnlyPassport) {
         this.displayPrice = displayPrice;
         this.ticketDays = ticketDays;
@@ -62,6 +69,10 @@ public class Ticket {
     // ===================================================================================
     //                                                                             In Park
     //                                                                             =======
+    /**
+     * パークに入場するときに実行するメソッド。
+     * 実行するたびに入場可能な残り日数が1日減る。また、残り日数が0の時や夜限定パスポートを夜以外に使おうとしたときは入場できない。
+     */
     public void doInPark() {
         if (remainingDays == 0) {
             throw new IllegalStateException("Already in park by this ticket: displayedPrice=" + displayPrice);
@@ -88,10 +99,16 @@ public class Ticket {
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
+    /**
+     * @return 券面に表示される値段を返す
+     */
     public int getDisplayPrice() {
         return displayPrice;
     }
 
+    /**
+     * @return すでにパークに入場したことがあるのかを返す
+     */
     public boolean isAlreadyIn() {
         return alreadyIn;
     }
@@ -101,10 +118,16 @@ public class Ticket {
     // #1on1: 自分が使ってるツール、オープンソースなのか？closedなのか？
     // オープンソースにしても、企業ベースでビジネス的なのか？コミュニティでボランティア的なのか？(個人でボランティア的なのか？)
     // DBFluteの例、Spring Frameworkの例
+    /**
+     * @return 何日間入場できるチケットなのか日数を返す。　入場可能な残り日数ではない。
+     */
     public int getTicketDays(){
         return ticketDays;
     }
 
+    /**
+     * @return 夜限定のパスポートなのかを返す
+     */
     public boolean isNightOnlyPassport(){
         return isNightOnlyPassport;
     }

@@ -45,6 +45,9 @@ public class TicketBooth {
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
+    /**
+     * チケットブースを作成するコンストラクタ
+     */
     public TicketBooth() {
     }
 
@@ -52,13 +55,6 @@ public class TicketBooth {
     //                                                                          Buy Ticket
     //                                                                          ==========
     // you can rewrite comments for your own language by jflute
-    // e.g. Japanese
-    // /**
-    // * 1Dayパスポートを買う、パークゲスト用のメソッド。
-    // * @param handedMoney パークゲストから手渡しされたお金(金額) (NotNull, NotMinus)
-    // * @throws TicketSoldOutException ブース内のチケットが売り切れだったら
-    // * @throws TicketShortMoneyException 買うのに金額が足りなかったら
-    // */
     // done tabata javadoc, @return を書いてみましょう (日本語でOK: ↑を参考に) by jflute (2025/09/25)
     // #1on1: JavaDocは、Javaで決められたフォーマットになっています。/** ... */
     // JavaDocにしておくと、メソッドの補完時などに表示されて、呼び出し側が助かる。
@@ -69,12 +65,19 @@ public class TicketBooth {
     // @throwsも、複数ありえるので、どの例外？って特定して説明しないといけない。
     // 戻り値は、絶対に一個しかないので、なので識別する必要がない。
     // (基本的に、メソッド宣言を読めばわかることは書かない)
+//    /**
+//     * Buy one-day passport, method for park guest.
+//     * @param handedMoney The money (amount) handed over from park guest. (NotNull, NotMinus)
+//     * @return The result data of the 1-Day passport purchase.
+//     * @throws TicketSoldOutException When ticket in booth is sold out.
+//     * @throws TicketShortMoneyException When the specified money is short for purchase.
+//     */
     /**
-     * Buy one-day passport, method for park guest.
-     * @param handedMoney The money (amount) handed over from park guest. (NotNull, NotMinus)
-     * @return The result data of the 1-Day passport purchase.
-     * @throws TicketSoldOutException When ticket in booth is sold out.
-     * @throws TicketShortMoneyException When the specified money is short for purchase.
+     * 1Dayパスポートを買う、パークゲスト用のメソッド。金額が足りないときや、在庫切れなどのときは購入できない。
+     * @param handedMoney パークゲストから手渡しされたお金(金額) (NotNull, NotMinus)
+     * @return 1Dayパスポートを購入した結果を返す
+     * @throws TicketSoldOutException ブース内のチケットが売り切れだったら
+     * @throws TicketShortMoneyException 買うのに金額が足りなかったら
      */
     public TicketBuyResult buyOneDayPassport(int handedMoney) {
         validateAndRegisterSale(handedMoney,ONE_DAY_PRICE);
@@ -92,6 +95,13 @@ public class TicketBooth {
     // o キーワード検索で指差し確認 (別のファイルに一時的にコピーして確認など)
     // o そもそも修正を別ファイルで一括置換で直す
     // #1on1: 一時的な作業するテキストファイルをバッと開けるようにしておくといいかも。
+    /**
+     * 2Dayパスポートを買う、パークゲスト用のメソッド。金額が足りないときや、在庫切れなどのときは購入できない。
+     * @param handedMoney パークゲストから手渡しされたお金(金額) (NotNull, NotMinus)
+     * @return 2Dayパスポートを購入した結果を返す
+     * @throws TicketSoldOutException ブース内のチケットが売り切れだったら
+     * @throws TicketShortMoneyException 買うのに金額が足りなかったら
+     */
     public TicketBuyResult buyTwoDayPassport(int handedMoney){
         validateAndRegisterSale(handedMoney,TWO_DAY_PRICE);
         // #1on1: (特にローカル)変数のスコープは短ければ短いほどよい。
@@ -101,6 +111,13 @@ public class TicketBooth {
         return new TicketBuyResult(purchasedTicket, change);
     }
 
+    /**
+     * 4Dayパスポートを買う、パークゲスト用のメソッド。金額が足りないときや、在庫切れなどのときは購入できない。
+     * @param handedMoney パークゲストから手渡しされたお金(金額) (NotNull, NotMinus)
+     * @return 4Dayパスポートを購入した結果を返す
+     * @throws TicketSoldOutException ブース内のチケットが売り切れだったら
+     * @throws TicketShortMoneyException 買うのに金額が足りなかったら
+     */
     public TicketBuyResult buyFourDayPassport(int handedMoney){
         validateAndRegisterSale(handedMoney,FOUR_DAY_PRICE);
         Ticket purchasedTicket = new Ticket(FOUR_DAY_PRICE, 4, false);
@@ -108,6 +125,13 @@ public class TicketBooth {
         return new TicketBuyResult(purchasedTicket, change);
     }
 
+    /**
+     * 2Dayの夜限定パスポートを買う、パークゲスト用のメソッド。金額が足りないときや、在庫切れなどのときは購入できない。
+     * @param handedMoney パークゲストから手渡しされたお金(金額) (NotNull, NotMinus)
+     * @return 2Dayの夜限定パスポートを購入した結果を返す
+     * @throws TicketSoldOutException ブース内のチケットが売り切れだったら
+     * @throws TicketShortMoneyException 買うのに金額が足りなかったら
+     */
     public TicketBuyResult buyNightOnlyTwoDayPassport(int handedMoney){
         validateAndRegisterSale(handedMoney, NIGHT_ONLY_TWO_DAY_PASSPORT);
         Ticket purchasedTicket = new Ticket(NIGHT_ONLY_TWO_DAY_PASSPORT, 2, true);
@@ -145,19 +169,33 @@ public class TicketBooth {
         salesProceeds += price;
     }
 
+    /**
+     * チケットが売り切れの際に使用するクラス
+     */
     public static class TicketSoldOutException extends RuntimeException {
 
         private static final long serialVersionUID = 1L;
 
+        /**
+         * チケットが売り切れの際に表示するエラーメッセージを作成する
+         * @param msg　表示するエラーメッセージ
+         */
         public TicketSoldOutException(String msg) {
             super(msg);
         }
     }
 
+    /**
+     * チケット購入の際に支払われた金額が足りない際に使用されるクラス
+     */
     public static class TicketShortMoneyException extends RuntimeException {
 
         private static final long serialVersionUID = 1L;
 
+        /**
+         * チケット購入の際に支払われた金額が足りない際に表示するエラーメッセージを作成する
+         * @param msg　表示するエラーメッセージ
+         */
         public TicketShortMoneyException(String msg) {
             super(msg);
         }
@@ -166,10 +204,16 @@ public class TicketBooth {
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
+    /**
+     * @return チケットの在庫の数を返す
+     */
     public int getQuantity() {
         return quantity;
     }
 
+    /**
+     * @return チケットブースの合計売上の金額を返す
+     */
     public int getSalesProceeds() {
         return salesProceeds;
     }
