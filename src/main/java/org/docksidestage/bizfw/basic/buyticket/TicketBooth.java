@@ -19,9 +19,9 @@ package org.docksidestage.bizfw.basic.buyticket;
 // TODO done tabata javadoc, 説明が先で、あっとまーくのタグが後ろ by jflute (2025/10/08)
 // IntelliJで行移動、shift+option+上下
 /**
- * パークの入場チケットを販売するチケットブースを表すクラスです。
- * チケットブースで購入できるチケットの上限の枚数、チケットの種類ごとの値段、チケットブースでの売り上げの金額などを保持します。
- * チケットを購入するロジックなどを持ちます。チケットが購入可能かの判定、売り上げ金額の計算などができます。
+ * パークの入場チケットを販売するチケットブースを表すクラスです。 <br>
+ * チケットブースで購入できるチケットの上限の枚数、チケットの種類ごとの値段、チケットブースでの売り上げの金額などを保持します。 <br>
+ * チケットを購入するロジックなどを持ちます。チケットが購入可能かの判定、売り上げ金額の計算などができます。 <br>
  * @author jflute
  * @author taba-atsu
  */
@@ -39,7 +39,10 @@ public class TicketBooth {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    private int quantity = MAX_QUANTITY;
+    private int oneDayPassportQuantity = MAX_QUANTITY;
+    private int twoDayPassportQuantity = MAX_QUANTITY;
+    private int fourDayPassportQuantity = MAX_QUANTITY;
+    private int nightOnlyTwoDayPassportQuantity = MAX_QUANTITY;
     private int salesProceeds = 0;
 
     // ===================================================================================
@@ -80,7 +83,7 @@ public class TicketBooth {
      * @throws TicketShortMoneyException 買うのに金額が足りなかったら
      */
     public TicketBuyResult buyOneDayPassport(int handedMoney) {
-        validateAndRegisterSale(handedMoney,ONE_DAY_PRICE);
+        oneDayPassportQuantity = validateAndRegisterSale(handedMoney,ONE_DAY_PRICE,oneDayPassportQuantity);
         Ticket purchasedTicket = new Ticket(ONE_DAY_PRICE, 1,false);
         int change = handedMoney - ONE_DAY_PRICE;
         // TODO done tabata この場合、直接newしたものをreturnしちゃってもいいかなと(少しでも行削減) by jflute (2025/10/08)
@@ -103,7 +106,7 @@ public class TicketBooth {
      * @throws TicketShortMoneyException 買うのに金額が足りなかったら
      */
     public TicketBuyResult buyTwoDayPassport(int handedMoney){
-        validateAndRegisterSale(handedMoney,TWO_DAY_PRICE);
+        twoDayPassportQuantity = validateAndRegisterSale(handedMoney,TWO_DAY_PRICE,twoDayPassportQuantity);
         // #1on1: (特にローカル)変数のスコープは短ければ短いほどよい。
         // いまここでは業務的な順序に制限がないので、プログラミングの都合(安全)を優先して良い。
         Ticket purchasedTicket = new Ticket(TWO_DAY_PRICE, 2, false);
@@ -119,7 +122,7 @@ public class TicketBooth {
      * @throws TicketShortMoneyException 買うのに金額が足りなかったら
      */
     public TicketBuyResult buyFourDayPassport(int handedMoney){
-        validateAndRegisterSale(handedMoney,FOUR_DAY_PRICE);
+        fourDayPassportQuantity = validateAndRegisterSale(handedMoney,FOUR_DAY_PRICE,fourDayPassportQuantity);
         Ticket purchasedTicket = new Ticket(FOUR_DAY_PRICE, 4, false);
         int change = handedMoney - FOUR_DAY_PRICE;
         return new TicketBuyResult(purchasedTicket, change);
@@ -133,7 +136,7 @@ public class TicketBooth {
      * @throws TicketShortMoneyException 買うのに金額が足りなかったら
      */
     public TicketBuyResult buyNightOnlyTwoDayPassport(int handedMoney){
-        validateAndRegisterSale(handedMoney, NIGHT_ONLY_TWO_DAY_PASSPORT);
+        nightOnlyTwoDayPassportQuantity = validateAndRegisterSale(handedMoney, NIGHT_ONLY_TWO_DAY_PASSPORT,nightOnlyTwoDayPassportQuantity);
         Ticket purchasedTicket = new Ticket(NIGHT_ONLY_TWO_DAY_PASSPORT, 2, true);
         int change = handedMoney - NIGHT_ONLY_TWO_DAY_PASSPORT;
         return new TicketBuyResult(purchasedTicket, change);
@@ -147,14 +150,21 @@ public class TicketBooth {
     // #1on1: shift + shift からの ren で Rename... でやる方法と...
     // control + T から Refacter Thisメニューで Rename... を選択 (こっちがオススメ)
     // Renameが気軽にできると、ちょっと名前こうした方がいいな、ってのを積極的にできるようになる。
-    private void validateAndRegisterSale(int handedMoney,int price){
+    /**
+     * チケットを購入できるのか判定するメソッド。
+     * @param handedMoney　持っている金額
+     * @param price　チケットの金額
+     * @param quantity　チケットの在庫
+     * @return  引数として与えられたチケットの在庫の数を1減らして返す
+     */
+    private int validateAndRegisterSale(int handedMoney,int price,int quantity){
         if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
         }
         if (handedMoney < price) {
             throw new TicketShortMoneyException("Short money: " + handedMoney);
         }
-        registerSale(price);
+        return registerSale(price, quantity);
         // 共通している処理をまとめるprivate関数を追加した。全て引数に持たせるようにしたが、これが筋の良いやり方なのか自分ではあまり判断できなかった、、
         // #1on1: 引数がまだ少ないので、全然悪くないです。よくやります。
         // つまり、引数で業務(チケットの種類)を抽象化して再利用できるようにしたと言える。
@@ -164,9 +174,10 @@ public class TicketBooth {
         // という感じなので、人間の限界を超えるか？超えないか？の話なので線引は若干曖昧にある。
     }
 
-    private void registerSale(int price){
+    private int registerSale(int price, int quantity){
         quantity--;
         salesProceeds += price;
+        return quantity;
     }
 
     /**
@@ -205,10 +216,31 @@ public class TicketBooth {
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * @return チケットの在庫の数を返す
+     * @return 1Dayチケットの在庫の数を返す
      */
-    public int getQuantity() {
-        return quantity;
+    public int getOneDayPassPortQuantity() {
+        return oneDayPassportQuantity;
+    }
+
+    /**
+     * @return 2Dayチケットの在庫の数を返す
+     */
+    public int getTwoDayPassPortQuantity() {
+        return twoDayPassportQuantity;
+    }
+
+    /**
+     * @return 4Dayチケットの在庫の数を返す
+     */
+    public int getFourDayPassPortQuantity() {
+        return fourDayPassportQuantity;
+    }
+
+    /**
+     * @return 夜限定2Dayチケットの在庫の数を返す
+     */
+    public int getNightOnlyTwoDayPassportQuantity() {
+        return nightOnlyTwoDayPassportQuantity;
     }
 
     /**

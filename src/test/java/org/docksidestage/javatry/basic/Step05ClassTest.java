@@ -47,7 +47,7 @@ public class Step05ClassTest extends PlainTestCase {
     public void test_class_howToUse_basic() {
         TicketBooth booth = new TicketBooth();
         booth.buyOneDayPassport(7400);
-        int sea = booth.getQuantity();
+        int sea = booth.getOneDayPassPortQuantity();
         log(sea); // your answer? => 9
         // buyOneDayPassportメソッドではquntityが0でない場合、-1するので9になる。
     }
@@ -91,7 +91,7 @@ public class Step05ClassTest extends PlainTestCase {
         } catch (TicketShortMoneyException continued) {
             log("Failed to buy one-day passport: money=" + handedMoney, continued);
         }
-        return booth.getQuantity();
+        return booth.getOneDayPassPortQuantity();
     }
 
     // ===================================================================================
@@ -145,7 +145,7 @@ public class Step05ClassTest extends PlainTestCase {
     public void test_class_letsFix_refactor_recycle() {
         TicketBooth booth = new TicketBooth();
         booth.buyOneDayPassport(10000);
-        log(booth.getQuantity(), booth.getSalesProceeds()); // should be same as before-fix
+        log(booth.getOneDayPassPortQuantity(), booth.getSalesProceeds()); // should be same as before-fix
         // この問題まではtwoDaypssportを購入した場合quantityが2減る仕様にしていたが、不自然な仕様だと考えてquantityが2減るのではなく1減るように変更しました。
     }
 
@@ -298,6 +298,9 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_yourSuperJavaDoc() {
         // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        TicketBuyResult buyTwoDayNightPassResult = booth.buyNightOnlyTwoDayPassport(100000);
+        log(buyTwoDayNightPassResult.getPurchasedTicket().getTicketDays());
     }
 
     // ===================================================================================
@@ -311,5 +314,18 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_zonedQuantity() {
         // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        TicketBuyResult buyOneDayNPassResult = booth.buyOneDayPassport(100000);
+        TicketBuyResult buyTwoDayPassResult = booth.buyTwoDayPassport(100000);
+        TicketBuyResult buyFourDayPassResult = booth.buyFourDayPassport(100000);
+        TicketBuyResult buyTwoDayNightPassResult = booth.buyNightOnlyTwoDayPassport(100000);
+        log(booth.getOneDayPassPortQuantity());
+        log(booth.getTwoDayPassPortQuantity());
+        log(booth.getFourDayPassPortQuantity());
+        log(booth.getNightOnlyTwoDayPassportQuantity());
+        log(booth.getSalesProceeds());
+        // この設計だと在庫を呼び出すgetメソッドの数がチケットの種類の数と対応して増えてしまうという問題点がある。
+        // ただ一般的にパークチケットの種類がこれより大幅に増えないのではないかという仮説でこの設計にした。
+        // validateAndResisterSaleメソッドがわかりにくくなりそうだったのでjavadocを追加
     }
 }
