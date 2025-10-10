@@ -32,7 +32,7 @@ import org.docksidestage.unit.PlainTestCase;
  * Operate exercise as javadoc. If it's question style, write your answer before test execution. <br>
  * (javadocの通りにエクササイズを実施。質問形式の場合はテストを実行する前に考えて答えを書いてみましょう)
  * @author jflute
- * @author your_name_here
+ * @author taba-atsu
  */
 public class Step06ObjectOrientedTest extends PlainTestCase {
 
@@ -53,7 +53,8 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         // simulation: actually these variables should be more wide scope
         int oneDayPrice = 7400;
         int quantity = 10;
-        Integer salesProceeds = null;
+        int salesProceeds = 0;
+        // 売り上げがない時nullを返すのは不自然だと考えて、int型に変更し初期値を0にした
 
         //
         // [buy one-day passport]
@@ -67,13 +68,15 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         if (handedMoney < oneDayPrice) {
             throw new IllegalStateException("Short money: handedMoney=" + handedMoney);
         }
-        salesProceeds = handedMoney;
+        salesProceeds += oneDayPrice;
+        //売上を保持する変数に、所持金を代入してしまっていたので、チケットの値段を足すように変更した
 
         //
         // [ticket info]
         //
         // simulation: actually these variables should be more wide scope
-        int displayPrice = quantity;
+        int displayPrice = oneDayPrice;
+        // displayPriceに在庫の数を渡してしまっていたので修正
         boolean alreadyIn = false;
 
         // other processes here...
@@ -85,25 +88,27 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         //
         // simulation: actually this process should be called by other trigger
         if (alreadyIn) {
-            throw new IllegalStateException("Already in park by this ticket: displayPrice=" + quantity);
+            throw new IllegalStateException("Already in park by this ticket: displayPrice=" + oneDayPrice);
+           // displayPriceを返すはずが、quantityを返していたので修正
         }
         alreadyIn = true;
 
         //
         // [final process]
         //
-        saveBuyingHistory(quantity, displayPrice, salesProceeds, alreadyIn);
+        saveBuyingHistory(quantity, salesProceeds, displayPrice, alreadyIn);
+        // 渡す引数の順番が間違っていた
     }
 
-    private void saveBuyingHistory(int quantity, Integer salesProceeds, int displayPrice, boolean alreadyIn) {
-        if (alreadyIn) {
-            // simulation: only logging here (normally e.g. DB insert)
-            showTicketBooth(displayPrice, salesProceeds);
-            showYourTicket(quantity, alreadyIn);
-        }
+    private void saveBuyingHistory(int quantity, int salesProceeds, int displayPrice, boolean alreadyIn) {
+
+        // simulation: only logging here (normally e.g. DB insert)
+        showTicketBooth(displayPrice, salesProceeds);
+        showYourTicket(quantity, alreadyIn);
+        // alreadyInのif文があると、チケットを購入しているのに入場していない場合、チケットの情報を表示できないと考えて修正。
     }
 
-    private void showTicketBooth(int quantity, Integer salesProceeds) {
+    private void showTicketBooth(int quantity, int salesProceeds) {
         log("Ticket Booth: quantity={}, salesProceeds={}", quantity, salesProceeds);
     }
 
