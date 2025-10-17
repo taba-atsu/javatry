@@ -17,6 +17,7 @@ package org.docksidestage.javatry.basic;
 
 import org.docksidestage.bizfw.basic.buyticket.Ticket;
 import org.docksidestage.bizfw.basic.buyticket.TicketBooth;
+import org.docksidestage.bizfw.basic.buyticket.TicketBuyResult;
 import org.docksidestage.bizfw.basic.objanimal.Animal;
 import org.docksidestage.bizfw.basic.objanimal.BarkedSound;
 import org.docksidestage.bizfw.basic.objanimal.Cat;
@@ -138,9 +139,9 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         // [buy one-day passport]
         //
         // if step05 has been finished, you can use this code by jflute (2019/06/15)
-        //Ticket ticket = booth.buyOneDayPassport(10000);
-        booth.buyOneDayPassport(10000); // as temporary, remove if you finished step05
-        Ticket ticket = new Ticket(7400,1,false); // also here
+        TicketBuyResult ticket = booth.buyOneDayPassport(10000);
+        //booth.buyOneDayPassport(10000); // as temporary, remove if you finished step05
+        //Ticket ticket = new Ticket(7400,1,false); // also here
 
         // *buyOneDayPassport() has this process:
         //if (quantity <= 0) {
@@ -163,7 +164,7 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         //
         // [do in park now!!!]
         //
-        ticket.doInPark();
+        ticket.getPurchasedTicket().doInPark();
 
         // *doInPark() has this process:
         //if (alreadyIn) {
@@ -174,7 +175,7 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         //
         // [final process]
         //
-        saveBuyingHistory(booth, ticket);
+        saveBuyingHistory(booth, ticket.getPurchasedTicket());
     }
 
     private void saveBuyingHistory(TicketBooth booth, Ticket ticket) {
@@ -186,7 +187,7 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
     }
 
     private void doShowTicketBooth(TicketBooth booth) {
-        //log("Ticket Booth: quantity={}, salesProceeds={}", booth.getQuantity(), booth.getSalesProceeds());
+        log("Ticket Booth: quantity={}, salesProceeds={}", booth.getOneDayPassPortQuantity(), booth.getSalesProceeds());
     }
 
     private void doShowYourTicket(Ticket ticket) {
@@ -196,7 +197,13 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
     // write your memo here:
     // _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
     // what is object?
-    //
+    // オブジェクトを使用することで、特定の責務ごとに処理がまとまりそのコードが何をしているのかとても読みやすくなった。
+    // また、責務ごとに分離していることで動作のテストも非常にやりやすそう。
+    // クラスを用いて、private変数でパスポートの値段や売上を管理することで、その数字を安全に管理しやすくなっていると感じた。
+    // private変数にしていると外部からその値を変更されるリスクがなく、複雑な処理を追う必要がなくなりそう。
+    // さらに、クラスを作成することで特定の処理を再利用しやすくなると感じた。特にパスポートを購入する処理は何回か繰り返される可能性が高いが、
+    // クラスを作成しているとそのクラスに所属しているメソッドを呼び出すだけで購入できる。
+    // まとめると、オブジェクトとは処理をまとめて整理することで複雑度合いを下げられ、開発を行いやすくしてくれる仕組みなのではないかと考えた。
     // _/_/_/_/_/_/_/_/_/_/
 
     // ===================================================================================
