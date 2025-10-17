@@ -217,9 +217,15 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         Dog dog = new Dog();
         BarkedSound sound = dog.bark();
         String sea = sound.getBarkWord();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => wan
+        // getBarkWordメソッドは、そのインスタンスのbarkWordを返すだけのgetメソッドなので、soundのbarkWordになにが入っているのかに着目した。
+        // barkメソッドはBarkSoundというオブジェクトを返し、doBarkメソッドの引数に入るものが、今回log(sea)で出力される。doBarkメソッドの引数には
+        // getBarkWordメソッドによって取得された文字列が入る。getBarkWordメソッドには、abstractがついていたのでサブクラスでオーバーライドされていると考え
+        // てDogクラスを見てみた。そこではwanという文字列が返されていたので、log(sea)で出力されるのはwan。
         int land = dog.getHitPoint();
-        log(land); // your answer? => 
+        log(land); // your answer? => 7
+        // ここではhitPointの数が出力されるのでその処理を追った。初めに初期値が10に設定されており、barkメソッドの中でhitPointをデクリメントする
+        // 処理を呼び出している関数が3つあったので、log(land)は7が出力される。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -227,9 +233,11 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         Animal animal = new Dog();
         BarkedSound sound = animal.bark();
         String sea = sound.getBarkWord();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => wan
         int land = animal.getHitPoint();
-        log(land); // your answer? => 
+        log(land); // your answer? => 7
+        // Animal型の変数animalにDogクラスのインスタンスが入れられているが、DogクラスはAnimalクラスを継承しているので、型のエラーは起きない？暗黙的にAnimal型と扱われる？
+        // また、今回の出力に関しては一つ前の問題と同じ処理を辿ると考えて、出力されるものも同じになると予想した。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -237,9 +245,11 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         Animal animal = createAnyAnimal();
         BarkedSound sound = animal.bark();
         String sea = sound.getBarkWord();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => wan
         int land = animal.getHitPoint();
-        log(land); // your answer? => 
+        log(land); // your answer? => 7
+        // createAnyAnimalメソッド以外前回の問題と同じと考えた。createAnyAnimalメソッドは新しいDogオブジェクトを返すだけなので
+        // 前回の問題と出力は同じになると考えた。
     }
 
     private Animal createAnyAnimal() {
@@ -255,9 +265,10 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
     private void doAnimalSeaLand_for_4th(Animal animal) {
         BarkedSound sound = animal.bark();
         String sea = sound.getBarkWord();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => wan
         int land = animal.getHitPoint();
-        log(land); // your answer? => 
+        log(land); // your answer? => 7
+        // 前回の問題と比較してみると、メソッドが分かれているが
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
