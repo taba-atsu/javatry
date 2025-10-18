@@ -268,7 +268,7 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         log(sea); // your answer? => wan
         int land = animal.getHitPoint();
         log(land); // your answer? => 7
-        // 前回の問題と比較してみると、メソッドが分かれているが
+        // 前回の問題と比較してみると、メソッドが分かれているがドックオブジェクトが渡されているので、前回の問題と出力は同じになると考えた。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
