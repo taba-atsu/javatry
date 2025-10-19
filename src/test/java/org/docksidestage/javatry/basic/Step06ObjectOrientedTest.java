@@ -276,9 +276,11 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         Animal animal = new Cat();
         BarkedSound sound = animal.bark();
         String sea = sound.getBarkWord();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => nya-
         int land = animal.getHitPoint();
-        log(land); // your answer? => 
+        log(land); // your answer? => 7
+        // catクラスで親クラスであるanimalクラスのメソッドをオーバーライドしている。superは親のバージョンを呼びたい時に使用する。
+        // 今回はgetHitPointメソッドはcat側のものが使用される。したがって、landは７ではなく５になる。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
