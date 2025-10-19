@@ -288,9 +288,9 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         Animal animal = new Zombie();
         BarkedSound sound = animal.bark();
         String sea = sound.getBarkWord();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => uooo
         int land = animal.getHitPoint();
-        log(land); // your answer? => 
+        log(land); // your answer? => -1
     }
 
     /**
@@ -301,7 +301,9 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         // write your memo here:
         // _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
         // what is happy?
-        //
+        // メソッドをオーバーライドすることで簡単に処理を分けられる。他の動物を追加したいときとても簡単になりそうだと感じた。
+        // また、鳴き声を取得するときに、どの場合でも同じ処理で呼び出せるので混乱が少なく再利用しやすいと感じた。
+        // 新しい共通メソッドを作成するときもかなり簡単に追加できるところも嬉しいと感じた。
         // _/_/_/_/_/_/_/_/_/_/
     }
 
@@ -312,18 +314,21 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
     public void test_objectOriented_polymorphism_interface_dispatch() {
         Loudable loudable = new Zombie();
         String sea = loudable.soundLoudly();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => uooo
         String land = ((Zombie) loudable).bark().getBarkWord();
-        log(land); // your answer? => 
+        log(land); // your answer? => uooo
+        // AnimalクラスはLoudableの実装クラスであり、soundLoudlyメソッドはbarkWordが返されるので、seaもlandもuoooになる
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_objectOriented_polymorphism_interface_hierarchy() {
         Loudable loudable = new AlarmClock();
         String sea = loudable.soundLoudly();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => jiri jiri jiri---
         boolean land = loudable instanceof Animal;
-        log(land); // your answer? => 
+        log(land); // your answer? => false
+        // AlarmClockクラスはLoudableクラスの実装クラスであり、seaの出力はAlarmClockクラスで実装されているのでjiri jiri jiri---になる
+        // また、AlarmClockクラスはLoudableクラスの実装クラスであり、Animalクラスのサブクラスではないのでfalseになる
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -331,9 +336,10 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         Animal seaAnimal = new Cat();
         Animal landAnimal = new Zombie();
         boolean sea = seaAnimal instanceof FastRunner;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => true
         boolean land = landAnimal instanceof FastRunner;
-        log(land); // your answer? => 
+        log(land); // your answer? => false
+        // CatクラスはFastRunnerの実装クラスなのでtrueになるがZombieクラスは実装していないのでfalseになる
     }
 
     /**
