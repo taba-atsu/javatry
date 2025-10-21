@@ -348,6 +348,9 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
      */
     public void test_objectOriented_polymorphism_interface_runnerImpl() {
         // your confirmation code here
+        Animal animal = new Dog();
+        boolean sea = animal instanceof FastRunner;
+        log(sea);
     }
 
     /**
@@ -358,7 +361,8 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         // write your memo here:
         // _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
         // what is difference?
-        //
+        // インターフェースは特定の実装が強制されるので、特定の機能を保証したい時に使用するのではないか。
+        // それに対して、抽象クラスは振る舞いだけでなく変数などの状態を持てるので、共通の処理をまとめる時に使用するという違いがあるのではないかと考えた。
         // _/_/_/_/_/_/_/_/_/_/
     }
 
