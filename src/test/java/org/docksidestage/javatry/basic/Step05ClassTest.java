@@ -219,14 +219,18 @@ public class Step05ClassTest extends PlainTestCase {
         // 解決策としてはTicketクラスにticketDaysというインスタンス変数を持たせるように変更して、いつでもチケット種別を判定しやすいようにした。
         // その際にその変数を文字列型にするかint型にするか少し迷ったが、int型で日数を渡す方がインスタンスを作成する時にわかりやすく、チケットを使用できる残り日数を
         // 保存しているremainingDays変数の初期化にも活用することができると考えてint型の変数にした。
-        // TODO done tabata ↑コンパイルエラーになったところは、辻褄合うように修正しましょう by jflute (2025/10/08)
+        // done tabata ↑コンパイルエラーになったところは、辻褄合うように修正しましょう by jflute (2025/10/08)
     }
 
     // uncomment when you implement this exercise
     private void showTicketIfNeeds(Ticket ticket) {
-        // TODO done tabata 「あっ、nightパスポートが」byたばたさん、の通り by jflute (2025/10/08)
+        // done tabata 「あっ、nightパスポートが」byたばたさん、の通り by jflute (2025/10/08)
         // これは怖いパターン話。新機能追加で、修正何もしてない既存のプログラムが正しく動かなくなる。
         // 夜限定パスポートだと弾くように条件を修正しました by taba-atsu
+        // #1on1: nightの種類が増えても、NightOnlyPassportという抽象概念で判定しているので、追加する必要がないのでGood
+        // さらに破綻するケースの想像: night以外でも種類が出てきた時 by たばたさん
+        // 昼オンリー、夕方オンリーとかの2Dayが出てきたら破綻しちゃう。
+        // TODO tabata 修行++: ということで昼オンリー、夕方オンリーとかまだ見ぬチケット種別が登場しても破綻しないようにしたい by jflute (2025/10/22)
         if (ticket.getTicketDays() == 2 && !ticket.isNightOnlyPassport()) { // write determination for two-day passport
             log("two-day passport");
         } else {
@@ -248,7 +252,7 @@ public class Step05ClassTest extends PlainTestCase {
         Ticket fourDayPassport = buyFourDayPassportResult.getPurchasedTicket();
         log(fourDayPassport.getTicketDays());
     }
-    // TODO jflute 次回1on1こっから (2025/09/25)
+    // done jflute 次回1on1こっから (2025/09/25)
 
     /**
      * Fix it to be able to buy night-only two-day passport (price is 7400), which can be used at only night. <br>
@@ -302,6 +306,7 @@ public class Step05ClassTest extends PlainTestCase {
         TicketBuyResult buyTwoDayNightPassResult = booth.buyNightOnlyTwoDayPassport(100000);
         log(buyTwoDayNightPassResult.getPurchasedTicket().getTicketDays());
     }
+    // #1on1: コメント上手、適度な補足もあって、ためになるコメントになってる (2025/10/22)
 
     // ===================================================================================
     //                                                                         Devil Stage
@@ -315,6 +320,7 @@ public class Step05ClassTest extends PlainTestCase {
     public void test_class_moreFix_zonedQuantity() {
         // your confirmation code here
         TicketBooth booth = new TicketBooth();
+        // TODO tabata unusedの警告が出ている。使わない変数なら作らなくてもいいし、使うなら使いましょう by jflute (2025/10/22)
         TicketBuyResult buyOneDayNPassResult = booth.buyOneDayPassport(100000);
         TicketBuyResult buyTwoDayPassResult = booth.buyTwoDayPassport(100000);
         TicketBuyResult buyFourDayPassResult = booth.buyFourDayPassport(100000);

@@ -16,7 +16,7 @@
 package org.docksidestage.bizfw.basic.buyticket;
 
 // done tabata author追加お願いします (他のクラスも、さわったらauthor追加を) by jflute (2025/09/25)
-// TODO done tabata javadoc, 説明が先で、あっとまーくのタグが後ろ by jflute (2025/10/08)
+// done tabata javadoc, 説明が先で、あっとまーくのタグが後ろ by jflute (2025/10/08)
 // IntelliJで行移動、shift+option+上下
 /**
  * パークの入場チケットを販売するチケットブースを表すクラスです。 <br>
@@ -62,7 +62,7 @@ public class TicketBooth {
     // #1on1: JavaDocは、Javaで決められたフォーマットになっています。/** ... */
     // JavaDocにしておくと、メソッドの補完時などに表示されて、呼び出し側が助かる。
     // IntelliJで、メソッド補完時にcontrol+Jを押すとJavaDoc表示されるので、見たいときはぱっとcontrol+J！
-    // TODO done tabata returnは、型宣言は不要です。説明だけでOK。 by jflute (2025/10/08)
+    // done tabata returnは、型宣言は不要です。説明だけでOK。 by jflute (2025/10/08)
     // 恐らく、@param, @throws に引きづられて入れたと想像。
     // @paramは、引数って複数ありえるので、どの引数？って特定して説明しないといけない。
     // @throwsも、複数ありえるので、どの例外？って特定して説明しないといけない。
@@ -83,10 +83,12 @@ public class TicketBooth {
      * @throws TicketShortMoneyException 買うのに金額が足りなかったら
      */
     public TicketBuyResult buyOneDayPassport(int handedMoney) {
+        // TODO tabata もし将来、お釣りの計算の仕様が変わった時、一箇所修正で済むようにしたい by jflute (2025/10/22)
+        // TODO tabata もし将来、チケットの発行(new Ticket)とお釣りの計算の順序を逆にしないといけないってなったとき、一箇所修正で済むようにしたい by jflute (2025/10/22)
         oneDayPassportQuantity = validateAndRegisterSale(handedMoney,ONE_DAY_PRICE,oneDayPassportQuantity);
         Ticket purchasedTicket = new Ticket(ONE_DAY_PRICE, 1,false);
         int change = handedMoney - ONE_DAY_PRICE;
-        // TODO done tabata この場合、直接newしたものをreturnしちゃってもいいかなと(少しでも行削減) by jflute (2025/10/08)
+        // done tabata この場合、直接newしたものをreturnしちゃってもいいかなと(少しでも行削減) by jflute (2025/10/08)
         //  e.g. return new TicketBuyResult(purchasedTicket, change);
         return new TicketBuyResult(purchasedTicket, change);
     }
@@ -150,6 +152,7 @@ public class TicketBooth {
     // #1on1: shift + shift からの ren で Rename... でやる方法と...
     // control + T から Refacter Thisメニューで Rename... を選択 (こっちがオススメ)
     // Renameが気軽にできると、ちょっと名前こうした方がいいな、ってのを積極的にできるようになる。
+    // TODO tabata javadoc, @paramの区切りが全角空白になっている by jflute (2025/10/22)
     /**
      * チケットを購入できるのか判定するメソッド。
      * @param handedMoney　持っている金額
@@ -187,6 +190,7 @@ public class TicketBooth {
 
         private static final long serialVersionUID = 1L;
 
+        // TODO tabata 全角空白 by jflute (2025/10/22)
         /**
          * チケットが売り切れの際に表示するエラーメッセージを作成する
          * @param msg　表示するエラーメッセージ

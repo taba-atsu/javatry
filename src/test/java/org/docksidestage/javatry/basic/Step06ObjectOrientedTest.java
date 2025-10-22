@@ -53,6 +53,7 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         int salesProceeds = 0;
         // 売り上げがない時nullを返すのは不自然だと考えて、int型に変更し初期値を0にした
 
+        // TODO tabata 間違い、あと2つ by jflute (2025/10/22)
         //
         // [buy one-day passport]
         //
@@ -90,6 +91,7 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         }
         alreadyIn = true;
 
+        // TODO jflute 次回1on1で間違えない話をする (2025/10/22)
         //
         // [final process]
         //
@@ -201,6 +203,7 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
     // クラスを作成しているとそのクラスに所属しているメソッドを呼び出すだけで購入できる。
     // まとめると、オブジェクトとは処理をまとめて整理することで複雑度合いを下げられ、開発を行いやすくしてくれる仕組みなのではないかと考えた。
     // _/_/_/_/_/_/_/_/_/_/
+    // #1on1: オブジェクトの意味をちゃんと見出して、クラスにしていることが大切 (適当にまとめればいいわけではない) (2025/10/22)
 
     // ===================================================================================
     //                                                              Polymorphism Beginning

@@ -69,6 +69,10 @@ public class Ticket {
     // ===================================================================================
     //                                                                             In Park
     //                                                                             =======
+    // #1on1: @throws も入れるとさらに丁寧話。ただ必須ではないので重要なものだけ書く (2025/10/22)
+    // e.g.
+    //  * @throws IllegalStateException 残り日数が0の時の呼び出した時
+    //  * @throws IllegalStateException 夜限定チケットで昼に呼び出した時
     /**
      * パークに入場するときに実行するメソッド。 <br>
      * 実行するたびに入場可能な残り日数が1日減る。また、残り日数が0の時や夜限定パスポートを夜以外に使おうとしたときは入場できない。
@@ -85,11 +89,11 @@ public class Ticket {
         remainingDays--;
         alreadyIn = true;
     }
-    // TODO done tabata このコメント、isNightPassportAvailable()の説明だと思うので空行なしでOK by jflute (2025/10/08)
+    // done tabata このコメント、isNightPassportAvailable()の説明だと思うので空行なしでOK by jflute (2025/10/08)
     // doInParkメソッドにナイトパスの場合夜か判定して入場できるか判断する処理を追加する
     private boolean isNightPassportAvailable(){
         LocalTime currentTime = LocalTime.now();
-        // TODO done tabata 17:00:01 〜 19:59:59 なら入れるという仕様になっているが意図しているか？ by jflute (2025/10/08)
+        // done tabata 17:00:01 〜 19:59:59 なら入れるという仕様になっているが意図しているか？ by jflute (2025/10/08)
         // 境界値が含むのか？含まないのか？意識して判定をしましょう。e.g. 17時ぴったりは入れていいのでは？
         // (DBのEND_TIME含むの？ややこしい話)
         // 17:00:00 〜 19:59:59なら入れる仕様にしました by taba-atsu

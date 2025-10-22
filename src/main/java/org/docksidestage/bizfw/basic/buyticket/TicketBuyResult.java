@@ -1,6 +1,6 @@
 package org.docksidestage.bizfw.basic.buyticket;
 
-// TODO done tabata 購入したチケットの種類、購入時のお釣りの金額と具体例を列挙することでわかりやすい一方で... by jflute (2025/10/08)
+// done tabata 購入したチケットの種類、購入時のお釣りの金額と具体例を列挙することでわかりやすい一方で... by jflute (2025/10/08)
 // 列挙を断定してしまうと、将来項目が追加された時に、ちょっと誤解を生みやすい文章になってしまう可能性あり。
 // 列挙断定の情報はjavadocになくてよくて、具体例を出してイメージを沸かせることだけで良いかなと。
 // e.g. 購入時のお釣りの金額 "など" を保持します。他には、"とか"、"e.g."、"例えば" ....
@@ -14,6 +14,7 @@ public class TicketBuyResult {
     private final Ticket purchasedTicket;
     private final int change;
 
+    // #1on1: Macで日本語入力モード中に、shift+space で半角スペースが打てる (2025/10/22)
     /**
      * チケットの購入結果を作成するコンストラクタ
      * @param purchasedTicket 購入されたチケット
@@ -24,7 +25,7 @@ public class TicketBuyResult {
         this.change = change;
     }
 
-    // TODO done tabata 外部はスッキリ内部は明示的ってのもアリだし、統一概念でgetPurchasedTicket()もアリ by jflute (2025/10/08)
+    // done tabata 外部はスッキリ内部は明示的ってのもアリだし、統一概念でgetPurchasedTicket()もアリ by jflute (2025/10/08)
     // まあ、意図してなかったということなので、意図しましょう。
     // 統一した方が他の人が混乱する可能性が低くなるのではないかと考えたので、getメソッドの名前を変更しました！ by taba-atsu
     /**
