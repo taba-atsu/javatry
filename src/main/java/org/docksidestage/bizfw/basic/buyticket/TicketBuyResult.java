@@ -18,7 +18,7 @@ public class TicketBuyResult {
     /**
      * チケットの購入結果を作成するコンストラクタ
      * @param purchasedTicket 購入されたチケット
-     * @param change　購入の際のお釣り
+     * @param change 購入の際のお釣り
      */
     public TicketBuyResult(Ticket purchasedTicket, int change) {
         this.purchasedTicket = purchasedTicket;

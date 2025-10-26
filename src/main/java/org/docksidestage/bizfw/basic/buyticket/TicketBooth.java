@@ -152,13 +152,13 @@ public class TicketBooth {
     // #1on1: shift + shift からの ren で Rename... でやる方法と...
     // control + T から Refacter Thisメニューで Rename... を選択 (こっちがオススメ)
     // Renameが気軽にできると、ちょっと名前こうした方がいいな、ってのを積極的にできるようになる。
-    // TODO tabata javadoc, @paramの区切りが全角空白になっている by jflute (2025/10/22)
+    // TODO done tabata javadoc, @paramの区切りが全角空白になっている by jflute (2025/10/22)
     /**
      * チケットを購入できるのか判定するメソッド。
-     * @param handedMoney　持っている金額
-     * @param price　チケットの金額
-     * @param quantity　チケットの在庫
-     * @return  引数として与えられたチケットの在庫の数を1減らして返す
+     * @param handedMoney 持っている金額
+     * @param price チケットの金額
+     * @param quantity チケットの在庫
+     * @return 引数として与えられたチケットの在庫の数を1減らして返す
      */
     private int validateAndRegisterSale(int handedMoney,int price,int quantity){
         if (quantity <= 0) {
@@ -190,10 +190,10 @@ public class TicketBooth {
 
         private static final long serialVersionUID = 1L;
 
-        // TODO tabata 全角空白 by jflute (2025/10/22)
+        // TODO done tabata 全角空白 by jflute (2025/10/22)
         /**
          * チケットが売り切れの際に表示するエラーメッセージを作成する
-         * @param msg　表示するエラーメッセージ
+         * @param msg 表示するエラーメッセージ
          */
         public TicketSoldOutException(String msg) {
             super(msg);
@@ -209,7 +209,7 @@ public class TicketBooth {
 
         /**
          * チケット購入の際に支払われた金額が足りない際に表示するエラーメッセージを作成する
-         * @param msg　表示するエラーメッセージ
+         * @param msg 表示するエラーメッセージ
          */
         public TicketShortMoneyException(String msg) {
             super(msg);
