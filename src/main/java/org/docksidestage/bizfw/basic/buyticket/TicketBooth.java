@@ -85,6 +85,8 @@ public class TicketBooth {
     public TicketBuyResult buyOneDayPassport(int handedMoney) {
         // TODO tabata もし将来、お釣りの計算の仕様が変わった時、一箇所修正で済むようにしたい by jflute (2025/10/22)
         // TODO tabata もし将来、チケットの発行(new Ticket)とお釣りの計算の順序を逆にしないといけないってなったとき、一箇所修正で済むようにしたい by jflute (2025/10/22)
+        // 方針としてはTicketBoothクラス自体は情報を保持する役割にして、PurchaseProcessorのような購入する処理を持つクラスを作成する。
+        // この方針をとるとお釣りを計算するロジックを変えるときや購入の際のプロセスの順番が変更された場合にも対応できる。仕様の変更に対し、より強い構造になりそう。
         oneDayPassportQuantity = validateAndRegisterSale(handedMoney,ONE_DAY_PRICE,oneDayPassportQuantity);
         Ticket purchasedTicket = new Ticket(ONE_DAY_PRICE, 1,false);
         int change = handedMoney - ONE_DAY_PRICE;

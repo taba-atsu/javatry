@@ -218,7 +218,7 @@ public class Step05ClassTest extends PlainTestCase {
         // 今までの問題をといていた影響で元々書かれていたコードではコンパイルエラーが起きるので、実行できるように修正した。
         // 解決策としてはTicketクラスにticketDaysというインスタンス変数を持たせるように変更して、いつでもチケット種別を判定しやすいようにした。
         // その際にその変数を文字列型にするかint型にするか少し迷ったが、int型で日数を渡す方がインスタンスを作成する時にわかりやすく、チケットを使用できる残り日数を
-        // 保存しているremainingDays変数の初期化にも活用することができると考えてint型の変数にした。
+        // 保存しているremainingDays変数の初期化にも活用できると考えてint型の変数にした。
         // done tabata ↑コンパイルエラーになったところは、辻褄合うように修正しましょう by jflute (2025/10/08)
     }
 
@@ -231,6 +231,8 @@ public class Step05ClassTest extends PlainTestCase {
         // さらに破綻するケースの想像: night以外でも種類が出てきた時 by たばたさん
         // 昼オンリー、夕方オンリーとかの2Dayが出てきたら破綻しちゃう。
         // TODO tabata 修行++: ということで昼オンリー、夕方オンリーとかまだ見ぬチケット種別が登場しても破綻しないようにしたい by jflute (2025/10/22)
+        // TicketTypeをenumで管理するようにすれば、まだ見ぬチケット種別にも対応できるのではないかと考えた。
+        // そうするとif文の分岐の中で、自分で作成した特定の種類を指定できるようになりそう。
         if (ticket.getTicketDays() == 2 && !ticket.isNightOnlyPassport()) { // write determination for two-day passport
             log("two-day passport");
         } else {
