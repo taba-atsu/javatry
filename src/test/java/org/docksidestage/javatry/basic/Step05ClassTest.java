@@ -322,7 +322,7 @@ public class Step05ClassTest extends PlainTestCase {
     public void test_class_moreFix_zonedQuantity() {
         // your confirmation code here
         TicketBooth booth = new TicketBooth();
-        // TODO done tabata unusedの警告が出ている。使わない変数なら作らなくてもいいし、使うなら使いましょう by jflute (2025/10/22)
+        // done tabata unusedの警告が出ている。使わない変数なら作らなくてもいいし、使うなら使いましょう by jflute (2025/10/22)
         booth.buyOneDayPassport(100000);
         booth.buyTwoDayPassport(100000);
         booth.buyFourDayPassport(100000);
