@@ -123,7 +123,7 @@ public class Ticket {
     // オープンソースにしても、企業ベースでビジネス的なのか？コミュニティでボランティア的なのか？(個人でボランティア的なのか？)
     // DBFluteの例、Spring Frameworkの例
     /**
-     * @return 何日間入場できるチケットなのか日数を返す。　入場可能な残り日数ではない。
+     * @return 何日間入場できるチケットなのか日数を返す。入場可能な残り日数ではない。
      */
     public int getTicketDays(){
         return ticketDays;
