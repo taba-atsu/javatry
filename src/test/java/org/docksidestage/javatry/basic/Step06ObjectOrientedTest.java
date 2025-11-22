@@ -53,7 +53,7 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         int salesProceeds = 0;
         // 売り上げがない時nullを返すのは不自然だと考えて、int型に変更し初期値を0にした
 
-        // TODO tabata 間違い、あと2つ by jflute (2025/10/22)
+        // TODO done tabata 間違い、あと2つ by jflute (2025/10/22)
         //
         // [buy one-day passport]
         //
@@ -102,9 +102,10 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
     private void saveBuyingHistory(int quantity, int salesProceeds, int displayPrice, boolean alreadyIn) {
 
         // simulation: only logging here (normally e.g. DB insert)
-        showTicketBooth(displayPrice, salesProceeds);
-        showYourTicket(quantity, alreadyIn);
+        showTicketBooth(quantity, salesProceeds);
+        showYourTicket(displayPrice, alreadyIn);
         // alreadyInのif文があると、チケットを購入しているのに入場していない場合、チケットの情報を表示できないと考えて修正。
+        // 渡す引数が間違っていたので修正。quantityとdisplayPriceの位置が逆になっていました。
     }
 
     private void showTicketBooth(int quantity, int salesProceeds) {
