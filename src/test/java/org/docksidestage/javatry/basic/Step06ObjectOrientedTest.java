@@ -22,6 +22,8 @@ import org.docksidestage.bizfw.basic.objanimal.*;
 import org.docksidestage.bizfw.basic.objanimal.loud.AlarmClock;
 import org.docksidestage.bizfw.basic.objanimal.loud.Loudable;
 import org.docksidestage.bizfw.basic.objanimal.runner.FastRunner;
+import org.docksidestage.javatry.basic.st6.dbms.St6MySql;
+import org.docksidestage.javatry.basic.st6.dbms.St6PostgreSql;
 import org.docksidestage.unit.PlainTestCase;
 
 /**
@@ -399,6 +401,12 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
      */
     public void test_objectOriented_writing_generalization_extractToAbstract() {
         // your confirmation code here
+        St6MySql mySql = new St6MySql();
+        log(mySql.buildPagingQuery(1, 2));
+        St6PostgreSql postgreSql = new St6PostgreSql();
+        log(postgreSql.buildPagingQuery(1,2));
+        // 振る舞いを出し分けるという点でinterfaceを使いたくなった。
+        // 共通しているロジックとしてoffsetの計算があったので、それを親クラスでまとめた。戻り値はそれぞれの形式を返せるようになっている。
     }
 
     /**
