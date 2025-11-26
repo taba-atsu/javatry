@@ -55,7 +55,8 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         int salesProceeds = 0;
         // 売り上げがない時nullを返すのは不自然だと考えて、int型に変更し初期値を0にした
 
-        // TODO done tabata 間違い、あと2つ by jflute (2025/10/22)
+        // done tabata 間違い、あと2つ by jflute (2025/10/22)
+        // TODO tabata あと1つ、この辺に、それぞれの行自体は間違ってない系のバグが一つ by jflute (2025/11/26)
         //
         // [buy one-day passport]
         //
@@ -93,16 +94,34 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         }
         alreadyIn = true;
 
-        // TODO jflute 次回1on1で間違えない話をする (2025/10/22)
         //
         // [final process]
         //
         saveBuyingHistory(quantity, salesProceeds, displayPrice, alreadyIn);
         // 渡す引数の順番が間違っていた
+
+        // done jflute 次回1on1で間違えない話をする (2025/10/22)
+        // #1on1: 間違えない話
+        //
+        // 作り手として: 極力、こういうメソッドを作らないように努力する。
+        // o 個別個別にクラス化、Value Objectみたいなものを導入する。
+        // o BoothとかTicket単位でクラス化する。(オブジェクト利用)
+        // o 引数の順序を工夫する (100%ではないけど: 軽減策)
+        // o JavaDocおおげさに書く (100%ではないけど: 軽減策)
+        //
+        // 呼び手として: チェックする(by たばたさん)、指差し確認する。
+        // o したら、1行1行ぜんぶ指差し確認するか？
+        // o 間違えポイントだけで指差し確認するにはどうしたら？
+        // o 重み付け、クリティカルなところだけ指差し確認(by たばたさん)
+        // o 経験から、間違えポイント(の思い出)を積み重ねてるかどうか？ ☆☆☆
+        // o 同じ体験をしてても、積み重ねてないと意味がない。
+        // o さらに、自分ならではな間違えポイントも積み重ねてるかどうか？ ☆☆☆
+        // o jfluteならではな間違えポイントも積み重ねて思い出にしている
+        //
+        // 技術スキルというよりかは、開発者スキル？ものづくりスキル？
     }
 
     private void saveBuyingHistory(int quantity, int salesProceeds, int displayPrice, boolean alreadyIn) {
-
         // simulation: only logging here (normally e.g. DB insert)
         showTicketBooth(quantity, salesProceeds);
         showYourTicket(displayPrice, alreadyIn);
@@ -307,7 +326,11 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         // また、鳴き声を取得するときに、どの場合でも同じ処理で呼び出せるので混乱が少なく再利用しやすいと感じた。
         // 新しい共通メソッドを作成するときもかなり簡単に追加できるところも嬉しいと感じた。
         // _/_/_/_/_/_/_/_/_/_/
+        // #1on1: ポリモーフィズム的な考え方、実は日常生活でも使っている!? (2025/11/26)
+        // 便利なので、プログラミングでもやりたい。
+        // (日常の中でのポリモーフィズムを見つけてみてください。抽象概念を見つける)
     }
+    // TODO jflute 次回1on1ここから (2025/11/26)
 
     // ===================================================================================
     //                                                              Polymorphism Interface
