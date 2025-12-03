@@ -22,6 +22,7 @@ import org.docksidestage.bizfw.basic.objanimal.*;
 import org.docksidestage.bizfw.basic.objanimal.loud.AlarmClock;
 import org.docksidestage.bizfw.basic.objanimal.loud.Loudable;
 import org.docksidestage.bizfw.basic.objanimal.runner.FastRunner;
+import org.docksidestage.bizfw.colorbox.ColorBox;
 import org.docksidestage.javatry.basic.st6.dbms.St6MySql;
 import org.docksidestage.javatry.basic.st6.dbms.St6PostgreSql;
 import org.docksidestage.unit.PlainTestCase;
@@ -389,6 +390,55 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         // インターフェースは特定の実装が強制されるので、特定の機能を保証したい時に使用するのではないか。
         // それに対して、抽象クラスは振る舞いだけでなく変数などの状態を持てるので、共通の処理をまとめる時に使用するという違いがあるのではないかと考えた。
         // _/_/_/_/_/_/_/_/_/_/
+        // #1on1: 抽象クラスのインターフェースに。 (2025/12/03)
+        //
+        // そもそもコンセプトの違い:
+        // インターフェース: 機能にフォーカスを当てて整理する
+        // オブジェクト指向: オブジェクト(その物)にフォーカスを当てて整理する
+        //
+        // 抽象クラスのインターフェースにはない機能はGood。
+        // 一方で、特定の実装が強制に関しては、抽象クラスもできる。
+        // これだけの論理だと、抽象クラスが機能を包含しているので、インターフェースなくても良いのでは？話になる。
+        //
+        // インターフェース: ポリモーフィズム
+        // 抽象クラス: ポリモーフィズム + 実装継承(具象クラスの形付け)
+        //
+        // 一瞬、抽象クラスが機能を包含しているように見えるが...
+        //
+        // インターフェース: 複数定義できる (implements)
+        // 抽象クラス(継承): 単一のみ (extends)
+        //
+        // Javaのオブジェクト指向は、多重継承を排除している。(あえてしている)
+        // Dog, Cat が Animal でもあり、Pet でもあり...ができない。
+        // C++ が多重継承OK。話に聞くと、多重継承でだいぶカオスになった。
+        // 間違った多重継承しちゃって辛いもあるだろうし、正しくでもまあまあ辛い。
+        //
+        // Javaは多重継承やめた。(ようである)
+        // でも、Pet継承できないじゃん。困った。
+        // ってところでインターフェースが補完している。
+        // でも、インターフェースで多重継承できちゃったら同じ話じゃん。
+        // インターフェースは、あくまでポリモーフィズムだけなので、実装は継承できない。
+        // ある意味、多重ポリモーフィズム (造語) ができるようになる。
+        // 多重の実装継承はできない。ので、そこまでカオスにならないでしょう、という話。
+        //
+        // 多重の実装継承 (再利用) は、別の方法である程度は代替もできる。(newして委譲するだけとか)
+        // 多重ポリモーフィズムは、代替がしづらいのでこれはさすがにできて欲しい。
+        //
+        // 具象クラスと抽象クラスは、変数の継承などできるから、依存度が高い by たばたさん
+        // その感想すばらしい by jflute
+        // あとまあ、インターフェースはフレームワークとかライブラリとかでよく使われるので自分で作る機会が少ない by jflute
+        // (レイヤー隠蔽のための機械的なinterfaceは作るかもだけど、複数具象クラスのinterfaceはなかなかない)
+        
+        // #1on1: インターフェースの応用的利用 ColorBox (2025/12/03)
+        // e.g. abstract class AbstractColorBox implements ColorBox
+        // メリットは何だ？
+        //
+        // 1. ポリモーフィズムできるメソッドの一覧がわかりやすい
+        // 2.
+        // 3. 抽象クラスの実装を継承したくない別の具象クラスを作りたいとき 
+        //    (ラップオブジェクトとか e.g. ListResultBean)
+        //
+        // TODO jflute 次回1on1 (2025/12/03)
     }
 
     // ===================================================================================
