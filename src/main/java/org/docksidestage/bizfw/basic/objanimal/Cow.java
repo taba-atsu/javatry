@@ -25,7 +25,7 @@ public class Cow extends Animal implements ShortSleeper {
     //                                                                               Bark
     //                                                                              ======
     @Override
-    protected String getBarkWord() {
+    public String getBarkWord() {
         return "moo";
     }
 

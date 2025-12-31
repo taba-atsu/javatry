@@ -541,6 +541,10 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
      */
     public void test_objectOriented_writing_withPackageRefactoring() {
         // your confirmation code here
+        Animal dog = new Dog();
+        BarkedSound sound = dog.bark();
+        log(sound.getBarkWord());
+        // Animalクラスに記述されているメソッドがprotectedになっており別パッケージからの呼び出しができなかったので、publicに修正した。
     }
 
     /**
@@ -549,9 +553,11 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
      */
     public void test_objectOriented_zoo() {
         // write your memo here:
+        // 現状、Animalクラスを継承してZombieクラスが適切に仕様を表している。しかし、HPが無限であったり概念的には動物としてまとめるには違和感がある。
         // _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
         // is it correct?
-        //
+        // 共通化されているAnimalクラスの仕組みを利用することを重視するなら今のサブクラスとして適切であると考える。
+        // しかし、HPがdownHitPointメソッドで減らなかったり、動物とは言いにくい特徴を持っていることから、意味的な正しさを重視するならサブクラスとして適切ではないと考えた。
         // _/_/_/_/_/_/_/_/_/_/
     }
 }
