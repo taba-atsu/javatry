@@ -17,20 +17,18 @@ package org.docksidestage.javatry.basic.st6.os;
 
 /**
  * @author jflute
+ * @author tabaatsu
  */
 public abstract class St6OperationSystem {
 
     // ===================================================================================
     //                                                                          Definition
     //                                                                          ==========
-//    private static final String OS_TYPE_MAC = "Mac";
-//    private static final String OS_TYPE_WINDOWS = "Windows";
-//    private static final String OS_TYPE_OLD_WINDOWS = "OldWindows";
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    private final String osType;
+    final String osType;
     final String loginId;
 
     // ===================================================================================
@@ -52,28 +50,6 @@ public abstract class St6OperationSystem {
     }
 
     protected abstract String getFileSeparator();
-//    {
-//        if (OS_TYPE_MAC.equalsIgnoreCase(osType)) {
-//            return "/";
-//        } else if (OS_TYPE_WINDOWS.equalsIgnoreCase(osType)) {
-//            return "\\";
-//        } else if (OS_TYPE_OLD_WINDOWS.equalsIgnoreCase(osType)) {
-//            return "\\";
-//        } else {
-//            throw new IllegalStateException("Unknown osType: " + osType);
-//        }
-//    }
 
     protected abstract String getUserDirectory();
-//    {
-//        if (OS_TYPE_MAC.equalsIgnoreCase(osType)) {
-//            return "/Users/" + loginId;
-//        } else if (OS_TYPE_WINDOWS.equalsIgnoreCase(osType)) {
-//            return "/Users/" + loginId;
-//        } else if (OS_TYPE_OLD_WINDOWS.equalsIgnoreCase(osType)) {
-//            return "/Documents and Settings/" + loginId;
-//        } else {
-//            throw new IllegalStateException("Unknown osType: " + osType);
-//        }
-//    }
 }

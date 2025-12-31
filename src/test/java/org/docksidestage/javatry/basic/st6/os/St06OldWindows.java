@@ -9,12 +9,12 @@ public class St06OldWindows extends St6OperationSystem {
     }
 
     @Override
-    protected String getFileSeparator(){
+    public String getFileSeparator(){
         return "\\";
     }
 
     @Override
-    protected String getUserDirectory(){
+    public String getUserDirectory(){
         return "/Documents and Settings/" + loginId;
     }
 }

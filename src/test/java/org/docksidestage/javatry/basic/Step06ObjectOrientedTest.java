@@ -19,12 +19,15 @@ import org.docksidestage.bizfw.basic.buyticket.Ticket;
 import org.docksidestage.bizfw.basic.buyticket.TicketBooth;
 import org.docksidestage.bizfw.basic.buyticket.TicketBuyResult;
 import org.docksidestage.bizfw.basic.objanimal.*;
+import org.docksidestage.bizfw.basic.objanimal.barking.BarkedSound;
 import org.docksidestage.bizfw.basic.objanimal.loud.AlarmClock;
 import org.docksidestage.bizfw.basic.objanimal.loud.Loudable;
 import org.docksidestage.bizfw.basic.objanimal.runner.FastRunner;
-import org.docksidestage.bizfw.colorbox.ColorBox;
 import org.docksidestage.javatry.basic.st6.dbms.St6MySql;
 import org.docksidestage.javatry.basic.st6.dbms.St6PostgreSql;
+import org.docksidestage.javatry.basic.st6.os.St06Mac;
+import org.docksidestage.javatry.basic.st6.os.St06OldWindows;
+import org.docksidestage.javatry.basic.st6.os.St06Windows;
 import org.docksidestage.unit.PlainTestCase;
 
 /**
@@ -66,10 +69,10 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         if (quantity <= 0) {
             throw new IllegalStateException("Sold out");
         }
-        --quantity;
         if (handedMoney < oneDayPrice) {
             throw new IllegalStateException("Short money: handedMoney=" + handedMoney);
         }
+        --quantity; // 所持金が足りない場合でも、quantityを減らしてしまっていたので位置を修正した
         salesProceeds += oneDayPrice;
         //売上を保持する変数に、所持金を代入してしまっていたので、チケットの値段を足すように変更した
 
@@ -494,6 +497,13 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
      */
     public void test_objectOriented_writing_specialization_extractToConcrete() {
         // your confirmation code here
+        St06Mac mac = new St06Mac("mac");
+        St06Windows windows = new St06Windows("windows");
+        St06OldWindows oldWindows = new St06OldWindows("oldWindows");
+
+        log(mac.getFileSeparator(),mac.getUserDirectory());
+        log(windows.getFileSeparator(),windows.getUserDirectory());
+        log(oldWindows.getFileSeparator(),oldWindows.getUserDirectory());
     }
 
     // ===================================================================================
@@ -505,6 +515,11 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
      */
     public void test_objectOriented_writing_withDelegation() {
         // your confirmation code here
+        Animal dog = new Dog();
+        BarkedSound sound = dog.bark();
+        log(sound.getBarkWord());
+        // barkメソッドの内容を切り出したBarkingProcessクラス内にbarkメソッドを定義し、その引数にAnimalクラスを入れた。それによってbarkメソッド以外のメソッドを
+        // BarkingProcessクラス内で簡単に使用できるようにした。
     }
 
     /**
