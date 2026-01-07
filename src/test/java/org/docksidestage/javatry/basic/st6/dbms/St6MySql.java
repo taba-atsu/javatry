@@ -26,4 +26,23 @@ public class St6MySql extends St06Dbms {
         int offset = calculateOffset(pageSize, pageNumber);
         return "limit " + offset + ", " + pageSize;
     }
+    
+    // TODO tabata まだコピペが残っている。重複している箇所... by jflute (2026/01/07)
+    // 1. calculate (再利用)
+    // 2. 文字列生成 (DBMS独自)
+    // この流れ自体がコピペになっている。
+    // もし、1と2の間に新しい処理を入れようと仕様変更あった場合、
+    // 1. calculate (再利用)
+    // 1.5. 何かの追加処理
+    // 2. 文字列生成 (DBMS独自)
+    // これを、MySQLとPostgreSQL両方に追加しないといけない。
+    // つまり、処理の流れが再利用されていない。
+    // これを、一箇所追加で済むようにしたいところ。
+
+    // こっちPostgreSQL:
+    //@Override
+    //public String buildPagingQuery(int pageSize, int pageNumber) {
+    //    int offset = calculateOffset(pageSize, pageNumber);
+    //    return "offset " + offset + " limit " + pageSize;
+    //}
 }

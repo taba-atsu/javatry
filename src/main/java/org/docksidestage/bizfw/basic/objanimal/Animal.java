@@ -55,6 +55,7 @@ public abstract class Animal implements Loudable {
         return new BarkingProcess().bark(this);
     }
 
+    // TODO tabata 要件的な話、吠える専用メソッドと言えるので、これもBarkingProcessに移動 by jflute (2026/01/07)
     public void breatheIn() { // actually depends on barking
         logger.debug("...Breathing in for barking"); // dummy implementation
         downHitPoint();
@@ -65,6 +66,9 @@ public abstract class Animal implements Loudable {
         downHitPoint();
     }
 
+    // #1on1: javaのpackageスコープ、物理構造に依存するロジックになっちゃうので、jflute的に避けがち (2026/01/07)
+    // 個人的には、testクラスとかだと定型的で使うけど(mainとtestの関係)、main内だけ閉じるときは極力使わない。
+    // TODO tabata 修行++: カプセル化的にはpublicをprotectedに戻したいところ by jflute (2026/01/07)
     public abstract String getBarkWord();
 
     public BarkedSound doBark(String barkWord) {

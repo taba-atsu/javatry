@@ -334,7 +334,7 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         // 便利なので、プログラミングでもやりたい。
         // (日常の中でのポリモーフィズムを見つけてみてください。抽象概念を見つける)
     }
-    // TODO jflute 次回1on1ここから (2025/11/26)
+    // done jflute 次回1on1ここから (2025/11/26)
 
     // ===================================================================================
     //                                                              Polymorphism Interface
@@ -504,6 +504,8 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         log(mac.getFileSeparator(),mac.getUserDirectory());
         log(windows.getFileSeparator(),windows.getUserDirectory());
         log(oldWindows.getFileSeparator(),oldWindows.getUserDirectory());
+        
+        // TODO jflute 次回以降1on1にて、思考トレーニングを二つやれたら (2026/01/07)
     }
 
     // ===================================================================================
@@ -547,6 +549,7 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         // Animalクラスに記述されているメソッドがprotectedになっており別パッケージからの呼び出しができなかったので、publicに修正した。
     }
 
+    // TODO jflute 次回1on1にて、Zombie話で盛り上がろう (2026/01/07)
     /**
      * Is Zombie correct as sub-class of Animal? Analyze it in thirty seconds. (thinking only) <br>
      * (ゾンビは動物クラスのサブクラスとして適切でしょうか？30秒だけ考えてみましょう (考えるだけでOK))
