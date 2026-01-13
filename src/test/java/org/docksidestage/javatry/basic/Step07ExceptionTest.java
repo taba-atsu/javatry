@@ -15,19 +15,25 @@
  */
 package org.docksidestage.javatry.basic;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.docksidestage.bizfw.basic.supercar.SupercarClient;
 import org.docksidestage.javatry.basic.st7.St7BasicExceptionThrower;
 import org.docksidestage.javatry.basic.st7.St7ConstructorChallengeException;
 import org.docksidestage.unit.PlainTestCase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The test of variable. <br>
  * Operate as javadoc. If it's question style, write your answer before test execution. <br>
  * (javadocの通りに実施。質問形式の場合はテストを実行する前に考えて答えを書いてみましょう)
  * @author jflute
- * @author your_name_here
+ * @author taba-atsu
  */
 public class Step07ExceptionTest extends PlainTestCase {
+    private static final Logger log = LoggerFactory.getLogger(Step07ExceptionTest.class);
 
     // ===================================================================================
     //                                                                               Basic
@@ -47,7 +53,8 @@ public class Step07ExceptionTest extends PlainTestCase {
         } finally {
             sea.append("broadway");
         }
-        log(sea); // your answer? =>
+        log(sea); // your answer? => hangarbroadway
+        // landメソッドを実行するとIllegalStateExceptionが投げられるので、docksideはseaにappendされない。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -60,7 +67,9 @@ public class Step07ExceptionTest extends PlainTestCase {
         } catch (IllegalStateException e) {
             sea = e.getMessage();
         }
-        log(sea); // your answer? =>
+        log(sea); // your answer? => oneman at showbase
+        // landメソッドを実行した際に投げられるIllegalStateExceptionがseaに入る
+        // failが実行される前にcatchに入る
     }
 
     /**
@@ -75,7 +84,7 @@ public class Step07ExceptionTest extends PlainTestCase {
         } catch (IllegalStateException e) {
             log(e);
         }
-        // your answer? => 
+        // your answer? => St7BasicExceptionThrowerクラスのonemanメソッドの3行目(ファイルの40行目)
     }
 
     // ===================================================================================
@@ -88,35 +97,35 @@ public class Step07ExceptionTest extends PlainTestCase {
     public void test_exception_hierarchy_Runtime_instanceof_RuntimeException() {
         Object exp = new IllegalStateException("mystic");
         boolean sea = exp instanceof RuntimeException;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => true
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_exception_hierarchy_Runtime_instanceof_Exception() {
         Object exp = new IllegalStateException("mystic");
         boolean sea = exp instanceof Exception;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => true
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_exception_hierarchy_Runtime_instanceof_Error() {
         Object exp = new IllegalStateException("mystic");
         boolean sea = exp instanceof Error;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => false
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_exception_hierarchy_Runtime_instanceof_Throwable() {
         Object exp = new IllegalStateException("mystic");
         boolean sea = exp instanceof Throwable;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => true
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_exception_hierarchy_Throwable_instanceof_Exception() {
         Object exp = new Throwable("mystic");
         boolean sea = exp instanceof Exception;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => false
     }
 
     // ===================================================================================
@@ -135,7 +144,8 @@ public class Step07ExceptionTest extends PlainTestCase {
         } catch (NullPointerException e) {
             log(e);
         }
-        // your answer? => 
+        // your answer? => land,136
+        // seaは必ずmisticになるので、landは三項演算子により常にnullが代入される
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -149,7 +159,8 @@ public class Step07ExceptionTest extends PlainTestCase {
         } catch (NullPointerException e) {
             log(e);
         }
-        // your answer? => 
+        // your answer? => piari,151
+        // landがonemanになるのでpiariは必ずnullになる
     }
 
     /**
@@ -161,7 +172,10 @@ public class Step07ExceptionTest extends PlainTestCase {
             String sea = "mystic";
             String land = !!!sea.equals("mystic") ? null : "oneman";
             String piari = !!!sea.equals("mystic") ? "plaza" : null;
-            int sum = land.length() + piari.length();
+            int landLength = land.length();
+            int piariLength = piari.length();
+
+            int sum = landLength +piariLength;
             log(sum);
         } catch (NullPointerException e) {
             log(e);
@@ -176,6 +190,15 @@ public class Step07ExceptionTest extends PlainTestCase {
      * (new java.io.File(".") の canonical path を取得してログに表示、I/Oエラーの時はメッセージとスタックトレースを代わりに表示)
      */
     public void test_exception_checkedException_basic() {
+        File sea = new java.io.File(".");
+
+        try {
+            String canonicalPath = sea.getCanonicalPath();
+            log(canonicalPath);
+        } catch (IOException e) {
+            log(e.getMessage());
+            log((Object) e.getStackTrace());
+        }
     }
 
     // ===================================================================================
