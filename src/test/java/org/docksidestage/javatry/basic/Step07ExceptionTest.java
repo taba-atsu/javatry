@@ -194,11 +194,13 @@ public class Step07ExceptionTest extends PlainTestCase {
 
         try {
             String canonicalPath = sea.getCanonicalPath();
+            // new java.io.FileInputStream(sea);
             log(canonicalPath);
         } catch (IOException e) {
             log(e.getMessage());
-            log((Object) e.getStackTrace());
+            log((Object)e.getStackTrace());
         }
+        // 例外処が投げられた場合の処理を検証する方法がよくわからなかったので、必ず例外を投げる処理を挟んで対応した
     }
 
     // ===================================================================================
@@ -219,14 +221,19 @@ public class Step07ExceptionTest extends PlainTestCase {
             Throwable cause = e.getCause();
             sea = cause.getMessage();
             land = cause.getClass().getSimpleName();
-            log(sea); // your answer? => 
-            log(land); // your answer? => 
-            log(e); // your answer? => 
+            log(sea); // your answer? => Failed to call the third help method: symbol=-1
+            log(land); // your answer? => IllegalArgumentException
+            log(e); // your answer? => throwCauseThirdLevel
+
+            // スタックトレースの順番があまり理解できなかったので深く考えてみた。一番上が最終的に投げられた例外、
+            // 下に行くほど「さかのぼった原因」by copilot
+            // コールスタックから pop された順に出ているのか？とはじめ勘違いしてしまっていたが、実際はラップされた順に、外側→内側へ辿っていく。
+            //
         }
     }
 
     private void throwCauseFirstLevel() {
-        int symbol = Integer.MAX_VALUE - 0x7ffffffe;
+        int symbol = Integer.MAX_VALUE - 0x7ffffffe; // 1
         try {
             throwCauseSecondLevel(symbol);
         } catch (IllegalArgumentException e) {
