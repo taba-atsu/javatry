@@ -1,6 +1,9 @@
 package org.docksidestage.javatry.basic.st6.os;
 
-// TODO tabata javadocお願いします(^^ by jflute (2026/01/07)
+// TODO done tabata javadocお願いします(^^ by jflute (2026/01/07)
+/**
+ * @author tabaatsu
+ */
 public class St06Mac extends St6OperationSystem {
 
     // TODO tabata どのみち、Javaの慣習としてstatic finalな定数は、大文字スネークケース by jflute (2026/01/07)
