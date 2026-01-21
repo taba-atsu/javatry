@@ -167,16 +167,27 @@ public class Step08Java8FunctionTest extends PlainTestCase {
      * (二つのlog()によって出力される文字列は同じでしょうか？ (yes or no))
      */
     public void test_java8_optional_concept() {
+        // #1on1: ないかもしれないという概念を、nullという文法で表現している (2026/01/21)
+        // → ないかもしれないというケースをケアしなくてもコンパイルエラーにはならない。
         St8Member oldmember = new St8DbFacade().oldselectMember(1);
         if (oldmember != null) {
             log(oldmember.getMemberId(), oldmember.getMemberName());
         }
+
+        // #1on1: ないかもしれないという概念を、クラス (オブジェクト) で表現している (2026/01/21)
+        // → ないかもしれないというケースをケアしなかったら基本的にコンパイルエラーになる。
         Optional<St8Member> optMember = new St8DbFacade().selectMember(1);
         if (optMember.isPresent()) {
             St8Member member = optMember.get();
             log(member.getMemberId(), member.getMemberName());
         }
         // your answer? => 
+        
+        // #1on1: これがOptionalの根源的なメリット(役割) (2026/01/21)
+        // Optional は、Javaの文法というよりかはただのクラス。
+        // Java8はおよそ2015年くらいで、Optionalもそのとき。
+        // Javaの始まりは1995年くらいで、最初の20年くらいOptionalなかった。
+        // #1on1: 突然、言語の歴史、流行りの要因、現場の特徴のお話 (2026/01/21)
     }
 
     /**
