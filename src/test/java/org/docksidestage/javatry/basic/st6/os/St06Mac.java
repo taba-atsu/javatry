@@ -1,6 +1,6 @@
 package org.docksidestage.javatry.basic.st6.os;
 
-// TODO done tabata javadocお願いします(^^ by jflute (2026/01/07)
+// done tabata javadocお願いします(^^ by jflute (2026/01/07)
 /**
  * @author tabaatsu
  */
