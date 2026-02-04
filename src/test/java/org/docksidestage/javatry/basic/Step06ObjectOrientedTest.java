@@ -23,6 +23,7 @@ import org.docksidestage.bizfw.basic.objanimal.barking.BarkedSound;
 import org.docksidestage.bizfw.basic.objanimal.loud.AlarmClock;
 import org.docksidestage.bizfw.basic.objanimal.loud.Loudable;
 import org.docksidestage.bizfw.basic.objanimal.runner.FastRunner;
+import org.docksidestage.javatry.basic.st6.dbms.St06Dbms;
 import org.docksidestage.javatry.basic.st6.dbms.St6MySql;
 import org.docksidestage.javatry.basic.st6.dbms.St6PostgreSql;
 import org.docksidestage.javatry.basic.st6.os.St06Mac;
@@ -60,7 +61,8 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         // 売り上げがない時nullを返すのは不自然だと考えて、int型に変更し初期値を0にした
 
         // done tabata 間違い、あと2つ by jflute (2025/10/22)
-        // TODO done tabata あと1つ、この辺に、それぞれの行自体は間違ってない系のバグが一つ by jflute (2025/11/26)
+        // done tabata あと1つ、この辺に、それぞれの行自体は間違ってない系のバグが一つ by jflute (2025/11/26)
+        // #1on1: それぞれの行自体は間違ってない系のバグは見つけづらい (2026/02/04)
         //
         // [buy one-day passport]
         //
@@ -486,6 +488,7 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         // your confirmation code here
         St6MySql mySql = new St6MySql();
         log(mySql.buildPagingQuery(1, 2));
+        
         St6PostgreSql postgreSql = new St6PostgreSql();
         log(postgreSql.buildPagingQuery(1,2));
         // 振る舞いを出し分けるという点でinterfaceを使いたくなった。

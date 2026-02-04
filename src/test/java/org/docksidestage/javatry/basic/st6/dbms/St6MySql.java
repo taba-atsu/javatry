@@ -21,12 +21,15 @@ package org.docksidestage.javatry.basic.st6.dbms;
  */
 public class St6MySql extends St06Dbms {
 
+    // TODO tabata superでprotectedのものが、subでpublicになっている by jflute (2026/02/04)
+    // 意図していないなら、protectedのままで隠蔽しましょう。
+    // (subでpublicにするケースは少ないけど、ピンポイントでこの具象クラスだけは部品を呼び出しってときに)
     @Override
     public String createPagingString(int offset, int pageSize) {
         return "limit " + offset + ", " + pageSize;
     }
     
-    // TODO done tabata まだコピペが残っている。重複している箇所... by jflute (2026/01/07)
+    // done tabata まだコピペが残っている。重複している箇所... by jflute (2026/01/07)
     // 1. calculate (再利用)
     // 2. 文字列生成 (DBMS独自)
     // この流れ自体がコピペになっている。

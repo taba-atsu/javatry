@@ -188,6 +188,8 @@ public class Step08Java8FunctionTest extends PlainTestCase {
         // Java8はおよそ2015年くらいで、Optionalもそのとき。
         // Javaの始まりは1995年くらいで、最初の20年くらいOptionalなかった。
         // #1on1: 突然、言語の歴史、流行りの要因、現場の特徴のお話 (2026/01/21)
+        
+        // #1on1: 問答無用get()の話 (詳しくはDBFluteハンズオンの方で) (2026/01/21)
     }
 
     /**
