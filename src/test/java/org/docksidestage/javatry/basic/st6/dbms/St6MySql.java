@@ -22,12 +22,11 @@ package org.docksidestage.javatry.basic.st6.dbms;
 public class St6MySql extends St06Dbms {
 
     @Override
-    public String buildPagingQuery(int pageSize, int pageNumber) {
-        int offset = calculateOffset(pageSize, pageNumber);
+    public String createPagingString(int offset, int pageSize) {
         return "limit " + offset + ", " + pageSize;
     }
     
-    // TODO tabata まだコピペが残っている。重複している箇所... by jflute (2026/01/07)
+    // TODO done tabata まだコピペが残っている。重複している箇所... by jflute (2026/01/07)
     // 1. calculate (再利用)
     // 2. 文字列生成 (DBMS独自)
     // この流れ自体がコピペになっている。

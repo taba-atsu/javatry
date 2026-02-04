@@ -12,5 +12,10 @@ abstract public class St06Dbms {
     }
 
     // done tabata [いいね] ポリモーフィズムは実現できている by jflute (2026/01/07)
-    abstract public String buildPagingQuery(int pageSize, int pageNumber);
+    public String buildPagingQuery(int pageSize, int pageNumber){
+        int offset = calculateOffset(pageSize, pageNumber);
+        return createPagingString(offset, pageSize);
+    }
+
+    abstract protected String createPagingString(int offset, int pageSize);
 }

@@ -60,7 +60,7 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         // 売り上げがない時nullを返すのは不自然だと考えて、int型に変更し初期値を0にした
 
         // done tabata 間違い、あと2つ by jflute (2025/10/22)
-        // TODO tabata あと1つ、この辺に、それぞれの行自体は間違ってない系のバグが一つ by jflute (2025/11/26)
+        // TODO done tabata あと1つ、この辺に、それぞれの行自体は間違ってない系のバグが一つ by jflute (2025/11/26)
         //
         // [buy one-day passport]
         //
@@ -75,7 +75,8 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         --quantity; // 所持金が足りない場合でも、quantityを減らしてしまっていたので位置を修正した
         salesProceeds += oneDayPrice;
         //売上を保持する変数に、所持金を代入してしまっていたので、チケットの値段を足すように変更した
-
+        handedMoney -= oneDayPrice;
+        // 所持金を減らすのを忘れていた？
         //
         // [ticket info]
         //
