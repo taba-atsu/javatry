@@ -32,7 +32,7 @@ public abstract class St6OperationSystem {
     // もし継承(参照)させるのであれば、サブクラスで隠蔽を発生させないようにしましょう。
     // (隠蔽は、コンストラクターの狭い範囲でクラス内で閉じてるものなら良いけど、クラス跨っての隠蔽は紛らわしいので避けようs)
     // done tabata そもそも、osTypeをクラスで表現するようになったわけなので、文字列のosTypeは無くてもいいかも by jflute (2026/01/07)
-    // TODO tabata Javaだと、可視性なしの場合は、packageスコープになる。意図しているか？してないなら何か付けたい by jflute (2026/02/18)
+    // TODO done tabata Javaだと、可視性なしの場合は、packageスコープになる。意図しているか？してないなら何か付けたい by jflute (2026/02/18)
     // 今、サブクラスがprotectedスコープで参照しているわけではなく、packageスコープで(たまたま)参照できているだけ。
     // packageが分かれたとしてもサブクラスに参照させて良いのであれば、protectedにしましょう。
     // #1on1: jfluteがpackageスコープをほとんど使わない話 (一部(UnitTest)は使うけど) (2026/02/18) 
@@ -40,7 +40,7 @@ public abstract class St6OperationSystem {
     // Javaでは、packageとディレクトリ構成が一致させないといけないので、
     // 「packageスコープに依存する == コードが物理構成に依存する」と言っても過言ではない。
     // 一方で、Javaのpackageとディレクトリ構成が一致はわかりやすいので好き。(レールが敷かれてて無難)
-    final String loginId;
+    protected final String loginId;
 
     // ===================================================================================
     //                                                                         Constructor
