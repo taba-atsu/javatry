@@ -52,14 +52,10 @@ public abstract class Animal implements Loudable {
     //                                                                               Bark
     //                                                                              ======
     public BarkedSound bark() {
-        return new BarkingProcess().bark(this);
+        return new BarkingProcess().bark(this, this.getBarkWord());
     }
 
-    // TODO tabata 要件的な話、吠える専用メソッドと言えるので、これもBarkingProcessに移動 by jflute (2026/01/07)
-    public void breatheIn() { // actually depends on barking
-        logger.debug("...Breathing in for barking"); // dummy implementation
-        downHitPoint();
-    }
+    // TODO done tabata 要件的な話、吠える専用メソッドと言えるので、これもBarkingProcessに移動 by jflute (2026/01/07)
 
     public void prepareAbdominalMuscle() { // also actually depends on barking
         logger.debug("...Using my abdominal muscle for barking"); // dummy implementation
@@ -68,8 +64,8 @@ public abstract class Animal implements Loudable {
 
     // #1on1: javaのpackageスコープ、物理構造に依存するロジックになっちゃうので、jflute的に避けがち (2026/01/07)
     // 個人的には、testクラスとかだと定型的で使うけど(mainとtestの関係)、main内だけ閉じるときは極力使わない。
-    // TODO tabata 修行++: カプセル化的にはpublicをprotectedに戻したいところ by jflute (2026/01/07)
-    public abstract String getBarkWord();
+    // TODO done tabata 修行++: カプセル化的にはpublicをprotectedに戻したいところ by jflute (2026/01/07)
+    protected abstract String getBarkWord();
 
     public BarkedSound doBark(String barkWord) {
         downHitPoint();
@@ -79,7 +75,7 @@ public abstract class Animal implements Loudable {
     // ===================================================================================
     //                                                                           Hit Point
     //                                                                           =========
-    protected void downHitPoint() {
+    public void downHitPoint() {
         --hitPoint;
         if (hitPoint <= 0) {
             throw new IllegalStateException("I'm very tired, so I want to sleep" + getBarkWord());

@@ -28,18 +28,16 @@ public abstract class St6OperationSystem {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    // TODO tabata サブクラスで隠蔽変数になるくらいなら、privateで隠しちゃった方が良い by jflute (2026/01/07)
+    // TODO done tabata サブクラスで隠蔽変数になるくらいなら、privateで隠しちゃった方が良い by jflute (2026/01/07)
     // もし継承(参照)させるのであれば、サブクラスで隠蔽を発生させないようにしましょう。
     // (隠蔽は、コンストラクターの狭い範囲でクラス内で閉じてるものなら良いけど、クラス跨っての隠蔽は紛らわしいので避けようs)
-    // TODO tabata そもそも、osTypeをクラスで表現するようになったわけなので、文字列のosTypeは無くてもいいかも by jflute (2026/01/07)
-    final String osType;
+    // TODO done tabata そもそも、osTypeをクラスで表現するようになったわけなので、文字列のosTypeは無くてもいいかも by jflute (2026/01/07)
     final String loginId;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public St6OperationSystem(String osType, String loginId) {
-        this.osType = osType;
+    public St6OperationSystem( String loginId) {
         this.loginId = loginId;
     }
 

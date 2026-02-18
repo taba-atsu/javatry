@@ -53,11 +53,6 @@ public class Zombie extends Animal {
     // ===================================================================================
     //                                                                               Bark
     //                                                                              ======
-    @Override
-    public void breatheIn() {
-        super.breatheIn();
-        zombieDiary.countBreatheIn();
-    }
 
     @Override
     public String getBarkWord() {
@@ -68,7 +63,7 @@ public class Zombie extends Animal {
     //                                                                           Hit Point
     //                                                                           =========
     @Override
-    protected void downHitPoint() {
+    public void downHitPoint() {
         // do nothing, infinity hit point
     }
 
