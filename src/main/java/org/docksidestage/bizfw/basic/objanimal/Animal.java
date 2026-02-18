@@ -36,7 +36,7 @@ public abstract class Animal implements Loudable {
     //                                                                           Attribute
     //                                                                           =========
     protected int hitPoint; // is HP
-
+    
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
@@ -55,8 +55,8 @@ public abstract class Animal implements Loudable {
         return new BarkingProcess().bark(this, this.getBarkWord());
     }
 
-    // TODO done tabata 要件的な話、吠える専用メソッドと言えるので、これもBarkingProcessに移動 by jflute (2026/01/07)
-
+    // done tabata 要件的な話、吠える専用メソッドと言えるので、これもBarkingProcessに移動 by jflute (2026/01/07)
+    // TODO tabata ↑もういっこ↓これも by jflute (2026/02/18)
     public void prepareAbdominalMuscle() { // also actually depends on barking
         logger.debug("...Using my abdominal muscle for barking"); // dummy implementation
         downHitPoint();
@@ -64,7 +64,9 @@ public abstract class Animal implements Loudable {
 
     // #1on1: javaのpackageスコープ、物理構造に依存するロジックになっちゃうので、jflute的に避けがち (2026/01/07)
     // 個人的には、testクラスとかだと定型的で使うけど(mainとtestの関係)、main内だけ閉じるときは極力使わない。
-    // TODO done tabata 修行++: カプセル化的にはpublicをprotectedに戻したいところ by jflute (2026/01/07)
+    // done tabata 修行++: カプセル化的にはpublicをprotectedに戻したいところ by jflute (2026/01/07)
+    // #1on1: こっちは参照のみなので、BarkingProcessがgetBarkWord()を呼ぶ必要はない。 (2026/02/18)
+    // あらかじめ読んで値だけを渡せば良い。引数/戻り値デザインを高度な世界の中でも忘れずに。
     protected abstract String getBarkWord();
 
     public BarkedSound doBark(String barkWord) {
@@ -75,6 +77,7 @@ public abstract class Animal implements Loudable {
     // ===================================================================================
     //                                                                           Hit Point
     //                                                                           =========
+    // TODO tabata 修行#: どうにかしてpublicにしてしまったのをprotectedに戻したい (package移動はせず) by jflute (2026/02/18)
     public void downHitPoint() {
         --hitPoint;
         if (hitPoint <= 0) {

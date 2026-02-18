@@ -21,7 +21,7 @@ package org.docksidestage.javatry.basic.st6.dbms;
  */
 public class St6MySql extends St06Dbms {
 
-    // TODO done tabata superでprotectedのものが、subでpublicになっている by jflute (2026/02/04)
+    // done tabata superでprotectedのものが、subでpublicになっている by jflute (2026/02/04)
     // 意図していないなら、protectedのままで隠蔽しましょう。
     // (subでpublicにするケースは少ないけど、ピンポイントでこの具象クラスだけは部品を呼び出しってときに)
     @Override

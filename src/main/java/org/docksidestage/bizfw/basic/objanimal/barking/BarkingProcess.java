@@ -23,4 +23,5 @@ public class BarkingProcess {
         animal.downHitPoint();
     }
     // ここでbreathInを定義するためにdownHitPointをpublicにしてしまったが、本当にこれでいいのだろうか、、
+    // #1on1: ↑素晴らしい悩み。リファクタリングをしたら、別のところのカプセル化を壊してしまった状態。 (2026/02/18)
 }
