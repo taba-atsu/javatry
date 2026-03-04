@@ -274,9 +274,8 @@ public class Step07ExceptionTest extends PlainTestCase {
             // _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
             // What happens? Write situation and cause here. (何が起きた？状況と原因をここに書いてみましょう)
             // - - - - - - - - - -
-            //
-            //
-            //
+            // buySupercar()メソッドを呼び出した際に例外が起き、それがキャッチされて"*No hint here for training."と出力されている。
+            // 原因は、スーパーカーを購入しようとした際に指定したボルトの種類がすでにサポートされていない形式だったから。
             // _/_/_/_/_/_/_/_/_/_/
         }
     }
@@ -314,7 +313,7 @@ public class Step07ExceptionTest extends PlainTestCase {
         try {
             helpThrowIllegalState();
         } catch (IllegalStateException e) {
-            throw new St7ConstructorChallengeException("Failed to do something.");
+            throw new St7ConstructorChallengeException("Failed to do something.", e);
         }
     }
 
