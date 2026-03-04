@@ -33,6 +33,9 @@ import org.slf4j.LoggerFactory;
  * @author taba-atsu
  */
 public class Step07ExceptionTest extends PlainTestCase {
+    
+    // TODO tabata javatryだと、superクラスにlog()があるので、そっち使って大丈夫です by jflute (2026/03/04)
+    // なので、現時点でもこのlogオブジェクトは unused の警告が出ています。
     private static final Logger log = LoggerFactory.getLogger(Step07ExceptionTest.class);
 
     // ===================================================================================
@@ -180,6 +183,9 @@ public class Step07ExceptionTest extends PlainTestCase {
         } catch (NullPointerException e) {
             log(e);
         }
+        // #1on1: 最近のJavaだと、どの変数がnullだったか教えてくれる (2026/03/04)
+        // #1on1: statementと行の違い。実行はstatement単位だけど、人間の見た目は行意識。 (2026/03/04)
+        // 他の言語だと、テキスト上の見た目と文法をもうちょいつなげてるケースもある。e.g. Python
     }
 
     // ===================================================================================
@@ -194,13 +200,32 @@ public class Step07ExceptionTest extends PlainTestCase {
 
         try {
             String canonicalPath = sea.getCanonicalPath();
-            // new java.io.FileInputStream(sea);
+            // catchの動作確認用 (getCanonicalPath()を呼んでもなかなか例外発生しないので)
+            //new java.io.FileInputStream(sea);
             log(canonicalPath);
         } catch (IOException e) {
             log(e.getMessage());
-            log((Object)e.getStackTrace());
+            // #1on1: これだと配列オブジェクトのtoString()が表示されるだけなので...log(e)でOK。
+            //log((Object)e.getStackTrace());
+            log(e);
         }
         // 例外処が投げられた場合の処理を検証する方法がよくわからなかったので、必ず例外を投げる処理を挟んで対応した
+        
+        // #1on1: チェック例外とは？ (2026/03/04)
+        // catchを義務化する文法。Throwable,Exceptionとデフォルトではチェック例外。
+        // RuntimeException配下(とError配下)だけ特別に実行時例外。
+        // ただ、チェック例外は流行ってない。
+        // コンセプト的にはチェック例外はそんなに悪くはない。
+        // TicketSoldOutExceptionは、チェック例外にしても悪くはないケース。
+        //
+        // o 一律ただthrowsが付けられてて、若干無意味な場面でもcatchが強制されるとかあって印象悪い
+        // o インフラ系は時代が進んで安定もして、インフラ系チェック例外が発生する確率も極端に低くなっている
+        //   (隕石が降ってくることを気にして歩かないのと同じ)
+        // 
+        // そんなこんで、残念ながらJavaの世界でチェック例外を積極的に使ってるケースはとても少ない。
+        // jfluteも、チェック例外を使って嬉しかったこと、3,4回しかない。0ではない。でも多くはない。
+        // 他の言語の例: Go言語とか、Kotlinとか
+        // チェック例外は、実務ではほとんど使わないが、色々な言語の文法を深掘りする勉強素材にはなる。
     }
 
     // ===================================================================================
@@ -257,6 +282,8 @@ public class Step07ExceptionTest extends PlainTestCase {
             Integer.valueOf("piari");
         }
     }
+    // #1on1: ちょこっと例外の翻訳話。それぞれのレイヤーの情報を付け足して翻訳throwしている (2026/03/04)
+    // 例外チェーンで、causeを階層的に保持することで、実質的に例外を複数投げることができている
 
     // ===================================================================================
     //                                                                         Translation
@@ -292,6 +319,8 @@ public class Step07ExceptionTest extends PlainTestCase {
         } catch (RuntimeException e) {
             log("*No hint here for training.", e);
         }
+        // #1on1: 例外の翻訳によるデバッグのしやすさの工夫 (2026/03/04)
+        // TODO jflute 次回1on1ふぉろー、もうちょい説明 (2026/03/04)
     }
 
     // ===================================================================================
