@@ -350,6 +350,9 @@ public class Step07ExceptionTest extends PlainTestCase {
             String importantValue = "dummy"; // important to debug
             throw new IllegalStateException("something illegal: importantValue=" + importantValue);
         }
+
+    // 元の実装では、St7ConstructorChallengeExceptionがメッセージだけを受け取るようになっており、causeを渡せないようになっていた。
+    // これだとhelpThrowIllegalState()で起きた本当の原因を消してしまっている。
     }
 
     // ===================================================================================
@@ -363,9 +366,9 @@ public class Step07ExceptionTest extends PlainTestCase {
         // _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
         // Write here. (ここに書いてみましょう)
         // - - - - - - - - - -
-        //
-        //
-        //
+        // そもそもErrorに関して理解していなかったので調べた。
+        // ThrowableからErrorとExceptionの分岐があり、Errorはプログラムの外側で起きた問題を表しExceptionはプログラムの中で起きた問題を表す。
+        // つまり、Exceptionはプログラム内で起きたことなのでプログラムで対処できる余地があるが、Errorはプログラム外の環境が原因で起きたものなのでプログラムで対処できる余地がない？
         // _/_/_/_/_/_/_/_/_/_/
     }
 }
