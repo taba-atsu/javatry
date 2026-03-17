@@ -34,9 +34,8 @@ import org.slf4j.LoggerFactory;
  */
 public class Step07ExceptionTest extends PlainTestCase {
     
-    // TODO tabata javatryだと、superクラスにlog()があるので、そっち使って大丈夫です by jflute (2026/03/04)
+    // TODO done tabata javatryだと、superクラスにlog()があるので、そっち使って大丈夫です by jflute (2026/03/04)
     // なので、現時点でもこのlogオブジェクトは unused の警告が出ています。
-    private static final Logger log = LoggerFactory.getLogger(Step07ExceptionTest.class);
 
     // ===================================================================================
     //                                                                               Basic
