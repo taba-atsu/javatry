@@ -33,7 +33,7 @@ import org.docksidestage.unit.PlainTestCase;
  * Operate as javadoc. If it's question style, write your answer before test execution. <br>
  * (javadocの通りに実施。質問形式の場合はテストを実行する前に考えて答えを書いてみましょう)
  * @author jflute
- * @author your_name_here
+ * @author tabaatsu
  */
 public class Step08Java8FunctionTest extends PlainTestCase {
 
@@ -47,6 +47,8 @@ public class Step08Java8FunctionTest extends PlainTestCase {
      * Are all the strings by log() methods in callback processes same? (yes or no) <br>
      * (コールバック処理の中で出力しているログの文字列はすべて同じでしょうか？ (yes or no))
      */
+
+    // コールバックとは自分で呼ばない処理を誰かに渡し、あとで呼んでもらう仕組み。
     public void test_java8_lambda_callback_basic() {
         String title = "over";
 
@@ -68,7 +70,7 @@ public class Step08Java8FunctionTest extends PlainTestCase {
         log("...Executing lambda expression style callback");
         helpCallbackConsumer(stage -> log(stage + ": " + title));
 
-        // your answer? => 
+        // your answer? => yes
 
         // cannot reassign because it is used at callback process
         //title = "wave";
