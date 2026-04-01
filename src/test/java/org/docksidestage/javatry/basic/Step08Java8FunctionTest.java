@@ -118,7 +118,7 @@ public class Step08Java8FunctionTest extends PlainTestCase {
         String sea = helpCallbackFunction(number -> {
             return label + ": " + number;
         });
-        log(sea); // your answer? => 
+        log(sea); // your answer? => number: 7
     }
 
     private String helpCallbackFunction(Function<Integer, String> oneArgLambda) {
@@ -143,17 +143,15 @@ public class Step08Java8FunctionTest extends PlainTestCase {
      * </pre>
      */
     public void test_java8_lambda_convertStyle_basic() {
-        helpCallbackSupplier(new Supplier<String>() { // sea
-            public String get() {
-                return "broadway";
-            }
+        helpCallbackSupplier(() ->{
+            return "broadway";
         });
 
-        helpCallbackSupplier(() -> { // land
-            return "dockside";
-        });
+        helpCallbackSupplier(() -> "dockside");
 
-        helpCallbackSupplier(() -> "hangar"); // piari
+        helpCallbackSupplier(() -> {
+            return "hangar";
+        });
     }
 
     private void helpCallbackSupplier(Supplier<String> oneArgLambda) {
@@ -183,7 +181,7 @@ public class Step08Java8FunctionTest extends PlainTestCase {
             St8Member member = optMember.get();
             log(member.getMemberId(), member.getMemberName());
         }
-        // your answer? => 
+        // your answer? => yes
         
         // #1on1: これがOptionalの根源的なメリット(役割) (2026/01/21)
         // Optional は、Javaの文法というよりかはただのクラス。
@@ -207,7 +205,7 @@ public class Step08Java8FunctionTest extends PlainTestCase {
         optMember.ifPresent(member -> {
             log(member.getMemberId(), member.getMemberName());
         });
-        // your answer? => 
+        // your answer? => yes
     }
 
     /**
