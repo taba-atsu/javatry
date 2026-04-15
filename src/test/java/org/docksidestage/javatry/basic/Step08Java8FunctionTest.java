@@ -265,13 +265,15 @@ public class Step08Java8FunctionTest extends PlainTestCase {
                 .map(wdl -> wdl.getWithdrawalId()) // ID here
                 .orElse(defaultWithdrawalId);
 
-        log(sea); // your answer? => 
-        log(land); // your answer? => 
-        log(piari); // your answer? => 
-        log(bonvo); // your answer? => 
-        log(dstore); // your answer? => 
-        log(amba); // your answer? => 
-        log(miraco); // your answer? => 
+        log(sea); // your answer? => music
+        log(land); // your answer? => music
+        log(piari); // your answer? => music
+        log(bonvo); // your answer? => music
+        log(dstore); // your answer? => *no reason: someone was not present
+        log(amba); // your answer? => *no reason: someone was not present
+        log(miraco); // your answer? => 12
+
+        // mapはOptionalで包んだ値を返す。それに対してflatMapはラムダの戻り値がOptionalなら二重で包まない。
     }
 
     /**
@@ -290,7 +292,7 @@ public class Step08Java8FunctionTest extends PlainTestCase {
         } catch (IllegalStateException e) {
             sea = e.getMessage();
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => wave
     }
 
     // ===================================================================================
@@ -309,14 +311,16 @@ public class Step08Java8FunctionTest extends PlainTestCase {
             }
         }
         String sea = oldfilteredNameList.toString();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => broadway,dockside
 
         List<String> filteredNameList = memberList.stream() //
                 .filter(mb -> mb.getWithdrawal().isPresent()) //
                 .map(mb -> mb.getMemberName()) //
                 .collect(Collectors.toList());
         String land = filteredNameList.toString();
-        log(land); // your answer? => 
+        log(land); // your answer? => broadway,dockside
+
+        // やっていることは同じで書き方が違う
     }
 
     /**
@@ -332,7 +336,7 @@ public class Step08Java8FunctionTest extends PlainTestCase {
                 .mapToInt(pur -> pur.getPurchasePrice())
                 .distinct()
                 .sum();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 600
     }
 
     // *Stream API will return at Step12 again, it's worth the wait!
