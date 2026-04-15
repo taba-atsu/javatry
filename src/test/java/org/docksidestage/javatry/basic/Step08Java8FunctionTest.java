@@ -49,12 +49,16 @@ public class Step08Java8FunctionTest extends PlainTestCase {
      */
 
     // コールバックとは自分で呼ばない処理を誰かに渡し、あとで呼んでもらう仕組み。
+    // A → B
+    // A ← B
+    // (A' ← B)
     public void test_java8_lambda_callback_basic() {
         String title = "over";
 
         log("...Executing named class callback(!?)");
         helpCallbackConsumer(new St8BasicConsumer(title));
 
+        // #1on1: 無名インナークラスとは？その場限りのクラスなので名前が不要 (2026/04/15)
         log("...Executing anonymous class callback");
         helpCallbackConsumer(new Consumer<String>() {
             public void accept(String stage) {
@@ -62,6 +66,7 @@ public class Step08Java8FunctionTest extends PlainTestCase {
             }
         });
 
+        // #1on1: Lambda式とは？ (2026/04/15)
         log("...Executing lambda block style callback");
         helpCallbackConsumer(stage -> {
             log(stage + ": " + title);
@@ -81,6 +86,7 @@ public class Step08Java8FunctionTest extends PlainTestCase {
      * (ログに出力される文字列の順番は？ (カンマ区切りで書き出しましょう))
      */
     public void test_java8_lambda_callback_order() {
+        // #1on1: Lambda式の{}の中は、別クラス (2026/04/15)
         log("harbor");
         helpCallbackConsumer(stage -> {
             log(stage);
@@ -149,6 +155,12 @@ public class Step08Java8FunctionTest extends PlainTestCase {
 
         helpCallbackSupplier(() -> "dockside");
 
+        // #1on1: {} が見栄え調整に使える話 (2026/04/15)
+        /* DBFluteの例
+cb.query().existsPurchase(purchaseCB -> {
+    purchaseCB.query().set... // tabでカーソル移動してcbで検索条件
+})
+         */
         helpCallbackSupplier(() -> {
             return "hangar";
         });
@@ -274,6 +286,7 @@ public class Step08Java8FunctionTest extends PlainTestCase {
         log(miraco); // your answer? => 12
 
         // mapはOptionalで包んだ値を返す。それに対してflatMapはラムダの戻り値がOptionalなら二重で包まない。
+        // TODO jflute map/flatMapのお話 (2026/04/15)
     }
 
     /**
@@ -293,6 +306,7 @@ public class Step08Java8FunctionTest extends PlainTestCase {
             sea = e.getMessage();
         }
         log(sea); // your answer? => wave
+        // TODO jflute orElseThrowジレンマのお話 (2026/04/15)
     }
 
     // ===================================================================================
@@ -313,6 +327,10 @@ public class Step08Java8FunctionTest extends PlainTestCase {
         String sea = oldfilteredNameList.toString();
         log(sea); // your answer? => broadway,dockside
 
+        // #1on1: Stream APIの本質とは？ (2026/04/15)
+        // 小人に小さな処理を任せている。
+        // 細かい要件は引数でLambda式。それにより、汎用性が高くなって再利用できるようになった。
+        // Lambda式と一緒だから、実質的に成り立つ。(実現可能かどうかと使われるかどうかは別の話)
         List<String> filteredNameList = memberList.stream() //
                 .filter(mb -> mb.getWithdrawal().isPresent()) //
                 .map(mb -> mb.getMemberName()) //
@@ -337,6 +355,11 @@ public class Step08Java8FunctionTest extends PlainTestCase {
                 .distinct()
                 .sum();
         log(sea); // your answer? => 600
+        // #1on1: Stream API のメリデメ？ (2026/04/15)
+        // Stream API を採用しない言語も。
+        // // 応援してる "A" にもデメリットはあるよ
+        // https://jflute.hatenadiary.jp/entry/20181008/yourademerit
+        // 選択肢があることのメリットとデメリット。
     }
 
     // *Stream API will return at Step12 again, it's worth the wait!
